@@ -1,0 +1,308 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{600BE558-4CD9-4E6F-AC6A-045B7F030C1B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>WorldLoader</RootNamespace>
+    <AssemblyName>WL</AssemblyName>
+    <LangVersion>10</LangVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NoWarn>CS8632</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Harm">
+      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat.old\Harm.dll</HintPath>
+    </Reference>
+    <Reference Include="Iced">
+      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat.old\Iced.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2Cppmscorlib, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\Il2Cppmscorlib.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Mdb, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\Mono.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Pdb, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\Mono.Cecil.Pdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Rocks, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\Mono.Cecil.Rocks.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoMod.RuntimeDetour">
+      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat.old\MonoMod.RuntimeDetour.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoMod.Utils">
+      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat.old\MonoMod.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>C:\Users\_1254\Downloads\Il2CppDumper-v6.7.25\DummyDll\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attributes\Attributes.cs" />
+    <Compile Include="DataClasses\InternalInfo.cs" />
+    <Compile Include="Discord\Discord.cs" />
+    <Compile Include="Discord\Manager.cs" />
+    <Compile Include="Discord\Update.cs" />
+    <Compile Include="FlatUI\FlatAlertBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FlatUI\FlatButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FlatUI\FlatCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FlatUI\FlatClose.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FlatUI\FlatColorPalette.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FlatUI\FlatColors.cs" />
+    <Compile Include="FlatUI\FlatComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FlatUI\FlatContextMenuStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FlatUI\FlatGroupBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FlatUI\FlatLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FlatUI\FlatListBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FlatUI\FlatMax.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FlatUI\FlatMini.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FlatUI\FlatNumeric.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FlatUI\FlatProgressBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FlatUI\FlatRadioButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FlatUI\FlatStatusBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FlatUI\FlatStickyButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FlatUI\FlatTabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FlatUI\FlatTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FlatUI\FlatToggle.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FlatUI\FlatTrackBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FlatUI\FlatTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FlatUI\FormSkin.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FlatUI\Helpers.cs" />
+    <Compile Include="FlatUI\MouseState.cs" />
+    <Compile Include="UIMenu\Menu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIMenu\Menu.Designer.cs">
+      <DependentUpon>Menu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\Interface.cs" />
+    <Compile Include="Support\MonoBhv.cs" />
+    <Compile Include="Unhollower\Core.cs" />
+    <Compile Include="Unhollower\FileHandler.cs" />
+    <Compile Include="Modules + Libs\Libs.cs" />
+    <Compile Include="Modules + Libs\ModManager.cs" />
+    <Compile Include="Modules + Libs\PluginManager.cs" />
+    <Compile Include="Modules + Libs\UnityMod.cs" />
+    <Compile Include="Modules + Libs\WLPlugin.cs" />
+    <Compile Include="Support\Overrides.cs" />
+    <Compile Include="Preint.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Unhollower\Packages\AssemblyUnhollower.cs" />
+    <Compile Include="Unhollower\Packages\Cpp2IL.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Attributes\CachedScanResultsAttribute.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Attributes\CallerCountAttribute.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Attributes\ObfuscatedNameAttribute.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Contexts\FieldRewriteContext.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Contexts\MethodRewriteContext.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Contexts\RewriteGlobalContext.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Contexts\TypeRewriteContext.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Contexts\UnhollowedAssemblyContext.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Extensions\AssemblyExtensions.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Extensions\CollectionEx.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Extensions\CustomAttributeEx.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Extensions\EnumEx.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Extensions\ILGeneratorEx.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Extensions\ParameterDefinitionEx.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Extensions\StringEx.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Extensions\TypeReferenceEx.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Extensions\WriterEx.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\GeneratorOptions.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Harmony\HarmonyBackendComponent.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Harmony\HarmonySupport.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Host\BaseHost.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Host\IHostComponent.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Il2CppInteropGenerator.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Il2CppInteropUtils.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Json\Deobb.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Logger.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Maps\MethodAddressToTokenMap.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Maps\MethodAddressToTokenMapBase.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Maps\MethodXrefScanCache.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\MetadataAccess\CecilMetadataAccess.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\MetadataAccess\IIl2CppMetadataAccess.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\MetadataAccess\IMetadataAccess.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\MetadataAccess\NullMetadataAccess.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\MiniILParser.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass05CreateRenameGroups.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass10CreateTypedefs.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass11ComputeTypeSpecifics.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass12FillTypedefs.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass13FillGenericConstraints.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass15GenerateMemberContexts.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass16ScanMethodRefs.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass18FinalizeMethodContexts.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass19CopyMethodParameters.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass20GenerateStaticConstructors.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass21GenerateValueTypeFields.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass22GenerateEnums.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass23GeneratePointerConstructors.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass25GenerateNonBlittableValueTypeDefaultCtors.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass30GenerateGenericMethodStoreConstructors.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass40GenerateFieldAccessors.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass50GenerateMethods.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass60AddImplicitConversions.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass70GenerateProperties.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass79UnstripTypes.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass80UnstripFields.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass80UnstripMethods.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass81FillUnstrippedMethodBodies.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass89GenerateForwarders.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass89GenerateMethodXrefCache.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass90WriteToDisk.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass91GenerateMethodPointerMap.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Runners\DeobfuscationAnalyzer.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Runners\DeobfuscationMapGenerator.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Runners\InteropAssemblyGenerator.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Runners\IRunner.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Utils\CorlibReferences.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Utils\FieldAccessorGenerator.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Utils\Memoize.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Utils\RuntimeAssemblyReferences.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Utils\TimingCookie.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Utils\UniquificationContext.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Utils\UnstripGenerator.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Utils\UnstripTranslator.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\Utils\XrefScanMetadataGenerationUtil.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\XrefScans\GeneratedDatabasesUtil.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\XrefScans\IXrefScannerImpl.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\XrefScans\XrefInstance.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\XrefScans\XrefScanImpl.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\XrefScans\XrefScanMethodDb.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\XrefScans\XrefScanner.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\XrefScans\XrefScannerLowLevel.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\XrefScans\XrefScannerManager.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\XrefScans\XrefScanUtil.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\XrefScans\XrefScanUtilFinder.cs" />
+    <Compile Include="Unhollower\Packages\Il2CppGen\XrefScans\XrefType.cs" />
+    <Compile Include="Unhollower\Packages\Models\ExecutablePackage.cs" />
+    <Compile Include="Unhollower\Packages\Models\PackageBase.cs" />
+    <Compile Include="Unhollower\Packages\Semver.cs" />
+    <Compile Include="Unhollower\Packages\UnityDependencies.cs" />
+    <Compile Include="Utils\OtherLibraries.cs" />
+    <Compile Include="Utils\Internal Utils.cs" />
+    <Compile Include="Utils\Logs.cs" />
+    <Compile Include="Utils\MinHook.cs" />
+    <Compile Include="Utils\Mod Utils.cs" />
+    <Compile Include="Main.cs" />
+    <Compile Include="Utils\NativeUtils.cs" />
+    <Compile Include="Watermark.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UIMenu\Menu.resx">
+      <DependentUpon>Menu.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Runtime\Runtime.csproj">
+      <Project>{675AF739-A353-4060-BB74-8AC8E47C57C6}</Project>
+      <Name>Runtime</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(TargetPath)" "C:\Program Files (x86)\Steam\steamapps\common\VRChat" /Y /I</PostBuildEvent>
+  </PropertyGroup>
+</Project>

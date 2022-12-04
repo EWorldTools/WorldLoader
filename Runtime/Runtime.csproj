@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{675AF739-A353-4060-BB74-8AC8E47C57C6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Il2CppGen.Runtime</RootNamespace>
+    <AssemblyName>Il2CppGen.Runtime</AssemblyName>
+    <LangVersion>10</LangVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>0</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Il2Cppmscorlib">
+      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat.old\Il2Cppmscorlib.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat.old\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WL">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\WL.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyExtensions.cs" />
+    <Compile Include="Attributes\AlsoInitializeAttribute.cs" />
+    <Compile Include="Attributes\ClassInjectionAssemblyTargetAttribute.cs" />
+    <Compile Include="Attributes\HideFromIl2CppAttribute.cs" />
+    <Compile Include="Attributes\Il2CppImplementsAttribute.cs" />
+    <Compile Include="DelegateSupport.cs" />
+    <Compile Include="IL2CPP.cs" />
+    <Compile Include="Il2CppClassPointerStore.cs" />
+    <Compile Include="Il2CppException.cs" />
+    <Compile Include="Il2CppType.cs" />
+    <Compile Include="Injection\ClassInjector.cs" />
+    <Compile Include="Injection\ClassInjector.Debug.cs" />
+    <Compile Include="Injection\EnumInjector.cs" />
+    <Compile Include="Injection\InjectorHelpers.cs" />
+    <Compile Include="Injection\TrampolineHelpers.cs" />
+    <Compile Include="InteropTypes\Internal Core\ILSystem\String.cs" />
+    <Compile Include="InteropTypes\Internal Core\Import.cs" />
+    <Compile Include="InteropTypes\Internal Core\Objects\IC Object.cs" />
+    <Compile Include="InteropTypes\Arrays\Il2CppArrayBase.cs" />
+    <Compile Include="InteropTypes\Arrays\Il2CppReferenceArray.cs" />
+    <Compile Include="InteropTypes\Arrays\Il2CppStringArray.cs" />
+    <Compile Include="InteropTypes\Arrays\Il2CppStructArray.cs" />
+    <Compile Include="InteropTypes\Fields\Il2CppReferenceField.cs" />
+    <Compile Include="InteropTypes\Fields\Il2CppStringField.cs" />
+    <Compile Include="InteropTypes\Fields\Il2CppValueField.cs" />
+    <Compile Include="InteropTypes\Il2CppObjectBase.cs" />
+    <Compile Include="MemoryUtils.cs" />
+    <Compile Include="ObjectCollectedException.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RuntimeReflectionHelper.cs" />
+    <Compile Include="RuntimeSpecificsStore.cs" />
+    <Compile Include="Runtime\ClassInjectorBase.cs" />
+    <Compile Include="Runtime\Il2CppApi.cs" />
+    <Compile Include="Runtime\Il2CppStructs.cs" />
+    <Compile Include="Runtime\NativeStructUtils.cs" />
+    <Compile Include="Runtime\StructHandlerInterfaces.cs" />
+    <Compile Include="Runtime\UnityVersionHandler.cs" />
+    <Compile Include="Runtime\VersionSpecific\AssemblyName\AssemblyName_16_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\AssemblyName\AssemblyName_24_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\AssemblyName\AssemblyName_24_1.cs" />
+    <Compile Include="Runtime\VersionSpecific\AssemblyName\Interfaces.cs" />
+    <Compile Include="Runtime\VersionSpecific\Assembly\Assembly_16_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\Assembly\Assembly_20_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\Assembly\Assembly_24_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\Assembly\Assembly_24_1.cs" />
+    <Compile Include="Runtime\VersionSpecific\Assembly\Assembly_24_2.cs" />
+    <Compile Include="Runtime\VersionSpecific\Assembly\Interfaces.cs" />
+    <Compile Include="Runtime\VersionSpecific\Class\Class_16_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\Class\Class_19_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\Class\Class_20_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\Class\Class_21_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\Class\Class_21_1.cs" />
+    <Compile Include="Runtime\VersionSpecific\Class\Class_22_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\Class\Class_22_1.cs" />
+    <Compile Include="Runtime\VersionSpecific\Class\Class_23_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\Class\Class_24_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\Class\Class_24_1.cs" />
+    <Compile Include="Runtime\VersionSpecific\Class\Class_24_2.cs" />
+    <Compile Include="Runtime\VersionSpecific\Class\Class_24_3.cs" />
+    <Compile Include="Runtime\VersionSpecific\Class\Class_24_4.cs" />
+    <Compile Include="Runtime\VersionSpecific\Class\Class_27_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\Class\Class_27_1.cs" />
+    <Compile Include="Runtime\VersionSpecific\Class\Class_27_2.cs" />
+    <Compile Include="Runtime\VersionSpecific\Class\Class_27_3.cs" />
+    <Compile Include="Runtime\VersionSpecific\Class\Class_29_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\Class\Class_29_1.cs" />
+    <Compile Include="Runtime\VersionSpecific\Class\Interfaces.cs" />
+    <Compile Include="Runtime\VersionSpecific\EventInfo\EventInfo_16_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\EventInfo\EventInfo_19_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\EventInfo\EventInfo_24_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\EventInfo\Interfaces.cs" />
+    <Compile Include="Runtime\VersionSpecific\Exception\Exception_16_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\Exception\Exception_20_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\Exception\Exception_21_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\Exception\Exception_24_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\Exception\Exception_29_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\Exception\Interfaces.cs" />
+    <Compile Include="Runtime\VersionSpecific\FieldInfo\FieldInfo_16_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\FieldInfo\FieldInfo_19_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\FieldInfo\FieldInfo_24_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\FieldInfo\Interfaces.cs" />
+    <Compile Include="Runtime\VersionSpecific\Image\Image_16_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\Image\Image_19_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\Image\Image_24_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\Image\Image_24_1.cs" />
+    <Compile Include="Runtime\VersionSpecific\Image\Image_24_2.cs" />
+    <Compile Include="Runtime\VersionSpecific\Image\Image_24_3.cs" />
+    <Compile Include="Runtime\VersionSpecific\Image\Image_24_4.cs" />
+    <Compile Include="Runtime\VersionSpecific\Image\Image_27_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\Image\Interfaces.cs" />
+    <Compile Include="Runtime\VersionSpecific\MethodInfo\Interfaces.cs" />
+    <Compile Include="Runtime\VersionSpecific\MethodInfo\MethodInfo_16_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\MethodInfo\MethodInfo_21_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\MethodInfo\MethodInfo_24_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\MethodInfo\MethodInfo_24_1.cs" />
+    <Compile Include="Runtime\VersionSpecific\MethodInfo\MethodInfo_29_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\MethodInfo\MethodInfo_29_1.cs" />
+    <Compile Include="Runtime\VersionSpecific\ParameterInfo\Interfaces.cs" />
+    <Compile Include="Runtime\VersionSpecific\ParameterInfo\ParameterInfo_16_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\ParameterInfo\ParameterInfo_24_1.cs" />
+    <Compile Include="Runtime\VersionSpecific\ParameterInfo\ParameterInfo_27_3.cs" />
+    <Compile Include="Runtime\VersionSpecific\PropertyInfo\Interfaces.cs" />
+    <Compile Include="Runtime\VersionSpecific\PropertyInfo\PropertyInfo_16_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\PropertyInfo\PropertyInfo_19_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\PropertyInfo\PropertyInfo_24_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\Type\Interfaces.cs" />
+    <Compile Include="Runtime\VersionSpecific\Type\Type_16_0.cs" />
+    <Compile Include="Runtime\VersionSpecific\Type\Type_27_0.cs" />
+    <Compile Include="Startup\Start.cs" />
+    <Compile Include="WCPatch\Utls.cs" />
+    <Compile Include="WCPatch\WCPatch.cs" />
+    <Compile Include="XrefScans\XrefInstanceExtensions.cs" />
+    <Compile Include="XrefScans\XrefScanImpl.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(TargetPath)" "C:\Program Files (x86)\Steam\steamapps\common\VRChat" /Y /I</PostBuildEvent>
+  </PropertyGroup>
+</Project>
