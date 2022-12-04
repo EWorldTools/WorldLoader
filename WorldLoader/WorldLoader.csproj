@@ -88,6 +88,7 @@
   <ItemGroup>
     <Compile Include="Attributes\Attributes.cs" />
     <Compile Include="DataClasses\InternalInfo.cs" />
+    <Compile Include="DataClasses\UnityVer.cs" />
     <Compile Include="Discord\Discord.cs" />
     <Compile Include="Discord\Manager.cs" />
     <Compile Include="Discord\Update.cs" />

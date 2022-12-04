@@ -22,7 +22,7 @@ namespace WorldLoader.HookUtils
 			if (flags != null && flags.Length != 0) foreach (var flag in flags) flagsToLog += $"[{flag}] ";
 			Console.Write(flagsToLog);
 			Console.ForegroundColor = color;
-			Console.Write(text);
+			Console.Write(text + " ");
 			Console.ResetColor();
 			AddToLog($"{time}[WorldLoader] {flagsToLog}{text} ", false);
 			return text;

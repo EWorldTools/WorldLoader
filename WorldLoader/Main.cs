@@ -8,6 +8,7 @@ using WorldLoader.Init;
 using WorldLoader.Il2CppGen;
 using WorldLoader.Utils;
 using Il2CppGen;
+using WorldLoader.DataClasses;
 
 namespace WorldLoader
 {
@@ -77,9 +78,9 @@ namespace WorldLoader
 
 		internal void Start()
 		{
-            GetReady.Create(new Configuration {
-                UnityVersion = new Version(2019, 4, 31)
-            });
+			GetReady.Create(new Configuration {
+                UnityVersion = InternalInfo.EngineVersion.version
+			});
 
 			"==================================- Start -==================================".WriteLineToConsole(ConsoleColor.DarkGray);
 			Logs.Log();
