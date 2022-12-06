@@ -62,6 +62,10 @@ public static unsafe class IL2CPP
         }
 
         var clazz = il2cpp_class_from_name(image, namespaze, className);
+        if (clazz == IntPtr.Zero) throw new Exception($"Class Pointer (" +
+            $"{$"{assemblyName}-"}" +
+            $"{(string.IsNullOrEmpty(namespaze) ? "" : $"{namespaze}::")}" +
+            $"{className}) Is Null!");
         return clazz;
     }
 

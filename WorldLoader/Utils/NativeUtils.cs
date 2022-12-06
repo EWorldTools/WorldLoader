@@ -25,16 +25,16 @@ namespace WorldLoader.HookUtils
             IntPtr* targetVarPointer = &from;
             PinnedDelegates.Add(to);
             MinHook.CreateHook(*targetVarPointer, Marshal.GetFunctionPointerForDelegate(to), out var OriginalMethod);
-            //MinHook.EnableHook(@from);
-            return Marshal.GetDelegateForFunctionPointer<T>(from);
+            MinHook.EnableHook(@from);
+            return Marshal.GetDelegateForFunctionPointer<T>(OriginalMethod);
         }
 
         public static unsafe T Detour<T>(IntPtr @from, T to, out IntPtr OriginalMethod) where T : Delegate {
             IntPtr* targetVarPointer = &from;
             PinnedDelegates.Add(to);
             MinHook.CreateHook(*targetVarPointer, Marshal.GetFunctionPointerForDelegate(to), out OriginalMethod);
-            //MinHook.EnableHook(@from);
-            return Marshal.GetDelegateForFunctionPointer<T>(from);
+            MinHook.EnableHook(@from);
+            return Marshal.GetDelegateForFunctionPointer<T>(OriginalMethod);
         }
     }
 }
