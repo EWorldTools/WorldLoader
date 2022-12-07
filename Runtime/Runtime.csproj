@@ -42,7 +42,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Libs\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -61,6 +61,7 @@
     <Compile Include="Attributes\HideFromIl2CppAttribute.cs" />
     <Compile Include="Attributes\Il2CppImplementsAttribute.cs" />
     <Compile Include="DelegateSupport.cs" />
+    <Compile Include="MarshalExtend.cs" />
     <Compile Include="IL2CPP.cs" />
     <Compile Include="Il2CppClassPointerStore.cs" />
     <Compile Include="Il2CppException.cs" />
@@ -171,6 +172,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Libs\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

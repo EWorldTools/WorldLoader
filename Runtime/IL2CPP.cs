@@ -14,12 +14,17 @@ using Il2CppGen.Runtime.InteropTypes;
 using Il2CppGen.Runtime.InteropTypes.Arrays;
 using Il2CppGen.Runtime.Runtime;
 using InternalCore.Objects;
+using WorldLoader.HookUtils;
 
 namespace Il2CppGen.Runtime;
 
 public static unsafe class IL2CPP
 {
     public static readonly Dictionary<string, IntPtr> ourImagesMap = new();
+    // AssemblyImage, Class, ClassPointer
+    public static readonly Dictionary<(IntPtr, string), IntPtr> ObfuClasses = new();
+    // ClassPoiner, FieldName
+    public static readonly Dictionary<IntPtr, string> ObfuFields = new();
 
     private static readonly MethodInfo CastMethod = typeof(Il2CppObjectBase).GetMethod(nameof(Il2CppObjectBase.Cast));
 
@@ -28,7 +33,7 @@ public static unsafe class IL2CPP
         var domain = il2cpp_domain_get();
         if (domain == IntPtr.Zero)
         {
-            Logger.Instance.LogError("No il2cpp domain found; sad!");
+            Logger.Instance.LogError("No il2cpp domain found; PensiveEmoji :(");
             return;
         }
 
@@ -39,6 +44,21 @@ public static unsafe class IL2CPP
             var image = il2cpp_assembly_get_image(assemblies[i]);
             var name = Marshal.PtrToStringAnsi(il2cpp_image_get_name(image));
             ourImagesMap[name] = image;
+
+            uint count = il2cpp_image_get_class_count(image);
+            for (uint y = 0; y < count; y++)
+            {
+                var prt = il2cpp_image_get_class(image, y);
+                var Classname = MarshalExtend.PtrToString(il2cpp_class_get_name(prt));
+                if (Classname.IsObfuscated() && il2cpp_class_get_declaring_type(prt) == IntPtr.Zero) {
+                    //"[Il2Cpp]".WriteToConsole(ConsoleColor.DarkRed)
+                    //    .WriteToConsole("[Class] Catched", ConsoleColor.DarkBlue)
+                    //    .WriteToConsole(name, Logs.GetRandomConsoleColor())
+                    //    .WriteLineToConsole(Classname);
+                    ObfuClasses.Add((image, Classname), prt);
+                    
+                }
+            }
         }
     }
 
@@ -53,6 +73,20 @@ public static unsafe class IL2CPP
         return ourImagesMap.Values.ToArray();
     }
 
+    public static IntPtr TryGetDeclaringType(IntPtr Prt, out IntPtr DeclaringType) =>
+        DeclaringType = il2cpp_class_get_declaring_type(Prt);
+    
+
+    internal static bool IsObfuscated(this string str)
+    {
+        foreach (var it in str)
+            if (!char.IsDigit(it) && !((it >= 'a' && it <= 'z') || (it >= 'A' && it <= 'Z')) && it != '_' &&
+                it != '`' && it != '.' && it != '<' && it != '>')
+                return true;
+
+        return false;
+    }
+
     public static IntPtr GetIl2CppClass(string assemblyName, string namespaze, string className)
     {
         if (!ourImagesMap.TryGetValue(assemblyName, out var image))
@@ -62,10 +96,12 @@ public static unsafe class IL2CPP
         }
 
         var clazz = il2cpp_class_from_name(image, namespaze, className);
-        if (clazz == IntPtr.Zero) throw new Exception($"Class Pointer (" +
-            $"{$"{assemblyName}-"}" +
-            $"{(string.IsNullOrEmpty(namespaze) ? "" : $"{namespaze}::")}" +
-            $"{className}) Is Null!");
+        if (clazz == IntPtr.Zero) 
+            if (!ObfuClasses.TryGetValue((image, className), out clazz))
+                throw new NullReferenceException($"Class Pointer (" +
+                    $"{$"{assemblyName}-"}" +
+                    $"{(string.IsNullOrEmpty(namespaze) ? "" : $"{namespaze}::")}" +
+                    $"{className}) Is Null!");
         return clazz;
     }
 
@@ -75,8 +111,14 @@ public static unsafe class IL2CPP
 
         var field = il2cpp_class_get_field_from_name(clazz, fieldName);
         if (field == IntPtr.Zero)
+        {
+            IntPtr field_iter = IntPtr.Zero;
+            IntPtr fieldx = IntPtr.Zero;
+            while ((fieldx = il2cpp_class_get_fields(clazz, ref field_iter)) != IntPtr.Zero)
+                if (MarshalExtend.PtrToString(il2cpp_field_get_name(fieldx)) == fieldName) return fieldx;
             Logger.Instance.LogError(
-                $"Field {fieldName} was not found on class { Marshal.PtrToStringAnsi(il2cpp_class_get_name(clazz))}");
+                $"Field {fieldName} was not found on class {Marshal.PtrToStringAnsi(il2cpp_class_get_name(clazz))}");
+        }
         return field;
     }
 
@@ -296,7 +338,6 @@ public static unsafe class IL2CPP
 
         var length = il2cpp_string_length(il2CppString);
         var chars = il2cpp_string_chars(il2CppString);
-
         return new string(chars, 0, length);
     }
 

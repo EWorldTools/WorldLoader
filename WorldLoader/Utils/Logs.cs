@@ -44,7 +44,7 @@ namespace WorldLoader.HookUtils
 
 		public static string WriteToConsole(this string text, ConsoleColor color, string AddText) {
 			Console.ForegroundColor = color;
-			Console.Write(" " + AddText);
+			Console.Write(text.EndsWith(" ") ? " " : String.Empty + AddText);
 			Console.ResetColor();
 			AddToLog($" {AddText}", false);
 			return text;
@@ -53,11 +53,12 @@ namespace WorldLoader.HookUtils
 		public static void WriteLineToConsole(this string text, string Write, ConsoleColor color = ConsoleColor.DarkCyan)
         {
 			Console.ForegroundColor = color;
-			Console.WriteLine(Write);
+			Console.WriteLine(" " + Write);
 			Console.ResetColor();
         }
 
-		public static string WriteLineToConsole(this string text, ConsoleColor color = ConsoleColor.DarkGray, string[] flags = null, ConsoleColor flagColor = ConsoleColor.DarkRed) {
+		public static string WriteLineToConsole(this string text, ConsoleColor color, string[] flags = null, ConsoleColor flagColor = ConsoleColor.DarkRed)
+		{
 			string flagsToLog = "";
 			var time = WriteTime();
 			Console.ForegroundColor = flagColor;
@@ -69,6 +70,24 @@ namespace WorldLoader.HookUtils
 			if (flags != null && flags.Length != 0) foreach (var flag in flags) flagsToLog += $"[{flag}] ";
 			Console.Write(flagsToLog);
 			Console.ForegroundColor = color;
+			Console.WriteLine(text);
+			Console.ResetColor();
+			AddToLog($"{time}[WorldLoader] {flagsToLog}{text}");
+			return text;
+		}
+
+		public static string WriteLineToConsole(this string text, string[] flags = null, ConsoleColor flagColor = ConsoleColor.DarkRed) {
+			string flagsToLog = "";
+			var time = WriteTime();
+			Console.ForegroundColor = flagColor;
+			Console.Write("[");
+			Console.ForegroundColor = ConsoleColor.Magenta;
+			Console.Write("WorldLoader");
+			Console.ForegroundColor = flagColor;
+			Console.Write("] ");
+			if (flags != null && flags.Length != 0) foreach (var flag in flags) flagsToLog += $"[{flag}] ";
+			Console.Write(flagsToLog);
+			Console.ForegroundColor = GetRandomConsoleColor();
 			Console.WriteLine(text);
 			Console.ResetColor();
 			AddToLog($"{time}[WorldLoader] {flagsToLog}{text}");
@@ -194,6 +213,19 @@ namespace WorldLoader.HookUtils
 			Console.Write("] ");
 			Console.ResetColor();
 			return $"[{SystemTime}] ";
+		}
+
+		private static ConsoleColor lastcolor;
+
+		public static ConsoleColor GetRandomConsoleColor() { 
+			var ca = new Random().Next(1, 16);
+			var color = (ConsoleColor)ca;
+			if (color == ConsoleColor.Black || color == ConsoleColor.Red)
+				return ConsoleColor.DarkMagenta;
+			if (color == lastcolor)
+				color = (ConsoleColor)Enum.GetValues(typeof(ConsoleColor)).GetValue(ca - 1);
+			lastcolor = color;
+			return color;
 		}
 
 		internal static string AddToLog(string Data = null, bool NewLine = true, bool IsDebug = false)

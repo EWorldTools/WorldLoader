@@ -25,20 +25,20 @@ namespace WorldLoader
 		internal static HarmonyLib.Harmony HarmonyInstance { get; set; }
 
 		protected internal static void Login() {
-			Internal_Utils.RunInTry(Load, null, true);
-			Internal_Utils.RunInTry(Preint.Start);
+            Internal_Utils.RunInTry(Load, null, true);
+            Internal_Utils.RunInTry(Preint.Start);
 
-			Logs.Log(ConsoleColor.DarkCyan, "Logging In And Checking Tags...");
-			Logs.Debug(" -=========================== Debug Mode On! ===========================- ", ConsoleColor.Gray);
-			Internal_Utils.RunInTry(Il2CppUnhollower.Core.OnInitialize);
-			Self.Awake();
-			Internal_Utils.RunInTry(Interface.StartLoadMods);
-			LoggedIn = true;
-			Logs.Log("Logged IN!", "LoaderInit", ConsoleColor.Green);
-			//Update.UpdateRPC("Logged in! <3");
-		}
+            Logs.Log(ConsoleColor.DarkCyan, "Logging In And Checking Tags...");
+            Logs.Debug(" -=========================== Debug Mode On! ===========================- ", ConsoleColor.Gray);
+            Internal_Utils.RunInTry(Il2CppUnhollower.Core.OnInitialize);
+            Self.Awake();
+            Internal_Utils.RunInTry(Interface.StartLoadMods);
+            LoggedIn = true;
+            Logs.Log("Logged IN!", "LoaderInit", ConsoleColor.Green);
+            //Update.UpdateRPC("Logged in! <3");
+        }
 
-		internal static void Load() {
+        internal static void Load() {
             AppDomain.CurrentDomain.UnhandledException +=
                 (sender, args) => Logs.Error((args.ExceptionObject as Exception).ToString());
 

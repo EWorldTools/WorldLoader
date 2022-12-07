@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 using WorldLoader.HookUtils;
 using WorldLoader.Utils;
 
@@ -29,6 +30,10 @@ internal sealed class Interface : AppDomainManager, INetDomain
 		global::WorldLoader.WorldLoader.Self.Start();
 
 	[Obfuscation(Exclude = true, ApplyToMembers = false)]
-	public void MinHook_CreateInstance(IntPtr CreateHook, IntPtr RemoveHook, IntPtr EnableHook, IntPtr DisableHook) =>
-		Internal_Utils.MinHookCreateInstance(CreateHook, RemoveHook, EnableHook, DisableHook);
+	public void MinHook_CreateInstance(IntPtr CreateHook, IntPtr RemoveHook, IntPtr EnableHook, IntPtr DisableHook) {
+		try {
+			Internal_Utils.MinHookCreateInstance(CreateHook, RemoveHook, EnableHook, DisableHook);
+		}
+		catch (Exception e) { MessageBox.Show(e.ToString(), "Failt ERROR"); }
+	}
 }
