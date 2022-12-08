@@ -8,7 +8,7 @@ namespace WorldLoader.Il2CppUnhollower.Packages
         internal UnityDependencies()
         {
             Name = nameof(UnityDependencies);
-            Version = InternalInfo.EngineVersion.version.ToString();
+            Version = "2019.4.40";
             C.L.Config.UnityVersion = Version;
             URL = $"https://github.com/LavaGang/Unity-Runtime-Libraries/raw/master/{Version}.zip";
             Destination = Path.Combine(Core.LoaderFolderPath, Name);

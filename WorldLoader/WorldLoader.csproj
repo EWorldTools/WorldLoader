@@ -164,6 +164,7 @@
     </Compile>
     <Compile Include="FlatUI\Helpers.cs" />
     <Compile Include="FlatUI\MouseState.cs" />
+    <Compile Include="Interface\MonoBehv.cs" />
     <Compile Include="UIMenu\Menu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -273,6 +274,7 @@
     <Compile Include="Unhollower\Packages\Models\PackageBase.cs" />
     <Compile Include="Unhollower\Packages\Semver.cs" />
     <Compile Include="Unhollower\Packages\UnityDependencies.cs" />
+    <Compile Include="Utils\CoroutinesHandler.cs" />
     <Compile Include="Utils\OtherLibraries.cs" />
     <Compile Include="Utils\Internal Utils.cs" />
     <Compile Include="Utils\Logs.cs" />

@@ -9,6 +9,8 @@ using WorldLoader.Il2CppGen;
 using WorldLoader.Utils;
 using Il2CppGen;
 using WorldLoader.DataClasses;
+using Il2CppGen.Runtime.Injection;
+using UnityEngine;
 
 namespace WorldLoader
 {
@@ -16,6 +18,7 @@ namespace WorldLoader
 	{
 		public static readonly bool IsAuth = LoggedIn;
 		private static bool LoggedIn = false;
+		internal static bool MonoBhvMade = false;
 		private int count;
 
 		public static WorldLoader Self { get; set; }
@@ -97,11 +100,15 @@ namespace WorldLoader
 				}
 			}
 			try {
-				SceneManagementInit();
-				//UpdateAndGUIHooks();
-				//MonoBhv.Start();
+                SceneManagementInit();
+                if (!ClassInjector.IsTypeRegisteredInIl2Cpp(typeof(MonoBehv)))
+                    ClassInjector.RegisterTypeInIl2Cpp<MonoBehv>();
+                var obj = new GameObject("TestOBJ").AddComponent<MonoBehv>();
+                UnityEngine.Object.DontDestroyOnLoad(obj);
+                MonoBhvMade = true;
+
             }
-            catch (Exception e) {
+			catch (Exception e) {
 				Logs.Error("Error On Override", e);
 			}
 
