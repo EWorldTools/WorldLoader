@@ -19,12 +19,11 @@ namespace WorldLoader
         void Update()
         {
             foreach (UnityMod vrMod in WorldLoader._ModManager.Mods) Internal_Utils.RunInTry(vrMod.OnUpdate, $"Error During Update on {vrMod.Name}\n");
-            var bakclog = CoroutinesHandler.BackLog;
-            foreach (var Emn in bakclog) {
+            foreach (var Emn in CoroutinesHandler.BackLog) {
                 var Wrapper = new MonoEnumeratorWrapper(Emn);
                 StartCoroutine(new Il2CppSystem.Collections.IEnumerator(Wrapper.Pointer));
-                //CoroutinesHandler.BackLog.Remove(Emn);
             }
+            CoroutinesHandler.BackLog.Clear();
         }
 
         void OnGUI()
