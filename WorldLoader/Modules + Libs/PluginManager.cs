@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text;
 using WorldLoader.Attributes;
 using WorldLoader.HookUtils;
+using WorldLoader.Il2CppGen.Internal.Extensions;
 
 namespace WorldLoader.Plugins;
 
@@ -52,7 +53,7 @@ public sealed class PluginManager
 
 						try {
 							try {
-								mod = assembly.GetTypes().Where(o => o.IsSubclassOf(typeof(WLPlugin))).Select(a => (WLPlugin)Activator.CreateInstance(a)).FirstOrDefault();
+								mod = assembly.GetTypesSafe().Where(o => o.IsSubclassOf(typeof(WLPlugin))).Select(a => (WLPlugin)Activator.CreateInstance(a)).FirstOrDefault();
 							}
 							catch (ReflectionTypeLoadException ex) {
 								StringBuilder sb = new StringBuilder();

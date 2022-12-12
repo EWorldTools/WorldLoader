@@ -25,9 +25,15 @@ namespace WorldLoader.Mods
 		public ModManager ModManager { get; private set; }
 		public UnityMod Mod;
 
-		public virtual void Unload() =>
+		public virtual void OnUnload() { 
+			
+		}
+
+		public void Unload() {
+			OnUnload();
 			ModManager.UnloadMod(this);
-		
+		}
+
 
 		internal void Initialize(ModAttribute ModInfo, ModManager ModMger)
 		{

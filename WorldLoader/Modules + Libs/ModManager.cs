@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text;
 using WorldLoader.Attributes;
 using WorldLoader.HookUtils;
+using WorldLoader.Il2CppGen.Internal.Extensions;
 
 namespace WorldLoader.Mods;
 
@@ -40,7 +41,7 @@ public sealed class ModManager
 			Type type = null;
 
 			try {
-				mod = assembly.GetTypes().Where(o => o
+				mod = assembly.GetTypesSafe().Where(o => o
 							.IsSubclassOf(typeof(UnityMod)))
 								.Select(a =>
 								(UnityMod)Activator
@@ -107,7 +108,7 @@ public sealed class ModManager
 						Type type = null;
 
 						try {
-							mod = assembly.GetTypes().Where(o => o
+							mod = assembly.GetTypesSafe().Where(o => o
 							.IsSubclassOf(typeof(UnityMod)))
 								.Select(a =>
 								(UnityMod)Activator
