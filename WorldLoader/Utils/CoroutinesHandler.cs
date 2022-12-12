@@ -18,7 +18,7 @@ namespace WorldLoader.Utils
     }
 
 
-    internal class MonoEnumeratorWrapper : Il2CppSystem.Object //, IEnumerator
+    internal class MonoEnumeratorWrapper : Il2CppSystem.Object // From Melonloader https://github.com/LavaGang/MelonLoader/blob/master/Dependencies/SupportModules/Il2Cpp/MonoEnumeratorWrapper.cs
     {
         private readonly IEnumerator enumerator;
         public MonoEnumeratorWrapper(IntPtr ptr) : base(ptr) { }
