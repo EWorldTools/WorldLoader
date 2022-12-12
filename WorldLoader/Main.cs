@@ -11,6 +11,7 @@ using Il2CppGen;
 using WorldLoader.DataClasses;
 using Il2CppGen.Runtime.Injection;
 using UnityEngine;
+using WorldLoader.Il2CppGen.HarmonySupport;
 
 namespace WorldLoader
 {
@@ -22,9 +23,12 @@ namespace WorldLoader
 		private int count;
 
 		public static WorldLoader Self { get; set; }
+		public static UnityAppInfo appInfo { get; private set; }
 		internal static ModManager _ModManager { get; set; }
 		internal static PluginManager _PluginManager { get; set; }
 		internal static LoaderMenu Menu { get; set; }
+		public static MonoBehv monoBehv { get; set; }
+		public static HarmonySupportComponent harmonySupportComponent { get; set; }
 		internal static HarmonyLib.Harmony HarmonyInstance { get; set; }
 
 		protected internal static void Login() {
@@ -46,7 +50,11 @@ namespace WorldLoader
                 (sender, args) => Logs.Error((args.ExceptionObject as Exception).ToString());
 
             HarmonyInstance = new HarmonyLib.Harmony("WorldLoader");
-			try {
+			harmonySupportComponent = new();
+			harmonySupportComponent.Start();
+
+			try
+			{
 				Self = new WorldLoader();
 				Self.Plugins();
 			} catch (Exception e) { 
@@ -55,6 +63,7 @@ namespace WorldLoader
 			Menu = new LoaderMenu();
 			Internal_Utils.RunInTry(Menu.Show);
 			Watermark.Send();
+			appInfo = new();
 		}
 
 		internal void Awake()
@@ -81,6 +90,7 @@ namespace WorldLoader
 
 		internal void Start()
 		{
+			InternalInfo.EngineVersion = new UnityVer();
 			GetReady.Create(new Configuration {
                 UnityVersion = InternalInfo.EngineVersion.version
 			});

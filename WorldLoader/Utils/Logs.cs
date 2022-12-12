@@ -220,10 +220,10 @@ namespace WorldLoader.HookUtils
 		public static ConsoleColor GetRandomConsoleColor() { 
 			var ca = new Random().Next(1, 16);
 			var color = (ConsoleColor)ca;
-			if (color == ConsoleColor.Black || color == ConsoleColor.Red)
-				return ConsoleColor.DarkMagenta;
 			if (color == lastcolor)
 				color = (ConsoleColor)Enum.GetValues(typeof(ConsoleColor)).GetValue(ca - 1);
+			if (color == ConsoleColor.Black || color == ConsoleColor.Red)
+				return ConsoleColor.DarkMagenta;
 			lastcolor = color;
 			return color;
 		}

@@ -174,7 +174,6 @@ namespace Il2CppGen.Runtime.Injection
             {
                 string namespaze = Marshal.PtrToStringAnsi(_namespace);
                 string className = Marshal.PtrToStringAnsi(name);
-                Logs.Log($"Looking for {namespaze}::{className} in InjectedClasses...", "InjectionHelpers");
                 s_ClassNameLookup.TryGetValue((namespaze, className, (IntPtr)image), out IntPtr injectedClass);
                 classPtr = (Il2CppClass*)injectedClass;
             }

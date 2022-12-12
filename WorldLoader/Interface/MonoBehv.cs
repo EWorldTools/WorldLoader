@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,9 +18,12 @@ namespace WorldLoader
 
         void Awake()
         {
-            //foreach (var Emn in CoroutinesHandler.BackLog) StartCoroutine(new Il2CppSystem.Collections.IEnumerator(Emn));
+            foreach (var Emn in CoroutinesHandler.BackLog) StartCoroutine(new Il2CppSystem.Collections.IEnumerator(new MonoEnumeratorWrapper(Emn).Pointer));
 
         }
+
+        internal void StartEmn(IEnumerator enumerator) =>
+            StartCoroutine(new Il2CppSystem.Collections.IEnumerator(new MonoEnumeratorWrapper(enumerator).Pointer));
 
 
         void Update()

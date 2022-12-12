@@ -14,7 +14,7 @@ internal class InternalInfo
     public static string Description { get; } = "A IL2Cpp Mod Loader, Allowing u to Load C# Managed Dlls";
     public static string Author { get; } = "_1254";
     public static string Thanks { get; } = "Cpp2IL [https://github.com/SamboyCoding/Cpp2IL] is licensed under the MIT License. See LICENSE for the full License.";
-    public static UnityVer EngineVersion { get; private set; } = new UnityVer();
+    public static UnityVer EngineVersion { get; internal set; }
 
 
 }

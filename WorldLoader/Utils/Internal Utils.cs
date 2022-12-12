@@ -51,7 +51,6 @@ internal static class Internal_Utils {
 
 
 	internal static void MinHookCreateInstance(IntPtr CreateHook, IntPtr RemoveHook, IntPtr EnableHook, IntPtr DisableHook) {
-		Internal_Utils.RunInTry(Internal_Utils.PrepConsole);
 		MinHook.HookInprts.mVRC_EnableHook = EnableHook;
 		MinHook.HookInprts.mVRC_CreateHook = CreateHook;
 		MinHook.HookInprts.mVRC_RemoveHook = RemoveHook;

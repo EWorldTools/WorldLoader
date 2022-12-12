@@ -33,7 +33,7 @@ public static unsafe class IL2CPP
         var domain = il2cpp_domain_get();
         if (domain == IntPtr.Zero)
         {
-            Logger.Instance.LogError("No il2cpp domain found; PensiveEmoji :(");
+            throw new NullReferenceException("No il2cpp domain found; PensiveEmoji :(");
             return;
         }
 
@@ -91,7 +91,7 @@ public static unsafe class IL2CPP
     {
         if (!ourImagesMap.TryGetValue(assemblyName, out var image))
         {
-            Logger.Instance.LogError($"Assembly {assemblyName} is not registered in il2cpp");
+            throw new NullReferenceException($"Assembly {assemblyName} is not registered in il2cpp");
             return IntPtr.Zero;
         }
 
@@ -116,8 +116,8 @@ public static unsafe class IL2CPP
             IntPtr fieldx = IntPtr.Zero;
             while ((fieldx = il2cpp_class_get_fields(clazz, ref field_iter)) != IntPtr.Zero)
                 if (MarshalExtend.PtrToString(il2cpp_field_get_name(fieldx)) == fieldName) return fieldx;
-            Logger.Instance.LogError(
-                $"Field {fieldName} was not found on class {Marshal.PtrToStringAnsi(il2cpp_class_get_name(clazz))}");
+            throw new NullReferenceException(
+                $"Field {fieldName} was not found on class {MarshalExtend.PtrToString(il2cpp_class_get_name(clazz))}");
         }
         return field;
     }
@@ -378,7 +378,7 @@ public static unsafe class IL2CPP
             if (Marshal.PtrToStringAnsi(il2cpp_class_get_name(nestedTypePtr)) == nestedTypeName)
                 return nestedTypePtr;
 
-        Logger.Instance.LogError(
+        throw new NullReferenceException(
             $"Nested type {nestedTypeName} on {Marshal.PtrToStringAnsi(il2cpp_class_get_name(enclosingType))} not found!");
 
         return IntPtr.Zero;

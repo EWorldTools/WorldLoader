@@ -144,6 +144,7 @@ internal static class Pass10CreateTypedefs
                 bool IsAssemblySkipped = false;
                 if (!string.IsNullOrEmpty(AssemblyName) && !string.IsNullOrEmpty(S.AssemblyFile))
                     if (!AssemblyName.Contains(S.AssemblyFile)) IsAssemblySkipped = true;
+   
                 if (!IsAssemblySkipped)
                     if (S.WithMethods.Count > 0 || S.WithOutMethods.Count > 0)
                         foreach (var Method in Methods)
@@ -167,7 +168,7 @@ internal static class Pass10CreateTypedefs
                     foreach (var Field in Fields) {
                         if (S.WithFields.Contains(Field.Name)) {
                                 IsAssembly++;
-                                Logs.Debug("FCUKGIN FIELD " + Field.FullName);
+                                Logs.Debug("Matched Field " + Field.FullName);
                             }
                             if (S.WithOutFields.Count > 0)
                         if (S.WithOutFields.Contains(Field.Name)) {

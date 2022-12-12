@@ -1,21 +1,21 @@
-﻿using System;
+﻿using HarmonyLib;
+using HarmonyLib.Public.Patching;
+using Il2CppGen.Runtime;
+using Il2CppGen.Runtime.Injection;
+using Il2CppGen.Runtime.InteropTypes;
+using Il2CppGen.Runtime.Runtime;
+using Il2CppGen.Runtime.Runtime.VersionSpecific.MethodInfo;
+using MonoMod.Cil;
+using MonoMod.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.InteropServices;
-using HarmonyLib;
-using HarmonyLib.Public.Patching;
-using WorldLoader.Il2CppGen.Internal;
-using MonoMod.Cil;
-using MonoMod.Utils;
 using WorldLoader.HookUtils;
-using Il2CppGen.Runtime;
+using WorldLoader.Il2CppGen.Internal;
 using ValueType = Il2CppSystem.ValueType;
-using Il2CppGen.Runtime.Runtime.VersionSpecific.MethodInfo;
-using Il2CppGen.Runtime.Runtime;
-using Il2CppGen.Runtime.Injection;
-using Il2CppGen.Runtime.InteropTypes;
 
 namespace WorldLoader.Il2CppGen.HarmonySupport;
 
@@ -59,8 +59,6 @@ internal unsafe class Il2CppDetourMethodPatcher : MethodPatcher
 
     private static readonly List<object> DelegateCache = new();
     private INativeMethodInfoStruct modifiedNativeMethodInfo;
-
-    private IntPtr nativeDetour;
 
     private INativeMethodInfoStruct originalNativeMethodInfo;
 
@@ -114,16 +112,18 @@ internal unsafe class Il2CppDetourMethodPatcher : MethodPatcher
     /// <inheritdoc />
     public override DynamicMethodDefinition PrepareOriginal() => null;
 
+    private IntPtr PatchPointer;
+
     /// <inheritdoc />
     public override MethodBase DetourTo(MethodBase replacement)
     {
-        //// // Unpatch an existing detour if it exists
-        //if (nativeDetour != null)
-        //{
-        //    // Point back to the original method before we unpatch
-        //    modifiedNativeMethodInfo.MethodPointer = originalNativeMethodInfo.MethodPointer;
-        //    MinHook.RemoveHook(modifiedNativeMethodInfo.MethodPointer);
-        //}
+        // // Unpatch an existing detour if it exists
+        if (PatchPointer != IntPtr.Zero)
+        {
+            // Point back to the original method before we unpatch
+            modifiedNativeMethodInfo.MethodPointer = originalNativeMethodInfo.MethodPointer;
+            MinHook.RemoveHook(PatchPointer);
+        }
 
         // Generate a new DMD of the modified unhollowed method, and apply harmony patches to it
         var copiedDmd = CopyOriginal();
@@ -141,12 +141,12 @@ internal unsafe class Il2CppDetourMethodPatcher : MethodPatcher
 
         var unmanagedDelegate = unmanagedTrampolineMethod.CreateDelegate(unmanagedDelegateType);
         DelegateCache.Add(unmanagedDelegate);
+
         MinHook.CreateHook(originalNativeMethodInfo.MethodPointer, Marshal.GetFunctionPointerForDelegate(unmanagedDelegate), out var OriginalMethod);
+        PatchPointer = OriginalMethod;
+        MinHook.EnableHook(originalNativeMethodInfo.MethodPointer);
 
-        //nativeDetour =
-        //    OriginalMethod;
-
-        //modifiedNativeMethodInfo.MethodPointer = nativeDetour;
+       
 
         // TODO: Add an ILHook for the original unhollowed method to go directly to managedHookedMethod
         // Right now it goes through three times as much interop conversion as it needs to, when being called from managed side
@@ -350,7 +350,7 @@ internal unsafe class Il2CppDetourMethodPatcher : MethodPatcher
     }
 
     private static void ReportException(Exception ex) =>
-        Logger.Instance.LogError("During invoking native->managed trampoline\n"+ ex);
+        Logger.Instance.LogError("During invoking native->managed trampoline\n" + ex);
 
     private static void EmitConvertManagedTypeToIL2CPP(ILGenerator il, Type returnType)
     {

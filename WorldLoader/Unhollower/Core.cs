@@ -14,38 +14,30 @@ namespace WorldLoader.Il2CppUnhollower
 {
     internal class Core
     {
-        internal static string LoaderFolderPath = null;
+        internal static List<AssemblyDefinition> Cpp2ILOutputFolder { get; set; } = new List<AssemblyDefinition>();
 
         internal static WebClient webClient = null;
-
         internal static Packages.Models.ExecutablePackage dumper = null;
         internal static AssemblyUnhollower assemblyunhollower = null;
         internal static UnityDependencies Dependencies = null;
-        internal static List<AssemblyDefinition> Cpp2ILOutputFolder { get; set; } = new List<AssemblyDefinition>();
-
+        internal static string LoaderFolderPath = null;
         internal static bool AssemblyGenerationNeeded = false;
 
         internal static void OnInitialize()
         {
-
-            webClient = new WebClient();
+            webClient = new();
             if (string.IsNullOrEmpty(C.L.Config.GameAssemblyPath))
                 if (!File.Exists(Path.Combine(Directory.GetCurrentDirectory(), "GameAssembly.dll"))) {
                     MessageBox.Show("Unable to find the GameAssembly! (you can try manually adding it in the config)", "Fatal Error");
                     return;
                 }
                 else C.L.Config.GameAssemblyPath = Path.Combine(Directory.GetCurrentDirectory(), "GameAssembly.dll");
-            if (string.IsNullOrEmpty(C.L.Config.ManagedPath))
-                foreach (var directory in Directory.GetDirectories(Directory.GetCurrentDirectory()))
-                    if (directory.EndsWith("_Data")) {
-                            C.L.Config.ManagedPath = directory;
-                        break;
-                    }
-            if (string.IsNullOrEmpty(C.L.Config.ManagedPath)) {
-                MessageBox.Show("Unable to find the ManagedPath! (Can Be added In Config, Not Necessary Atm)", "Error");
-            }
+            
             LoaderFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "WorldLoader");
-            try {
+            webClient.Headers.Add("User-Agent", "WorldLoader v0.5.4");
+
+            try
+            {
                 switch (Run())
                 {
                     default:
@@ -66,7 +58,6 @@ namespace WorldLoader.Il2CppUnhollower
             } catch (Exception e) {
                 Logs.Error("Error During AssemblyGeneration Stuff", e);
             }
-            webClient.Headers.Add("User-Agent", "WorldLoader v0.5.4");
         }
 
         internal static float Run(bool ForceRegen = false)

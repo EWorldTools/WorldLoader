@@ -37,11 +37,12 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="0Harmony, Version=2.10.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\HarmonyX.2.10.1\lib\net45\0Harmony.dll</HintPath>
-    </Reference>
     <Reference Include="Iced, Version=1.17.0.0, Culture=neutral, PublicKeyToken=5baba79f4264913b, processorArchitecture=MSIL">
       <HintPath>..\packages\Iced.1.17.0\lib\net45\Iced.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppGen.Runtime, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\Il2CppGen.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Il2Cppmscorlib, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -88,6 +89,7 @@
   <ItemGroup>
     <Compile Include="Attributes\Attributes.cs" />
     <Compile Include="DataClasses\InternalInfo.cs" />
+    <Compile Include="DataClasses\UnityAppInfo.cs" />
     <Compile Include="DataClasses\UnityVer.cs" />
     <Compile Include="Discord\Discord.cs" />
     <Compile Include="Discord\Manager.cs" />
@@ -282,6 +284,7 @@
     <Compile Include="Utils\Mod Utils.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Utils\NativeUtils.cs" />
+    <Compile Include="Utils\ProgressBar.cs" />
     <Compile Include="Watermark.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -293,9 +296,9 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Runtime\Runtime.csproj">
-      <Project>{675AF739-A353-4060-BB74-8AC8E47C57C6}</Project>
-      <Name>Runtime</Name>
+    <ProjectReference Include="..\..\..\Users\_1254\source\repos\Harm\Harm\Harm.csproj">
+      <Project>{62b3ab47-9ff0-451f-b45c-a1074ae2b5b4}</Project>
+      <Name>Harm</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

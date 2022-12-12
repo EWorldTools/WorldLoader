@@ -8,6 +8,7 @@ using WorldLoader.HookUtils;
 using System.Runtime.InteropServices;
 using System.Net;
 using WorldLoader.OtherLibraries;
+using WorldLoader.DataClasses;
 
 public class C {
     public static WorldConfig<Values> L;
@@ -21,7 +22,6 @@ public class Values
     public string GameAssemblyPath { get; set; } = "";
     public string GameAssemblyHash { get; set; } = "";
     public long DeObbMapHash { get; set; } = 0;
-    public string ManagedPath { get; set; } = "";
     public string DeobfuscationRegex { get; set; } = "";
     public string UnityVersion { get; set; } = "0.0.0.0";
     public string DumperVersion { get; set; } = "0.0.0.0";
@@ -32,9 +32,8 @@ namespace WorldLoader
     internal class Preint
     {
         private static readonly string[] Folders = {
-            "WorldLoader",
+            InternalInfo.Name,
             "Mods",
-            "Reversed",
         };
 
         public const int STD_INPUT_HANDLE = -10;
@@ -59,7 +58,7 @@ namespace WorldLoader
                     Directory.CreateDirectory(folder);
                     Logs.Log("Made Missing Directory! ["+folder+"]", "Prinit");
                 }
-            Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "WorldLoader\\Dependencies"));
+            Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), InternalInfo.Name, "Dependencies"));
             if (!File.Exists($"{Directory.GetCurrentDirectory()}\\WorldLoader\\Dependencies\\discord-rpc.dll"))
             {
                 var wc = new WebClient();
@@ -67,7 +66,7 @@ namespace WorldLoader
                 Logs.Log("Installed Discord RPC Dll!", "Discord RPC", ConsoleColor.White, ConsoleColor.Cyan);
             }
             Discord.Discord.Init();
-            C.L = new(Environment.CurrentDirectory + "\\WorldLoader\\Config.json");
+            C.L = new(Environment.CurrentDirectory + $"\\{InternalInfo.Name}\\Config.json");
         }
     }
 }
