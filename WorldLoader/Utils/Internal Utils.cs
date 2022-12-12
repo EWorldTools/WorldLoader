@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Il2CppGen.Runtime;
+using Il2CppGen.Runtime.Injection;
+using Il2CppGen.Runtime.Runtime;
+using Il2CppGen.Runtime.Runtime.VersionSpecific.Class;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -8,6 +12,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UnityEngine;
 using WorldLoader.HookUtils;
 
 namespace WorldLoader.Utils;
@@ -23,6 +28,33 @@ internal static class Internal_Utils {
 
 	[DllImport("kernel32.dll")]
 	private static extern IntPtr GetConsoleWindow();
+
+	internal static IntPtr ReadClassPointerForType(Type type)
+	{
+		return (IntPtr)typeof(Il2CppClassPointerStore<>).MakeGenericType(type)
+			.GetField(nameof(Il2CppClassPointerStore<int>.NativeClassPtr)).GetValue(null);
+	}
+
+	internal static unsafe void SetUpMainMono()
+    {
+		var rev = new RegisterTypeOptions();
+		var it = typeof(Il2CppSystem.Collections.IEnumerator);
+		var classPointer = ReadClassPointerForType(it);
+		if (classPointer == IntPtr.Zero)
+			throw new ArgumentException($"Type {it} doesn't have an IL2CPP class pointer, which means it's not an IL2CPP interface");
+
+		var prt = UnityVersionHandler.Wrap((Il2CppClass*)classPointer);
+		List<INativeClassStruct> structs = new List<INativeClassStruct>();
+		structs.Add(prt);
+		rev.Interfaces = new Il2CppInterfaceCollection(structs);
+			
+		if (Il2CppClassPointerStore<MonoEnumeratorWrapper>.NativeClassPtr == IntPtr.Zero)
+			ClassInjector.RegisterTypeInIl2Cpp<MonoEnumeratorWrapper>(rev);
+		if (!ClassInjector.IsTypeRegisteredInIl2Cpp(typeof(MonoBehv)))
+			ClassInjector.RegisterTypeInIl2Cpp<MonoBehv>();
+		var obj = new GameObject("TestOBJ").AddComponent<MonoBehv>();
+		UnityEngine.Object.DontDestroyOnLoad(obj);
+	}
 
 	internal static void PrepConsole() {
 		AllocConsole();
@@ -51,6 +83,7 @@ internal static class Internal_Utils {
 
 
 	internal static void MinHookCreateInstance(IntPtr CreateHook, IntPtr RemoveHook, IntPtr EnableHook, IntPtr DisableHook) {
+		Internal_Utils.RunInTry(Internal_Utils.PrepConsole);
 		MinHook.HookInprts.mVRC_EnableHook = EnableHook;
 		MinHook.HookInprts.mVRC_CreateHook = CreateHook;
 		MinHook.HookInprts.mVRC_RemoveHook = RemoveHook;

@@ -11,25 +11,22 @@ namespace WorldLoader.Utils
     public static class CoroutinesHandler
     {
         internal static List<IEnumerator> BackLog = new();
+        internal static List<MonoEnumeratorWrapper> HoldingCell = new();
 
-        public static void Start(this IEnumerator enumerator) { 
-            if (!WorldLoader.MonoBhvMade) BackLog.Add(enumerator);
-            else {
-                WorldLoader.monoBehv.StartEmn(enumerator);
-            }
-
+        public static void Start(this IEnumerator enumerator) {
+            BackLog.Add(enumerator);
         }
     }
 
 
-    internal class MonoEnumeratorWrapper : Il2CppSystem.Object 
+    internal class MonoEnumeratorWrapper : Il2CppSystem.Object //, IEnumerator
     {
         private readonly IEnumerator enumerator;
         public MonoEnumeratorWrapper(IntPtr ptr) : base(ptr) { }
         public MonoEnumeratorWrapper(IEnumerator _enumerator) : base(ClassInjector.DerivedConstructorPointer<MonoEnumeratorWrapper>())
         {
             ClassInjector.DerivedConstructorBody(this);
-            enumerator = _enumerator ?? throw new NullReferenceException("routine is null"); ;
+            enumerator = _enumerator ?? throw new NullReferenceException("routine is null");
         }
 
         public Il2CppSystem.Object /*IEnumerator.*/Current

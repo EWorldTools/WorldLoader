@@ -16,19 +16,15 @@ namespace WorldLoader
         {
         }
 
-        void Awake()
-        {
-            foreach (var Emn in CoroutinesHandler.BackLog) StartCoroutine(new Il2CppSystem.Collections.IEnumerator(new MonoEnumeratorWrapper(Emn).Pointer));
-
-        }
-
-        internal void StartEmn(IEnumerator enumerator) =>
-            StartCoroutine(new Il2CppSystem.Collections.IEnumerator(new MonoEnumeratorWrapper(enumerator).Pointer));
-
-
         void Update()
         {
             foreach (UnityMod vrMod in WorldLoader._ModManager.Mods) Internal_Utils.RunInTry(vrMod.OnUpdate, $"Error During Update on {vrMod.Name}\n");
+            var bakclog = CoroutinesHandler.BackLog;
+            foreach (var Emn in bakclog) {
+                var Wrapper = new MonoEnumeratorWrapper(Emn);
+                StartCoroutine(new Il2CppSystem.Collections.IEnumerator(Wrapper.Pointer));
+                //CoroutinesHandler.BackLog.Remove(Emn);
+            }
         }
 
         void OnGUI()

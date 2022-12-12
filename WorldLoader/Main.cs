@@ -99,7 +99,7 @@ namespace WorldLoader
 			Logs.Log();
 
 			Update.UpdateRPC(null, $"Loading {count} Mods...");
-
+			Internal_Utils.SetUpMainMono();
 			foreach (UnityMod vrMod in _ModManager.Mods) {
 				try {
 					"[OnInject] - ".WriteToConsole(ConsoleColor.Green).WriteLineToConsole(vrMod.Name, ConsoleColor.Magenta);
@@ -111,10 +111,6 @@ namespace WorldLoader
 			}
 			try {
                 SceneManagementInit();
-                if (!ClassInjector.IsTypeRegisteredInIl2Cpp(typeof(MonoBehv)))
-                    ClassInjector.RegisterTypeInIl2Cpp<MonoBehv>();
-                var obj = new GameObject("TestOBJ").AddComponent<MonoBehv>();
-                UnityEngine.Object.DontDestroyOnLoad(obj);
                 MonoBhvMade = true;
 
             }

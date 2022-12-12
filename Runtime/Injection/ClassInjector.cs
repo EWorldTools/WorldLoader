@@ -17,6 +17,7 @@ using Il2CppGen.Runtime.Runtime.VersionSpecific.Class;
 using Il2CppGen.Runtime.Runtime.VersionSpecific.MethodInfo;
 using ValueType = Il2CppSystem.ValueType;
 using Void = Il2CppSystem.Void;
+using WorldLoader.HookUtils;
 
 namespace Il2CppGen.Runtime.Injection;
 
@@ -87,8 +88,10 @@ public static unsafe partial class ClassInjector
 
     public static IntPtr DerivedConstructorPointer<T>()
     {
-        return IL2CPP.il2cpp_object_new(Il2CppClassPointerStore<T>
-            .NativeClassPtr); // todo: consider calling base constructor
+        var prt = Il2CppClassPointerStore<T>
+            .NativeClassPtr;
+        if (prt == null || prt == IntPtr.Zero) Logs.Error("Class Pointer Store Returned NULL!");
+        return IL2CPP.il2cpp_object_new(prt); // todo: consider calling base constructor
     }
 
     public static void DerivedConstructorBody(Il2CppObjectBase objectBase)
