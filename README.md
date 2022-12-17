@@ -14,6 +14,12 @@
 
  (Not Ready Yet)
 
+   
+## Known Issues: 
+        - Dup Class names in some games 
+            [ This is due to the Gen Opt's ( TypeDeobfuscationMaxUniquifiers && TypeDeobfuscationCharsPerUniquifier ) Being set to 0 
+                    ( CLR has the strings a lot smaller then how the CLI Sees it, thus causing the maps not work )
+
 ## LICENSING & CREDITS:
 
 Third-party Libraries used as Source Code and/or bundled in Binary Form:
