@@ -1,5 +1,8 @@
-<p align="center">
 
+<p align="center">
+  <header>
+    <h1>Here at WorldVRC we dont not support/ Condone hacking or cheating! </h1>
+  </header>
 <p align="center">
   <a href="#"><img src="https://raw.githubusercontent.com/Hacker1254/WorldClient-Files/main/WorldClient.png"></a>
 </p>
