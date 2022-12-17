@@ -36,7 +36,7 @@ namespace WorldLoader.HookUtils
 
 		public static string WriteToConsole(this string text, string AddText, ConsoleColor color) {
 			Console.ForegroundColor = color;
-			Console.Write(" " + AddText);
+			Console.Write(text.EndsWith(" ") ? String.Empty : " " + AddText);
 			Console.ResetColor();
 			AddToLog($" {AddText}", false);
 			return text;
@@ -44,7 +44,7 @@ namespace WorldLoader.HookUtils
 
 		public static string WriteToConsole(this string text, ConsoleColor color, string AddText) {
 			Console.ForegroundColor = color;
-			Console.Write(text.EndsWith(" ") ? " " : String.Empty + AddText);
+			Console.Write(text.EndsWith(" ") ? String.Empty : " " + AddText);
 			Console.ResetColor();
 			AddToLog($" {AddText}", false);
 			return text;
@@ -53,7 +53,7 @@ namespace WorldLoader.HookUtils
 		public static void WriteLineToConsole(this string text, string Write, ConsoleColor color = ConsoleColor.DarkCyan)
         {
 			Console.ForegroundColor = color;
-			Console.WriteLine(" " + Write);
+			Console.WriteLine(text.EndsWith(" ") ? String.Empty : " " + Write);
 			Console.ResetColor();
         }
 

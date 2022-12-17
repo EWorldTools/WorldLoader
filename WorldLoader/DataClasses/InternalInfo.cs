@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UnityEngine;
 
 namespace WorldLoader.DataClasses;
 
-internal class InternalInfo
+public class InternalInfo
 {
     public static string Name { get; } = "WorldLoader";
     public static double Version { get; } = 0.3;

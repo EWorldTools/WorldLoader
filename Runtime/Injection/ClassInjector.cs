@@ -58,7 +58,7 @@ public class RegisterTypeOptions
 {
     public static readonly RegisterTypeOptions Default = new();
 
-    public bool LogSuccess { get; set; } = true;
+    public bool LogSuccess { get; set; } = false;
     public Func<Type, Type[]>? InterfacesResolver { get; set; } = null;
     public Il2CppInterfaceCollection? Interfaces { get; set; } = null;
 }

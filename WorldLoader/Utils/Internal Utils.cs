@@ -52,9 +52,9 @@ internal static class Internal_Utils {
 			ClassInjector.RegisterTypeInIl2Cpp<MonoEnumeratorWrapper>(rev);
 		if (!ClassInjector.IsTypeRegisteredInIl2Cpp(typeof(MonoBehv)))
 			ClassInjector.RegisterTypeInIl2Cpp<MonoBehv>();
-		var obj = new GameObject("TestOBJ").AddComponent<MonoBehv>();
-		UnityEngine.Object.DontDestroyOnLoad(obj);
-	}
+        var obj = new GameObject("TestOBJ").AddComponent<MonoBehv>();
+        UnityEngine.Object.DontDestroyOnLoad(obj);
+    }
 
 	internal static void PrepConsole() {
 		AllocConsole();

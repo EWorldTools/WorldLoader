@@ -18,15 +18,6 @@ internal static class Pass10CreateTypedefs
             foreach (var type in assemblyContext.OriginalAssembly.MainModule.Types)
                 if (type.Namespace != "Cpp2ILInjected" && type.Name != "<Module>")
                     ProcessType(type, assemblyContext, null, assemblyContext.OriginalAssembly.Name.Name);
-
-        try {
-            if (context.Options.DeObbJson.Count > 0)
-                foreach (var assebly in context.Options.DeObbJson)
-                    Logs.Error($"Unable to Deobb Assembly {assebly.AssemblyName}");
-        }
-        catch (Exception e) {
-            Logs.Error(e);
-        }
     }
 
     private static void ProcessType(TypeDefinition type, UnhollowedAssemblyContext assemblyContext,
@@ -36,7 +27,7 @@ internal static class Pass10CreateTypedefs
         var convertedTypeName = GetConvertedTypeName(assemblyContext.GlobalContext, type, parentType, AssemblyName);
         var newType =
             new TypeDefinition(
-                convertedTypeName.Namespace ?? type.Namespace.UnSystemify(assemblyContext.GlobalContext.Options),
+                convertedTypeName.Namespace ?? GetNamespace(type, assemblyContext),
                 convertedTypeName.Name, AdjustAttributes(type.Attributes));
         newType.IsSequentialLayout = false;
 
@@ -57,6 +48,15 @@ internal static class Pass10CreateTypedefs
             ProcessType(typeNestedType, assemblyContext, newType);
 
         assemblyContext.RegisterTypeRewrite(new TypeRewriteContext(assemblyContext, type, newType));
+    }
+
+
+    static string GetNamespace(TypeDefinition type, UnhollowedAssemblyContext assemblyContext)
+    {
+        if (type.Name is "<Module>" or "<PrivateImplementationDetails>" || type.DeclaringType is not null)
+            return type.Namespace;
+        else
+            return type.Namespace.UnSystemify(assemblyContext.GlobalContext.Options);
     }
 
     internal static (string? Namespace, string Name) GetConvertedTypeName(
@@ -80,26 +80,31 @@ internal static class Pass10CreateTypedefs
             var fullName = enclosingType == null
                 ? type.Namespace
                 : enclosingType.GetNamespacePrefix() + "." + enclosingType.Name;
-
-            var deobbsMap = CheckName(assemblyContextGlobalContext, type, AssemblyName);
-            if (deobbsMap != null) {
-                if (type.Module.Types.Any(t => t.FullName == deobbsMap.AssemblyName))
+            if (assemblyContextGlobalContext.Options.DeObbJson != null)
+                if (assemblyContextGlobalContext.Options.DeObbJson.Count > 0)
                 {
-                    Logger.Instance.LogWarning($"[Rename map issue] {deobbsMap.AssemblyName} already exists in {type.Module.Name} (mapped from {fullName}.{convertedTypeName})");
-                    deobbsMap.AssemblyName += "_Duplicate";
+                    var deobbsMap = CheckName(assemblyContextGlobalContext, type, AssemblyName);
+                    if (deobbsMap != null)
+                    {
+                        if (type.Module.Types.Any(t => t.FullName == deobbsMap.AssemblyName))
+                        {
+                            Logger.Instance.LogWarning($"[Rename map issue] {deobbsMap.AssemblyName} already exists in {type.Module.Name} (mapped from {fullName}.{convertedTypeName})");
+                            deobbsMap.AssemblyName += "_Duplicate";
+                        }
+                        var lastDotPosition = deobbsMap.AssemblyName.LastIndexOf(".");
+                        if (lastDotPosition >= 0)
+                        {
+                            var ns = deobbsMap.AssemblyName.Substring(0, lastDotPosition);
+                            var name = deobbsMap.AssemblyName.Substring(lastDotPosition + 1);
+                            return (ns, name);
+                        }
+                    }
                 }
-                var lastDotPosition = deobbsMap.AssemblyName.LastIndexOf(".");
-                if (lastDotPosition >= 0)
-                {
-                    var ns = deobbsMap.AssemblyName.Substring(0, lastDotPosition);
-                    var name = deobbsMap.AssemblyName.Substring(lastDotPosition + 1);
-                    return (ns, name);
-                }
-            }
 
             if (assemblyContextGlobalContext.Options.RenameMap.TryGetValue(fullName + "." + convertedTypeName,
                     out var newName))
             {
+                Logger.Instance.LogWarning($"[Rename map] (mapped from {fullName}.{convertedTypeName})");
                 if (type.Module.Types.Any(t => t.FullName == newName))
                 {
                     Logger.Instance.LogWarning($"[Rename map issue] {newName} already exists in {type.Module.Name} (mapped from {fullName}.{convertedTypeName})");

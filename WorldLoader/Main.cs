@@ -10,7 +10,6 @@ using WorldLoader.Utils;
 using Il2CppGen;
 using WorldLoader.DataClasses;
 using Il2CppGen.Runtime.Injection;
-using UnityEngine;
 using WorldLoader.Il2CppGen.HarmonySupport;
 
 namespace WorldLoader
@@ -21,6 +20,7 @@ namespace WorldLoader
 		private static bool LoggedIn = false;
 		internal static bool MonoBhvMade = false;
 		private int count;
+
 
 		public static WorldLoader Self { get; set; }
 		public static UnityAppInfo appInfo { get; private set; }
@@ -102,11 +102,11 @@ namespace WorldLoader
 			Internal_Utils.SetUpMainMono();
 			foreach (UnityMod vrMod in _ModManager.Mods) {
 				try {
-					"[OnInject] - ".WriteToConsole(ConsoleColor.Green).WriteLineToConsole(vrMod.Name, ConsoleColor.Magenta);
+					"[OnInject] -".WriteToConsole(ConsoleColor.Green).WriteLineToConsole(vrMod.Name, ConsoleColor.Magenta);
 					vrMod.OnInject();
 				}
 				catch (Exception e) {
-                    Logs.Error("Error In OnInject For " + vrMod.Name, e);
+                    Logs.Error($"Error In OnInject For {vrMod.Name}", e);
 				}
 			}
 			try {

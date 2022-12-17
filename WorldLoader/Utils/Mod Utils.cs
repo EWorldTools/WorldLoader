@@ -108,7 +108,7 @@ namespace WorldLoader.HookUtils
 		//{
 		//    for (var childcount = transform.childCount - 1; childcount >= 0; childcount--)
 		//        if (exclude == null || exclude(transform.GetChild(childcount)))
-		//            Object.DestroyImmediate(transform.GetChild(childcount).gameObject);
+		//            UnityEngine.Object.DestroyImmediate(transform.GetChild(childcount).gameObject);
 		//}
 
 		//public static void DestroyChildren(this Transform transform) =>

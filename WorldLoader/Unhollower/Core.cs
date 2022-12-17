@@ -70,9 +70,9 @@ namespace WorldLoader.Il2CppUnhollower
             if (!dumper.Setup()
                 || !Dependencies.Setup())
                 return 1;
+
             if (!assemblyunhollower.Setup())
                 return 1;
-
             //DeobfuscationRegex.Setup();
 
             string CurrentGameAssemblyHash = FileHandler.Hash(C.L.Config.GameAssemblyPath);

@@ -13,7 +13,7 @@ public class GeneratorOptions
     internal List<AssemblyDefinition>? Source { get; set; }
     internal string? OutputDir { get; set; }
 
-    internal List<Deobb>? DeObbJson;
+    internal List<Deobb>? DeObbJson { get; set; }
 
     internal string? UnityBaseLibsDir { get; set; }
     internal List<string> AdditionalAssembliesBlacklist { get; } = new();

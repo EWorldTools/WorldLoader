@@ -21,6 +21,15 @@ namespace WorldLoader.HookUtils
             return Outdelegate = Marshal.GetDelegateForFunctionPointer(method, typeof(T)) as T;
         }
 
+        public static unsafe IntPtr NativeDetour(IntPtr @from, IntPtr to)
+        {
+            IntPtr* targetVarPointer = &from;
+            PinnedDelegates.Add(to);
+            MinHook.CreateHook(*targetVarPointer, to, out var OriginalMethod);
+            MinHook.EnableHook(@from);
+            return OriginalMethod;
+        }
+
         public static unsafe T Detour<T>(IntPtr @from, T to) where T : Delegate {
             IntPtr* targetVarPointer = &from;
             PinnedDelegates.Add(to);

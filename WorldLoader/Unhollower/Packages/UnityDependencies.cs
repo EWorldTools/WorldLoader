@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using WorldLoader.DataClasses;
 
 namespace WorldLoader.Il2CppUnhollower.Packages
 {
