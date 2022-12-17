@@ -17,8 +17,8 @@ public class GeneratorOptions
 
     internal string? UnityBaseLibsDir { get; set; }
     internal List<string> AdditionalAssembliesBlacklist { get; } = new();
-    internal int TypeDeobfuscationCharsPerUniquifier { get; set; } = 2;
-    internal int TypeDeobfuscationMaxUniquifiers { get; set; } = 10;
+    internal int TypeDeobfuscationCharsPerUniquifier { get; set; } = 0;
+    internal int TypeDeobfuscationMaxUniquifiers { get; set; } = 0;
     internal string? GameAssemblyPath { get; set; }
     internal bool Verbose { get; set; }
     internal bool NoXrefCache { get; set; }

@@ -42,7 +42,7 @@ public static unsafe class IL2CPP
         for (var i = 0; i < assembliesCount; i++)
         {
             var image = il2cpp_assembly_get_image(assemblies[i]);
-            var name = Marshal.PtrToStringAnsi(il2cpp_image_get_name(image));
+            var name = MarshalExtend.PtrToString(il2cpp_image_get_name(image));
             ourImagesMap[name] = image;
 
             uint count = il2cpp_image_get_class_count(image);
@@ -112,9 +112,9 @@ public static unsafe class IL2CPP
         var field = il2cpp_class_get_field_from_name(clazz, fieldName);
         if (field == IntPtr.Zero)
         {
-            IntPtr field_iter = IntPtr.Zero;
+            var iter = IntPtr.Zero;
             IntPtr fieldx = IntPtr.Zero;
-            while ((fieldx = il2cpp_class_get_fields(clazz, ref field_iter)) != IntPtr.Zero)
+            while ((fieldx = il2cpp_class_get_fields(clazz, ref iter)) != IntPtr.Zero)
                 if (MarshalExtend.PtrToString(il2cpp_field_get_name(fieldx)) == fieldName) return fieldx;
             throw new NullReferenceException(
                 $"Field {fieldName} was not found on class {MarshalExtend.PtrToString(il2cpp_class_get_name(clazz))}");
@@ -133,7 +133,7 @@ public static unsafe class IL2CPP
             if (il2cpp_method_get_token(method) == token)
                 return method;
 
-        var className = Marshal.PtrToStringAnsi(il2cpp_class_get_name(clazz));
+        var className = MarshalExtend.PtrToString(il2cpp_class_get_name(clazz));
         Logger.Instance.LogTrace($"Unable to find method {className}::{token}");
 
         return NativeStructUtils.GetMethodInfoForMissingMethod(className + "::" + token);
@@ -159,7 +159,7 @@ public static unsafe class IL2CPP
         IntPtr method;
         while ((method = il2cpp_class_get_methods(clazz, ref iter)) != IntPtr.Zero)
         {
-            if (Marshal.PtrToStringAnsi(il2cpp_method_get_name(method)) != methodName)
+            if (MarshalExtend.PtrToString(il2cpp_method_get_name(method)) != methodName)
                 continue;
 
             if (il2cpp_method_get_param_count(method) != argTypes.Length)
@@ -169,7 +169,7 @@ public static unsafe class IL2CPP
                 continue;
 
             var returnType = il2cpp_method_get_return_type(method);
-            var returnTypeNameActual = Marshal.PtrToStringAnsi(il2cpp_type_get_name(returnType));
+            var returnTypeNameActual = MarshalExtend.PtrToString(il2cpp_type_get_name(returnType));
             if (returnTypeNameActual != returnTypeName)
                 continue;
 
@@ -180,7 +180,7 @@ public static unsafe class IL2CPP
             for (var i = 0; i < argTypes.Length; i++)
             {
                 var paramType = il2cpp_method_get_param(method, (uint)i);
-                var typeName = Marshal.PtrToStringAnsi(il2cpp_type_get_name(paramType));
+                var typeName = MarshalExtend.PtrToString(il2cpp_type_get_name(paramType));
                 if (typeName != argTypes[i])
                 {
                     badType = true;
@@ -193,19 +193,19 @@ public static unsafe class IL2CPP
             return method;
         }
 
-        var className = Marshal.PtrToStringAnsi(il2cpp_class_get_name(clazz));
+        var className = MarshalExtend.PtrToString(il2cpp_class_get_name(clazz));
 
         if (methodsSeen == 1)
         {
             Logger.Instance.LogTrace(
                 $"Method {className}::{methodName} was stubbed with a random matching method of the same name");
             Logger.Instance.LogTrace(
-               $"Stubby return type/target: {Marshal.PtrToStringAnsi(il2cpp_type_get_name(il2cpp_method_get_return_type(lastMethod)))} / {returnTypeName}");
+               $"Stubby return type/target: {MarshalExtend.PtrToString(il2cpp_type_get_name(il2cpp_method_get_return_type(lastMethod)))} / {returnTypeName}");
             Logger.Instance.LogTrace("Stubby parameter types/targets follow:");
             for (var i = 0; i < argTypes.Length; i++)
             {
                 var paramType = il2cpp_method_get_param(lastMethod, (uint)i);
-                var typeName = Marshal.PtrToStringAnsi(il2cpp_type_get_name(paramType));
+                var typeName = MarshalExtend.PtrToString(il2cpp_type_get_name(paramType));
                 Logger.Instance.LogTrace($"    {typeName} / {argTypes[i]}");
             }
 
@@ -220,17 +220,17 @@ public static unsafe class IL2CPP
         iter = IntPtr.Zero;
         while ((method = il2cpp_class_get_methods(clazz, ref iter)) != IntPtr.Zero)
         {
-            if (Marshal.PtrToStringAnsi(il2cpp_method_get_name(method)) != methodName)
+            if (MarshalExtend.PtrToString(il2cpp_method_get_name(method)) != methodName)
                 continue;
 
             var nParams = il2cpp_method_get_param_count(method);
             Logger.Instance.LogTrace("Method starts");
             Logger.Instance.LogTrace(
-                $"     return {Marshal.PtrToStringAnsi(il2cpp_type_get_name(il2cpp_method_get_return_type(method)))}");
+                $"     return {MarshalExtend.PtrToString(il2cpp_type_get_name(il2cpp_method_get_return_type(method)))}");
             for (var i = 0; i < nParams; i++)
             {
                 var paramType = il2cpp_method_get_param(method, (uint)i);
-                var typeName = Marshal.PtrToStringAnsi(il2cpp_type_get_name(paramType));
+                var typeName = MarshalExtend.PtrToString(il2cpp_type_get_name(paramType));
                 Logger.Instance.LogTrace($"    {typeName}");
             }
 
@@ -259,7 +259,7 @@ public static unsafe class IL2CPP
         IntPtr method;
         while ((method = il2cpp_class_get_methods(clazz, ref iter)) != IntPtr.Zero)
         {
-            if (Marshal.PtrToStringAnsi(il2cpp_method_get_name(method)) != methodName)
+            if (MarshalExtend.PtrToString(il2cpp_method_get_name(method)) != methodName)
                 continue;
 
             if (il2cpp_method_get_param_count(method) != argTypes.Length)
@@ -272,7 +272,7 @@ public static unsafe class IL2CPP
             for (var i = 0; i < argTypes.Length; i++)
             {
                 var paramType = il2cpp_method_get_param(method, (uint)i);
-                var typeName = Marshal.PtrToStringAnsi(il2cpp_type_get_name(paramType));
+                var typeName = MarshalExtend.PtrToString(il2cpp_type_get_name(paramType));
                 if (typeName != argTypes[i])
                 {
                     badType = true;
@@ -285,19 +285,19 @@ public static unsafe class IL2CPP
             return method;
         }
 
-        var className = Marshal.PtrToStringAnsi(il2cpp_class_get_name(clazz));
+        var className = MarshalExtend.PtrToString(il2cpp_class_get_name(clazz));
 
         if (methodsSeen == 1)
         {
             Logger.Instance.LogTrace(
                 $"Method {className}::{methodName} was stubbed with a random matching method of the same name");
             Logger.Instance.LogTrace(
-               $"Stubby return type/target: {Marshal.PtrToStringAnsi(il2cpp_type_get_name(il2cpp_method_get_return_type(lastMethod)))}");
+               $"Stubby return type/target: {MarshalExtend.PtrToString(il2cpp_type_get_name(il2cpp_method_get_return_type(lastMethod)))}");
             Logger.Instance.LogTrace("Stubby parameter types/targets follow:");
             for (var i = 0; i < argTypes.Length; i++)
             {
                 var paramType = il2cpp_method_get_param(lastMethod, (uint)i);
-                var typeName = Marshal.PtrToStringAnsi(il2cpp_type_get_name(paramType));
+                var typeName = MarshalExtend.PtrToString(il2cpp_type_get_name(paramType));
                 Logger.Instance.LogTrace($"    {typeName} / {argTypes[i]}");
             }
 
@@ -311,17 +311,17 @@ public static unsafe class IL2CPP
         iter = IntPtr.Zero;
         while ((method = il2cpp_class_get_methods(clazz, ref iter)) != IntPtr.Zero)
         {
-            if (Marshal.PtrToStringAnsi(il2cpp_method_get_name(method)) != methodName)
+            if (MarshalExtend.PtrToString(il2cpp_method_get_name(method)) != methodName)
                 continue;
 
             var nParams = il2cpp_method_get_param_count(method);
             Logger.Instance.LogTrace("Method starts");
             Logger.Instance.LogTrace(
-                $"     return {Marshal.PtrToStringAnsi(il2cpp_type_get_name(il2cpp_method_get_return_type(method)))}");
+                $"     return {MarshalExtend.PtrToString(il2cpp_type_get_name(il2cpp_method_get_return_type(method)))}");
             for (var i = 0; i < nParams; i++)
             {
                 var paramType = il2cpp_method_get_param(method, (uint)i);
-                var typeName = Marshal.PtrToStringAnsi(il2cpp_type_get_name(paramType));
+                var typeName = MarshalExtend.PtrToString(il2cpp_type_get_name(paramType));
                 Logger.Instance.LogTrace($"    {typeName}");
             }
 
@@ -375,11 +375,11 @@ public static unsafe class IL2CPP
         }
 
         while ((nestedTypePtr = il2cpp_class_get_nested_types(enclosingType, ref iter)) != IntPtr.Zero)
-            if (Marshal.PtrToStringAnsi(il2cpp_class_get_name(nestedTypePtr)) == nestedTypeName)
+            if (MarshalExtend.PtrToString(il2cpp_class_get_name(nestedTypePtr)) == nestedTypeName)
                 return nestedTypePtr;
 
         throw new NullReferenceException(
-            $"Nested type {nestedTypeName} on {Marshal.PtrToStringAnsi(il2cpp_class_get_name(enclosingType))} not found!");
+            $"Nested type {nestedTypeName} on {MarshalExtend.PtrToString(il2cpp_class_get_name(enclosingType))} not found!");
 
         return IntPtr.Zero;
     }

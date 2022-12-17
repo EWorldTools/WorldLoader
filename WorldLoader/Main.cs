@@ -41,7 +41,7 @@ namespace WorldLoader
             Self.Awake();
             Internal_Utils.RunInTry(Interface.StartLoadMods);
             LoggedIn = true;
-            Logs.Log("Logged IN!", "LoaderInit", ConsoleColor.Green);
+            Logs.Log("Welcome to WL <3", "LoaderInit", ConsoleColor.Green);
             //Update.UpdateRPC("Logged in! <3");
         }
 

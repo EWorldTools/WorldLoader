@@ -10,6 +10,12 @@ namespace WorldLoader.Mods
 		public UnityMod() {
 		}
 
+		public UnityMod(string name, ConsoleColor color = ConsoleColor.DarkRed)
+		{
+			Name = name;
+			ModColor = color;
+		}
+
 		internal UnityMod(Type type) {
 			this.type = type;
 		}

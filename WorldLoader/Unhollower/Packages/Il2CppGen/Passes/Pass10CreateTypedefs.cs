@@ -104,7 +104,6 @@ internal static class Pass10CreateTypedefs
             if (assemblyContextGlobalContext.Options.RenameMap.TryGetValue(fullName + "." + convertedTypeName,
                     out var newName))
             {
-                Logger.Instance.LogWarning($"[Rename map] (mapped from {fullName}.{convertedTypeName})");
                 if (type.Module.Types.Any(t => t.FullName == newName))
                 {
                     Logger.Instance.LogWarning($"[Rename map issue] {newName} already exists in {type.Module.Name} (mapped from {fullName}.{convertedTypeName})");
