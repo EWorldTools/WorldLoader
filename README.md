@@ -1,5 +1,8 @@
-<p align="center">
 
+<p align="center">
+  <header>
+    <h1>Here at WorldVRC we dont not support hacking or cheating! </h1>
+  </header>
 <p align="center">
   <a href="#"><img src="https://raw.githubusercontent.com/Hacker1254/WorldClient-Files/main/WorldClient.png"></a>
 </p>
@@ -13,6 +16,12 @@
 # How To Install
 
  (Not Ready Yet)
+
+   
+## Known Issues: 
+        - Dup Class names in some games 
+            [ This is due to the Gen Opt's ( TypeDeobfuscationMaxUniquifiers && TypeDeobfuscationCharsPerUniquifier ) Being set to 0 
+                    ( CLR has the strings a lot smaller then how the CLI Sees it, thus causing the maps not work )
 
 ## LICENSING & CREDITS:
 
