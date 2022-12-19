@@ -115,7 +115,6 @@ namespace WorldLoader.Il2CppUnhollower
 
             if (!assemblyunhollower.Execute())
                 return 3;
-            C.L.Config.DeObbMapHash = ModUtils.GetByteSize("WorldLoader\\DeobbMaps.json");
             Logs.Log("Successful!", "Assembly Generation");
             C.L.Config.GameAssemblyHash = CurrentGameAssemblyHash;
             C.L.Save();

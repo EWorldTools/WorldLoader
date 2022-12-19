@@ -37,11 +37,11 @@ public sealed class ModManager
 				return null;
 			}
 
-			UnityMod mod = null;
+			UnityMod vrMod = null;
 			Type type = null;
 
 			try {
-				mod = assembly.GetTypesSafe().Where(o => o
+				vrMod = assembly.GetTypesSafe().Where(o => o
 							.IsSubclassOf(typeof(UnityMod)))
 								.Select(a =>
 								(UnityMod)Activator
@@ -52,11 +52,10 @@ public sealed class ModManager
 				Logs.Error($"[Error] Mod Was Not Found Inside Of Dll {FilePath}!", e);
 				return null;
 			}
-			type = mod.GetType();
+			type = vrMod.GetType();
 
 			ModAttribute ModAttributes;
 			if ((ModAttributes = type.GetCustomAttributes(typeof(ModAttribute), true).FirstOrDefault<object>() as ModAttribute) != null) {
-				UnityMod vrMod = mod;
 				_Mods.Add(vrMod);
 				vrMod.Initialize(ModAttributes, this);
 				WorldLoader.Menu.flatComboBox2.Items.Add(vrMod.Name);
@@ -75,6 +74,26 @@ public sealed class ModManager
 			}
 			else {
 				Logs.Error("File Missing Attributes! - " + FilePath);
+				if (C.L.Config.Debug) {
+					Logs.Debug("Trying to load Anyways...");
+					var title = type.Assembly.GetCustomAttributes(typeof(AssemblyTitleAttribute), false).SingleOrDefault<object>() as AssemblyTitleAttribute;
+					var autor = type.Assembly.GetCustomAttributes(typeof(AssemblyCompanyAttribute), false).SingleOrDefault<object>() as AssemblyCompanyAttribute;
+					ModAttributes = new(title.Title, "Unknown", autor.Company);
+
+					vrMod.Initialize(ModAttributes, this);
+					WorldLoader.Menu.flatComboBox2.Items.Add(vrMod.Name);
+
+
+					if (LogInfo)
+					{
+						Logs.Log(vrMod.ModColor, $"======= [{vrMod.Name}] - {vrMod.Version} =======");
+						Logs.Log(vrMod.ModColor, $"   Made By: {vrMod.Author}");
+						if (!string.IsNullOrEmpty(vrMod.Link))
+							Logs.Log(vrMod.ModColor, $"   Link By: {vrMod.Link}");
+						Logs.Log();
+					}
+					if (InvokeOnInject) vrMod.OnInject();
+				}
 			}
 		}
 		else Logs.Error("FILE NOT DLL!", new FormatException());
@@ -104,11 +123,11 @@ public sealed class ModManager
 							continue;
 						}
 
-						UnityMod mod = null;
+						UnityMod vrMod = null;
 						Type type = null;
 
 						try {
-							mod = assembly.GetTypesSafe().Where(o => o
+							vrMod = assembly.GetTypesSafe().Where(o => o
 							.IsSubclassOf(typeof(UnityMod)))
 								.Select(a =>
 								(UnityMod)Activator
@@ -120,12 +139,11 @@ public sealed class ModManager
 							Logs.Error($"[Error] Mod Was Not Found Inside Of Dll {text}!", e);
 							continue;
 						}
-						type = mod.GetType();
+						type = vrMod.GetType();
 
 
 						ModAttribute ModAttributes;
 						if ((ModAttributes = type.GetCustomAttributes(typeof(ModAttribute), true).FirstOrDefault<object>() as ModAttribute) != null) {
-							UnityMod vrMod = mod;
 							_Mods.Add(vrMod);
 							vrMod.Initialize(ModAttributes, this);
 							WorldLoader.Menu.flatComboBox2.Items.Add(vrMod.Name);
@@ -138,7 +156,24 @@ public sealed class ModManager
 						}
 						else {
 							Logs.Error("File Missing Attributes! - " + text);
+							if (C.L.Config.Debug) {
+								Logs.Debug("Trying to load Anyways...");
+								var title = type.Assembly.GetCustomAttributes(typeof(AssemblyTitleAttribute), false).SingleOrDefault<object>() as AssemblyTitleAttribute;
+								var autor = type.Assembly.GetCustomAttributes(typeof(AssemblyCompanyAttribute), false).SingleOrDefault<object>() as AssemblyCompanyAttribute;
+								ModAttributes = new(title.Title, "Unknown", autor.Company);
+
+								vrMod.Initialize(ModAttributes, this);
+								WorldLoader.Menu.flatComboBox2.Items.Add(vrMod.Name);
+
+
+								Logs.Log(vrMod.ModColor, $"======= [{vrMod.Name}] - {vrMod.Version} =======");
+								Logs.Log(vrMod.ModColor, $"   Made By: {vrMod.Author}");
+								if (!string.IsNullOrEmpty(vrMod.Link))
+									Logs.Log(vrMod.ModColor, $"   Link By: {vrMod.Link}");
+								Logs.Log();
+							}
 						}
+
 
 					}
 				}

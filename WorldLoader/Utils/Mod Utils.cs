@@ -6,22 +6,22 @@ using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
-//using UnityEngine;
-//using Object = UnityEngine.Object;
+using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace WorldLoader.HookUtils
 {
     public static class ModUtils
     {
-        //private static string GetGameObjectPath(Transform transform)
-        //{
-        //    string path = transform.name;
-        //    while (transform.parent != null) {
-        //        transform = transform.parent;
-        //        path = transform.name + "/" + path;
-        //    }
-        //    return path;
-        //}
+        private static string GetGameObjectPath(Transform transform)
+        {
+            string path = transform.name;
+            while (transform.parent != null) {
+                transform = transform.parent;
+                path = transform.name + "/" + path;
+            }
+            return path;
+        }
 
         /// <summary>
         ///  Returns a string with the color (Works With Hex)
@@ -67,79 +67,79 @@ namespace WorldLoader.HookUtils
         public static long GetByteSize(string FilePath) => 
             new System.IO.FileInfo(FilePath).Length;
 
-		//internal static Sprite SpriteFromFile(string path) {
-		//    byte[] array = File.ReadAllBytes(path);
-		//    Texture2D texture2D = new Texture2D(256, 256);
-		//    ImageConversion.LoadImage(texture2D, array);
-		//    Rect rect = new Rect(0.0f, 0.0f, texture2D.width, texture2D.height);
-		//    Vector2 vector = new Vector2(0.5f, 0.5f);
-		//    Vector4 zero = Vector4.zero;
-		//    return Sprite.CreateSprite_Injected(texture2D, ref rect, ref vector, 100f, 0, SpriteMeshType.Tight, ref zero, false);
-		//}
+        //internal static Sprite SpriteFromFile(string path) {
+        //    byte[] array = File.ReadAllBytes(path);
+        //    Texture2D texture2D = new Texture2D(256, 256);
+        //    ImageConversion.LoadImage(texture2D, array);
+        //    Rect rect = new Rect(0.0f, 0.0f, texture2D.width, texture2D.height);
+        //    Vector2 vector = new Vector2(0.5f, 0.5f);
+        //    Vector4 zero = Vector4.zero;
+        //    return Sprite.CreateSprite_Injected(texture2D, ref rect, ref vector, 100f, 0, SpriteMeshType.Tight, ref zero, false);
+        //}
 
-		//internal static Sprite SpriteFromBytes(byte[] bytes) {
-		//    Texture2D texture2D = new Texture2D(256, 256);
-		//    ImageConversion.LoadImage(texture2D, bytes);
-		//    Rect rect = new Rect(0.0f, 0.0f, texture2D.width, texture2D.height);
-		//    Vector2 vector = new Vector2(0.5f, 0.5f);
-		//    Vector4 zero = Vector4.zero;
-		//    return Sprite.CreateSprite_Injected(texture2D, ref rect, ref vector, 100f, 0, SpriteMeshType.Tight, ref zero, false);
-		//}
+        //internal static Sprite SpriteFromBytes(byte[] bytes) {
+        //    Texture2D texture2D = new Texture2D(256, 256);
+        //    ImageConversion.LoadImage(texture2D, bytes);
+        //    Rect rect = new Rect(0.0f, 0.0f, texture2D.width, texture2D.height);
+        //    Vector2 vector = new Vector2(0.5f, 0.5f);
+        //    Vector4 zero = Vector4.zero;
+        //    return Sprite.CreateSprite_Injected(texture2D, ref rect, ref vector, 100f, 0, SpriteMeshType.Tight, ref zero, false);
+        //}
 
-		//public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
-		//{
-		//    T component = gameObject.GetComponent<T>();
-		//    if (component == null)
-		//        return gameObject.AddComponent<T>();
+        public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
+        {
+            T component = gameObject.GetComponent<T>();
+            if (component == null)
+                return gameObject.AddComponent<T>();
 
-		//    return component;
-		//}
+            return component;
+        }
 
-		//public static T GetOrAddComponent<T>(this Transform transform) where T : Component
-		//{
-		//    T component = transform.GetComponent<T>();
-		//    if (component == null)
-		//        return transform.gameObject.AddComponent<T>();
+        public static T GetOrAddComponent<T>(this Transform transform) where T : Component
+        {
+            T component = transform.GetComponent<T>();
+            if (component == null)
+                return transform.gameObject.AddComponent<T>();
 
-		//    return component;
-		//}
+            return component;
+        }
 
-		//public static void DestroyChildren(this Transform transform, Func<Transform, bool> exclude)
-		//{
-		//    for (var childcount = transform.childCount - 1; childcount >= 0; childcount--)
-		//        if (exclude == null || exclude(transform.GetChild(childcount)))
-		//            UnityEngine.Object.DestroyImmediate(transform.GetChild(childcount).gameObject);
-		//}
+        public static void DestroyChildren(this Transform transform, Func<Transform, bool> exclude)
+        {
+            for (var childcount = transform.childCount - 1; childcount >= 0; childcount--)
+                if (exclude == null || exclude(transform.GetChild(childcount)))
+                    UnityEngine.Object.DestroyImmediate(transform.GetChild(childcount).gameObject);
+        }
 
-		//public static void DestroyChildren(this Transform transform) =>
-		//    transform.DestroyChildren(null);
+        public static void DestroyChildren(this Transform transform) =>
+            transform.DestroyChildren(null);
 
-		//public static List<string> LogComponets(this GameObject Obj)
-		//{
-		//    List<string> list = new();
-		//    Component[] components = Obj.GetComponents<Component>();
-		//    for (int i = 0; i < components.Length; i++)
-		//        Logs.Log(components[i].ToString());
-		//    return list;
-		//}
+        public static List<string> LogComponets(this GameObject Obj)
+        {
+            List<string> list = new();
+            Component[] components = Obj.GetComponents<Component>();
+            for (int i = 0; i < components.Length; i++)
+                Logs.Log(components[i].ToString());
+            return list;
+        }
 
-		//public static List<string> LogAllComponets(this GameObject Obj)
-		//{
-		//    List<string> list = new();
-		//    Component[] components = Obj.GetComponentsInChildren<Component>();
-		//    for (int i = 0; i < components.Length; i++)
-		//        Logs.Log(components[i].ToString());
-		//    return list;
-		//}
+        public static List<string> LogAllComponets(this GameObject Obj)
+        {
+            List<string> list = new();
+            Component[] components = Obj.GetComponentsInChildren<Component>();
+            for (int i = 0; i < components.Length; i++)
+                Logs.Log(components[i].ToString());
+            return list;
+        }
 
 
-		/// <summary>
-		///  Returns a string, Ex. "<color=#000000>InputText</color>"
-		/// </summary>
-		/// <param name="Text"></param>
-		/// <param name="A"></param>
-		/// <returns></returns>
-		public static string ConsoleColorToHex(string Text, ConsoleColor A = ConsoleColor.White)
+        /// <summary>
+        ///  Returns a string, Ex. "<color=#000000>InputText</color>"
+        /// </summary>
+        /// <param name="Text"></param>
+        /// <param name="A"></param>
+        /// <returns></returns>
+        public static string ConsoleColorToHex(string Text, ConsoleColor A = ConsoleColor.White)
 		{
 
 			string result;

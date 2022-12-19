@@ -16,20 +16,6 @@ namespace WorldLoader.Il2CppUnhollower.Packages
     {
         internal static GeneratorOptions opts;
         internal static bool deobb = false;
-        internal AssemblyUnhollower()
-        {
-            //            if (string.IsNullOrEmpty(Version) || Version.Equals("0.0.0.0"))
-            //                Version = "0.4.17.1";
-            //            C.L.Config.UnhollowerVersion = Version;
-            //            Name = nameof(Il2CppAssemblyUnhollower);
-            //            URL = $"https://github.com/knah/{Name}/releases/download/v{Version}/{Name}.{Version}.zip";
-            //            Destination = Path.Combine(Core.LoaderFolderPath, Name);
-            //            OutputFolder = Core.BasePath;
-            //            ExeFilePath = Path.Combine(Core.LoaderFolderPath, $"{Name}\\AssemblyUnhollower.exe");
-            //            FilePath = Path.Combine(Core.LoaderFolderPath, $"{Name}_{Version}.zip");
-
-
-        }
 
         internal override bool ShouldSetup()
             => false;
@@ -51,6 +37,8 @@ namespace WorldLoader.Il2CppUnhollower.Packages
                 UnityBaseLibsDir = Core.Dependencies.Destination, // Path to managed Unity core libraries (UnityEngine.dll etc)
                 Parallel = false,
                 PassthroughNames = C.L.Config.HollowerPassAllNames,
+                TypeDeobfuscationCharsPerUniquifier = 999,// Remove Limit
+                TypeDeobfuscationMaxUniquifiers = 99, //     ^
             };
             if (deobb)
                 opts.ReadRenameMap("WorldLoader\\RenameMap.csv.gz");
@@ -65,8 +53,6 @@ namespace WorldLoader.Il2CppUnhollower.Packages
                                   .AddAssemblyGenerator()
                                   .Run();
             return true; 
-
-            //return false;
         }
     }
 }

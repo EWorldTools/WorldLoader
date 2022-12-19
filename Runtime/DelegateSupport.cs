@@ -26,7 +26,7 @@ public static class DelegateSupport
 
     private static readonly ConcurrentDictionary<MethodInfo, Delegate> NativeToManagedTrampolines = new();
 
-    internal static Type GetOrCreateDelegateType(MethodSignature signature, MethodInfo managedMethod)
+    public static Type GetOrCreateDelegateType(MethodSignature signature, MethodInfo managedMethod)
     {
         return ourDelegateTypes.GetOrAdd(signature,
             (signature, managedMethodInner) =>
@@ -316,7 +316,7 @@ public static class DelegateSupport
         return converted.Cast<TIl2Cpp>();
     }
 
-    internal class MethodSignature : IEquatable<MethodSignature>
+    public class MethodSignature : IEquatable<MethodSignature>
     {
         public readonly bool HasThis;
         public readonly bool ConstructedFromNative;
