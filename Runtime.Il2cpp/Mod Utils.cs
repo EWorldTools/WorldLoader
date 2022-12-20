@@ -68,7 +68,14 @@ namespace WorldLoader.HookUtils
                                select temp[randomString.Next(temp.Length)]).ToArray<char>());
         }
 
-        public static string SHA256(string value) {
+		public static string Random(this string s, int length = 9, bool numbersOnly = false) {
+			System.Random randomString = new System.Random();
+			string element = numbersOnly ? "0123456789" : "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789";
+			return s + " " + new string((from temp in Enumerable.Repeat<string>(element, length)
+							   select temp[randomString.Next(temp.Length)]).ToArray<char>());
+		}
+
+		public static string SHA256(string value) {
             HashAlgorithm hashAlgorithm = new SHA256Managed();
             StringBuilder stringBuilder = new StringBuilder();
             foreach (byte b in hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(value)))

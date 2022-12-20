@@ -225,7 +225,7 @@ namespace WorldLoader
             this.TabsConsole.SelectedIndex = 0;
             this.TabsConsole.Size = new System.Drawing.Size(379, 319);
             this.TabsConsole.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.TabsConsole.TabIndex = 1;
+            this.TabsConsole.TabIndex = 3;
             // 
             // ConsoleTab
             // 

@@ -235,10 +235,10 @@ public static class Logs
 					WorldLoader.Menu.flatLabel1.Text += Data + Environment.NewLine;
 				else WorldLoader.Menu.flatLabel2.Text += Data + Environment.NewLine;
 			}
-		} catch (Exception e) {
-			Console.ForegroundColor = ConsoleColor.Red;
-			Console.WriteLine("[Error] " + e);
-			Console.ResetColor();
+		} catch (Exception e) { // throw ig
+			//Console.ForegroundColor = ConsoleColor.Red;
+			//Console.WriteLine("[Error] " + e);
+			//Console.ResetColor();
 		}
 		if (!Directory.Exists("WorldLoader\\"))
 			Directory.CreateDirectory("WorldLoader\\");

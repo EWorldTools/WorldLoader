@@ -77,9 +77,10 @@ namespace WorldLoader
 		internal void Plugins()
 		{
 			_PluginManager = new PluginManager();
-			int count = _PluginManager.LoadPlugins().Count;
+			_PluginManager.LoadPlugins();
+			int count = _PluginManager.LoadedPlugins.Count;
 			Logs.Log(ConsoleColor.DarkGray, $"          -==================- {count} Plugin{((count == 1) ? "" : "s")} loaded. -==================-");
-			foreach (var plugin in _PluginManager.Plugins)
+			foreach (var plugin in _PluginManager.LoadedPlugins)
 				try {
 					plugin.OnLoad();
 				}
@@ -100,7 +101,7 @@ namespace WorldLoader
 
 			Update.UpdateRPC(null, $"Loading {count} Mods...");
 			Internal_Utils.SetUpMainMono();
-			foreach (UnityMod vrMod in _ModManager.Mods) {
+			foreach (UnityMod vrMod in _ModManager.Mods.Keys) {
 				try {
 					"[OnInject] -".WriteToConsole(ConsoleColor.Green).WriteLineToConsole(vrMod.Name, ConsoleColor.Magenta);
 					vrMod.OnInject();

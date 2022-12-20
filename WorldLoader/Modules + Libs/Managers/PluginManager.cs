@@ -13,23 +13,13 @@ namespace WorldLoader.Plugins;
 
 public sealed class PluginManager
 {
-	private List<WLPlugin> _Plugins { get; } = new List<WLPlugin>();
+	public List<WLPlugin> LoadedPlugins { get; private set; } = new List<WLPlugin>();
 
-	public ReadOnlyCollection<WLPlugin> Plugins
+	internal void LoadPlugins(string path = "Plugins\\")
 	{
-		get {
-			return _Plugins.AsReadOnly();
-		}
-	}
-
-	internal ReadOnlyCollection<WLPlugin> LoadPlugins(string path = "Plugins\\")
-	{
-		ReadOnlyCollection<WLPlugin> readOnlyCollection;
 		if (!Directory.Exists(path)) {
 			Directory.CreateDirectory(path);
 			Logs.Log("Plugins folder does not exist.");
-			readOnlyCollection = Plugins;
-		}
 		{
 			Logs.Log(ConsoleColor.DarkGray, "==================================- Plugins -==================================");
 			Logs.Log();
@@ -73,7 +63,7 @@ public sealed class PluginManager
 						}
 						catch (Exception e) {
 							Logs.Error($"[Error] Plugin Was Not Found Inside Of Dll {text}!", e);
-							return null;
+							continue;
 						}
 						PluginAttribute PluginAttributes = null;
 						try {
@@ -86,13 +76,13 @@ public sealed class PluginManager
 
 						if (PluginAttributes != null) {
 							WLPlugin Plugin = mod;
-							_Plugins.Add(Plugin);
+							LoadedPlugins.Add(Plugin);
 							Plugin.Initialize(PluginAttributes, this);
 
-							Logs.Log(Plugin.PluginColor, $"======= [{Plugin.Name}] - {Plugin.Version} =======");
-							Logs.Log(Plugin.PluginColor, $"   Made By: {Plugin.Author}");
+							Logs.Log(Plugin.ModColor, $"======= [{Plugin.Name}] - {Plugin.Version} =======");
+							Logs.Log(Plugin.ModColor, $"   Made By: {Plugin.Author}");
 							if (!string.IsNullOrEmpty(Plugin.Link))
-								Logs.Log(Plugin.PluginColor, $"   Link By: {Plugin.Link}");
+								Logs.Log(Plugin.ModColor, $"   Link By: {Plugin.Link}");
 							Logs.Log();
 						}
 						else {
@@ -105,26 +95,6 @@ public sealed class PluginManager
 				}
 			}
 			Logs.Log(ConsoleColor.DarkGray, "==================================- Plugins -==================================");
-			readOnlyCollection = Plugins;
-		}
-		return readOnlyCollection;
-	}
-
-	public void UnloadPlugin(WLPlugin Plugin)
-	{
-		if (_Plugins.Contains(Plugin)) {
-			_Plugins.Remove(Plugin);
-			Logs.Log($"{Plugin} unloaded!");
 		}
 	}
-
-	public void UnloadPlugin(string Plugin)
-	{
-		foreach (var _Plugin in _Plugins)
-			if (_Plugin.Name == Plugin)
-			{
-				_Plugins.Remove(_Plugin);
-				Logs.Log($"{Plugin} unloaded!");
-			}
-	}
-}
+}}

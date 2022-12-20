@@ -13,14 +13,9 @@ namespace WorldLoader.Mods;
 
 public sealed class ModManager
 {
-	private List<UnityMod> _Mods { get; } = new List<UnityMod>();
+	private List<UnityMod> _Mods { get; } = new();
 
-	public ReadOnlyCollection<UnityMod> Mods
-	{
-		get {
-			return _Mods.AsReadOnly();
-		}
-	}
+	public Dictionary<UnityMod, (string, FileInfo)> Mods = new();
 
 	public UnityMod LoadMod(string FilePath, bool InvokeOnInject = true, bool LogInfo = true) {
 		if (Path.GetExtension(FilePath) == ".dll") {
@@ -57,6 +52,7 @@ public sealed class ModManager
 			ModAttribute ModAttributes;
 			if ((ModAttributes = type.GetCustomAttributes(typeof(ModAttribute), true).FirstOrDefault<object>() as ModAttribute) != null) {
 				_Mods.Add(vrMod);
+				Mods.Add(vrMod, (FilePath, new FileInfo(FilePath)));
 				vrMod.Initialize(ModAttributes, this);
 				WorldLoader.Menu.flatComboBox2.Items.Add(vrMod.Name);
 
@@ -100,9 +96,8 @@ public sealed class ModManager
 		return null;
 	}
 
-	internal ReadOnlyCollection<UnityMod> FindMods()
+	internal Dictionary<UnityMod, (string, FileInfo)> FindMods()
 	{
-		ReadOnlyCollection<UnityMod> Collection;
 		string path = "Mods\\";
 		{
 			Logs.Log(ConsoleColor.DarkGray, "==================================- Mods -==================================");
@@ -145,6 +140,7 @@ public sealed class ModManager
 						ModAttribute ModAttributes;
 						if ((ModAttributes = type.GetCustomAttributes(typeof(ModAttribute), true).FirstOrDefault<object>() as ModAttribute) != null) {
 							_Mods.Add(vrMod);
+							Mods.Add(vrMod, (text, new FileInfo(text)));
 							vrMod.Initialize(ModAttributes, this);
 							WorldLoader.Menu.flatComboBox2.Items.Add(vrMod.Name);
 
@@ -182,9 +178,8 @@ public sealed class ModManager
 				}
 			}
 			Logs.Log(ConsoleColor.DarkGray, "==================================- Mods -==================================");
-			Collection = Mods;
 		}
-		return Collection;
+		return Mods;
 	}
 
 	public void UnloadMod(UnityMod Mod)
