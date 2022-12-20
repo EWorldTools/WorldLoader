@@ -103,6 +103,7 @@ internal static class Internal_Utils {
 			if (Asm.EndsWith(".dll"))
 				UnhollowedAssemblys.Add(Asm.RemoveFullPath(), Asm);
 		}
+		AdditionalChecks.Add(Directory.CreateDirectory("UserLibs"));
 		AppDomain.CurrentDomain.AssemblyResolve += (sender, args) => {
 			string name = args.Name;
 			byte[] ByteData = null;
@@ -113,9 +114,12 @@ internal static class Internal_Utils {
 				return Assembly.Load(File.ReadAllBytes(asm));
 			if (AdditionalChecks.Count > 0) AdditionalChecks.ForEach(a => {
 				var files = a.GetFiles();
-				ByteData = File.ReadAllBytes(files.FirstOrDefault(a=>a.Name == name).FullName);
+				var filepath = files.FirstOrDefault(a => a.Name == name).FullName;
+				if (!string.IsNullOrEmpty(filepath))
+				ByteData = File.ReadAllBytes(filepath);
 			});
-			return Assembly.Load(ByteData);
+			if (ByteData.Length > 10)
+				return Assembly.Load(ByteData);
 			Logs.Warn($"Sender {sender} Tried to get an Assembly ({name}) and FAILED!");
 			return null;
 		};
@@ -126,10 +130,10 @@ internal static class Internal_Utils {
 
 	internal static void MinHookCreateInstance(IntPtr CreateHook, IntPtr RemoveHook, IntPtr EnableHook, IntPtr DisableHook) {
 		Internal_Utils.RunInTry(Internal_Utils.PrepConsole);
-		MinHook.HookInprts.mVRC_EnableHook = EnableHook;
-		MinHook.HookInprts.mVRC_CreateHook = CreateHook;
-		MinHook.HookInprts.mVRC_RemoveHook = RemoveHook;
-		MinHook.HookInprts.mVRC_DisableHook = DisableHook;
+		MinHook.HookInprts.EnableHook = EnableHook;
+		MinHook.HookInprts.CreateHook = CreateHook;
+		MinHook.HookInprts.RemoveHook = RemoveHook;
+		MinHook.HookInprts.DisableHook = DisableHook;
 		MinHook.CreateHook = NativeUtils.CreateDelegate<MinHook._CreateHook>(CreateHook);
 		MinHook.RemoveHook = NativeUtils.CreateDelegate<MinHook._RemoveHook>(RemoveHook);
 		MinHook.EnableHook = NativeUtils.CreateDelegate<MinHook._EnableHook>(EnableHook);

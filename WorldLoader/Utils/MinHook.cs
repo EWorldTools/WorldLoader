@@ -9,11 +9,14 @@ namespace WorldLoader.HookUtils
 {
     public static class MinHook
     {
+        /// <summary>
+        /// In case u wanted to make your own MinHook Ins
+        /// </summary>
         public static class HookInprts {
-            public static IntPtr mVRC_CreateHook { get; set; }
-            public static IntPtr mVRC_RemoveHook { get; set; }
-            public static IntPtr mVRC_EnableHook { get; set; }
-            public static IntPtr mVRC_DisableHook { get; set; }
+            public static IntPtr CreateHook { get; set; }
+            public static IntPtr RemoveHook { get; set; }
+            public static IntPtr EnableHook { get; set; }
+            public static IntPtr DisableHook { get; set; }
         }
 
         // (LPVOID pTarget, LPVOID pDetour, LPVOID* ppOrig)

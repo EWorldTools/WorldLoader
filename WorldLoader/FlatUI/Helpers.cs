@@ -7,7 +7,7 @@ namespace FlatUI
 {
     public static class Helpers
     {
-        public static Color FlatColor = Color.FromArgb( 22, 96, 253 );
+        public static Color FlatColor = Color.FromArgb(52, 2, 105);
         public static Color FlatWhite = Color.FromArgb( 255, 252, 255 );
 
         public static readonly StringFormat NearSF = new StringFormat

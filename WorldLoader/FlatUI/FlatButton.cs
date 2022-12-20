@@ -14,7 +14,7 @@ namespace FlatUI
         private MouseState State = MouseState.None;
 
         [Category( "Colors" )]
-        public Color BaseColor { get; set; } = Helpers.FlatColor;
+        public Color BaseColor { get; set; }
 
         [Category( "Colors" )]
         public Color TextColor { get; set; } = Helpers.FlatWhite;
@@ -159,7 +159,7 @@ namespace FlatUI
         {
             var colors = Helpers.GetColors( this );
 
-            BaseColor = colors.Flat;
+            BaseColor = Helpers.FlatColor;
         }
     }
 }

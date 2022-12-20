@@ -161,9 +161,7 @@ namespace FlatUI
 
         private void UpdateColors()
         {
-            var colors = Helpers.GetColors( this );
-
-            ActiveColor = colors.Flat;
+            ActiveColor = Helpers.FlatColor;
         }
     }
 }

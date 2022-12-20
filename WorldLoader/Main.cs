@@ -33,6 +33,8 @@ namespace WorldLoader
 		protected internal static void Login() {
             Internal_Utils.RunInTry(Load, null, true);
 			Internal_Utils.RunInTry(Preint.Start);
+			Menu = new LoaderMenu();
+			Internal_Utils.RunInTry(Menu.Show);
 
 			Logs.Log(ConsoleColor.DarkCyan, "Logging In And Checking Tags...");
             Logs.Debug(" -=========================== Debug Mode On! ===========================- ", ConsoleColor.Gray);
@@ -59,8 +61,7 @@ namespace WorldLoader
 			} catch (Exception e) { 
 				Logs.Error(e);
 			}
-			Menu = new LoaderMenu();
-			Internal_Utils.RunInTry(Menu.Show);
+
 			Watermark.Send();
 			appInfo = new();
 		}

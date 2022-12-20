@@ -11,20 +11,13 @@ using WorldLoader.HookUtils;
 
 namespace Il2CppGen.Runtime.IL2CppPatch
 {
-    unsafe public class IL2CppPatch
+    unsafe public class IL2CppPatch : Acess // idea From Blaze, Edited a little (this is pretty base line code tho)
     {
-        public IntPtr Pointer { get; private set; }
-        public IntPtr TargetMethod { get; private set; }
-        public IntPtr OriginalMethod { get; private set; }
-        private bool isEnabled = true;
-
         public IL2CppPatch(IntPtr targetMethod, IntPtr newMethod) {
+            MinHook.CreateHook(targetMethod, newMethod, out var OgMethod);
             Pointer = newMethod;
             TargetMethod = targetMethod;
-
-            MinHook.CreateHook(targetMethod, Pointer, out var OgMethod);
             OriginalMethod = OgMethod;
-            Logs.Debug("[IL2CppPatch] " + Regex.Replace(Marshal.PtrToStringAnsi(targetMethod), @"[^\u0000-\u007F]+", "?").Replace("\\", string.Empty) + " => " + Marshal.PtrToStringAnsi(newMethod));
             Active = true;
         }
 
@@ -45,20 +38,6 @@ namespace Il2CppGen.Runtime.IL2CppPatch
         public IL2CppPatch(IntPtr targetMethod, MethodBase newMethod)
             : this(targetMethod, newMethod.MethodHandle.GetFunctionPointer())
         {
-        }
-
-        public T GetDelegate<T>() where T : Delegate =>
-             Marshal.GetDelegateForFunctionPointer(OriginalMethod, typeof(T)) as T;
-        
-        public bool Active
-        {
-            get => isEnabled;
-            set {
-                if (isEnabled = value)
-                    MinHook.EnableHook(*(IntPtr*)TargetMethod);
-                else
-                    MinHook.DisableHook(*(IntPtr*)TargetMethod);
-            }
         }
     }
 }

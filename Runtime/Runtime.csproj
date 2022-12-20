@@ -162,8 +162,9 @@
     <Compile Include="Runtime\VersionSpecific\Type\Type_16_0.cs" />
     <Compile Include="Runtime\VersionSpecific\Type\Type_27_0.cs" />
     <Compile Include="Startup\Start.cs" />
-    <Compile Include="WCPatch\Utls.cs" />
-    <Compile Include="WCPatch\WCPatch.cs" />
+    <Compile Include="IL2CppPatch\Acess.cs" />
+    <Compile Include="IL2CppPatch\Utls.cs" />
+    <Compile Include="IL2CppPatch\WCPatch.cs" />
     <Compile Include="XrefScans\XrefInstanceExtensions.cs" />
     <Compile Include="XrefScans\XrefScanImpl.cs" />
   </ItemGroup>

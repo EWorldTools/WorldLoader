@@ -29,7 +29,7 @@ namespace FlatUI
         public Color Blue { get; set; } = Color.FromArgb( 0, 128, 255 );
 
         [Category( "Colors" )]
-        public Color LimeGreen { get; set; } = Color.FromArgb( 22, 96, 253 );
+        public Color LimeGreen { get; set; } = Color.FromArgb( 52, 2, 105 );
 
         [Category( "Colors" )]
         public Color Orange { get; set; } = Color.FromArgb( 253, 181, 63 );

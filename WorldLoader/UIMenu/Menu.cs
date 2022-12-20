@@ -11,13 +11,14 @@ using WorldLoader.Il2CppUnhollower;
 using WorldLoader.Il2CppUnhollower.Packages;
 using WorldLoader.HookUtils;
 using System.Reflection;
+using System.Diagnostics;
 
 namespace WorldLoader
 {
 	internal partial class LoaderMenu : Form
     {
         private static OpenFileDialog OpenFile;
-
+        internal static bool IsDone { get; private set; }
         public LoaderMenu()
 		{
 			InitializeComponent();
@@ -34,6 +35,10 @@ namespace WorldLoader
             };
             flatLabel1.Text = "";
             flatLabel2.Text = "";
+            IsDone = true;
+            UnhollowerLogTraceTgl.Checked = C.L.Config.UnhollowerLogTrace;
+            HollowerPassAllNamesTlg.Checked = C.L.Config.HollowerPassAllNames;
+            DebugTog.Checked = C.L.Config.Debug;
 
         }
 
@@ -65,7 +70,11 @@ namespace WorldLoader
 
         private void UnloadModDropDown(object sender, EventArgs e)
         {
-
+            if (flatComboBox2.SelectedItem == null) return;
+            var name = flatComboBox2.SelectedItem.ToString();
+            if (name == null) return;
+            WorldLoader._ModManager.UnloadMod(name);
+            flatComboBox2.Items.Remove(flatComboBox2.SelectedItem);
         }
 
         private void flatButton5_Click(object sender, EventArgs e)
@@ -79,6 +88,35 @@ namespace WorldLoader
                     Logs.Error("Error Loading Mod", E);
                 }
             }
+        }
+
+        private void ConsoleTab_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DebugTog_CheckedChanged(object sender)=>
+            C.L.Config.Debug = DebugTog.Checked;
+
+        private void HollowerPassAllNamesTlg_CheckedChanged(object sender) =>
+            C.L.Config.HollowerPassAllNames = HollowerPassAllNamesTlg.Checked;
+
+        private void UnhollowerLogTraceTgl_CheckedChanged(object sender) => 
+            C.L.Config.UnhollowerLogTrace = UnhollowerLogTraceTgl.Checked;
+
+        private void ResetBtn_Click(object sender, EventArgs e)
+        {
+            C.L.Config.UnhollowerLogTrace = false;
+            C.L.Config.HollowerPassAllNames = false;
+            C.L.Config.Debug = false;
+            UnhollowerLogTraceTgl.Checked = C.L.Config.UnhollowerLogTrace;
+            HollowerPassAllNamesTlg.Checked = C.L.Config.HollowerPassAllNames;
+            DebugTog.Checked = C.L.Config.Debug;
+        }
+
+        private void DownloadDataButton_Click(object sender, EventArgs e)
+        {
+            Process.Start(Logs.LogLocation);
         }
     }
 }

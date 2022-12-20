@@ -71,7 +71,7 @@ namespace FlatUI
         }
 
         [Category( "Colors" )]
-        public Color HoverColor { get; set; } = Color.FromArgb( 22, 96, 253 );
+        public Color HoverColor { get; set; } = Color.FromArgb( 52, 2, 105 );
 
         private int StartIndex
         {
@@ -126,7 +126,7 @@ namespace FlatUI
             Height = 16;
         }
 
-        private readonly Color _BaseColor = Color.FromArgb( 22, 96, 253 );
+        private readonly Color _BaseColor = Color.FromArgb( 52, 2, 105 );
         private readonly Color _BGColor = Color.FromArgb( 24, 22, 43 );
 
         public FlatComboBox()

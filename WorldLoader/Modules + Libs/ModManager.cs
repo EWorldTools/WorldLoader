@@ -197,7 +197,9 @@ public sealed class ModManager
 
 	public void UnloadMod(string Mod) {
 		foreach (var VRCMod in _Mods)
-			if (VRCMod.Name == Mod)
+			if (VRCMod.Name == Mod) {
 				VRCMod.Unload();
+				break;
+			}
 	}
 }

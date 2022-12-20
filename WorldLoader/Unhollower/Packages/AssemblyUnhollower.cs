@@ -30,7 +30,7 @@ namespace WorldLoader.Il2CppUnhollower.Packages
             {
                 GameAssemblyPath = C.L.Config.GameAssemblyPath, // Path to GameAssembly.dll
                 Source = Core.Cpp2ILOutputFolder, // List of Cpp2Il dummy assemblies loaded into Cecil
-                OutputDir = Directory.GetCurrentDirectory() + "\\WorldLoader\\UnhollowedAsm", // Path to which generate the assemblies
+                OutputDir = Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\WorldLoader\\UnhollowedAsm").FullName, // Path to which generate the assemblies
                 UnityBaseLibsDir = Core.Dependencies.Destination, // Path to managed Unity core libraries (UnityEngine.dll etc)
                 Parallel = false,
                 PassthroughNames = C.L.Config.HollowerPassAllNames,
