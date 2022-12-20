@@ -13,7 +13,7 @@ namespace Runtime.Il2cpp
     internal class SceneHook // ML
     {
         private static void OnSceneUnload(Scene scene) { if (scene == null) return; 
-            foreach (var c in WorldLoader.WorldLoader._ModManager.Mods)
+            foreach (var c in WorldLoader.WorldLoader._ModManager.Mods.Keys)
                 try {
                     c.OnSceneWasUnloaded(scene.buildIndex, scene.name);
                 } catch (Exception e) {
@@ -22,7 +22,7 @@ namespace Runtime.Il2cpp
         }
 
         private static void OnSceneLoad(Scene scene, LoadSceneMode mode) { if (scene == null) return; 
-            foreach (var c in WorldLoader.WorldLoader._ModManager.Mods)
+            foreach (var c in WorldLoader.WorldLoader._ModManager.Mods.Keys)
                 try {
                     c.OnSceneWasLoaded(scene.buildIndex, scene.name);
                 } catch (Exception e) {
