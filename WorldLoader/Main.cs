@@ -14,7 +14,7 @@ using WorldLoader.Il2CppGen.HarmonySupport;
 
 namespace WorldLoader
 {
-    internal partial class WorldLoader
+    public partial class WorldLoader
 	{
 		public static readonly bool IsAuth = LoggedIn;
 		private static bool LoggedIn = false;
@@ -24,18 +24,18 @@ namespace WorldLoader
 
 		public static WorldLoader Self { get; set; }
 		public static UnityAppInfo appInfo { get; private set; }
-		internal static ModManager _ModManager { get; set; }
+		public static ModManager _ModManager { get; set; }
 		internal static PluginManager _PluginManager { get; set; }
 		internal static LoaderMenu Menu { get; set; }
-		public static MonoBehv monoBehv { get; set; }
 		public static HarmonySupportComponent harmonySupportComponent { get; set; }
 		internal static HarmonyLib.Harmony HarmonyInstance { get; set; }
 
 		protected internal static void Login() {
             Internal_Utils.RunInTry(Load, null, true);
-            Internal_Utils.RunInTry(Preint.Start);
+			Internal_Utils.RunInTry(Preint.Start);
+			Internal_Utils.RunInTry(Internal_Utils.AssemblyResolveFix);
 
-            Logs.Log(ConsoleColor.DarkCyan, "Logging In And Checking Tags...");
+			Logs.Log(ConsoleColor.DarkCyan, "Logging In And Checking Tags...");
             Logs.Debug(" -=========================== Debug Mode On! ===========================- ", ConsoleColor.Gray);
             Internal_Utils.RunInTry(Il2CppUnhollower.Core.OnInitialize);
             Self.Awake();
@@ -108,14 +108,6 @@ namespace WorldLoader
 				catch (Exception e) {
                     Logs.Error($"Error In OnInject For {vrMod.Name}", e);
 				}
-			}
-			try {
-                SceneManagementInit();
-                MonoBhvMade = true;
-
-            }
-			catch (Exception e) {
-				Logs.Error("Error On Override", e);
 			}
 
 			"==================================- Start -==================================".WriteLineToConsole(ConsoleColor.DarkGray);

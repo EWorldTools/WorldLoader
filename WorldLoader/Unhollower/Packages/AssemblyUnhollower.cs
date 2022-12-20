@@ -37,8 +37,8 @@ namespace WorldLoader.Il2CppUnhollower.Packages
                 UnityBaseLibsDir = Core.Dependencies.Destination, // Path to managed Unity core libraries (UnityEngine.dll etc)
                 Parallel = false,
                 PassthroughNames = C.L.Config.HollowerPassAllNames,
-                TypeDeobfuscationCharsPerUniquifier = 999,// Remove Limit
-                TypeDeobfuscationMaxUniquifiers = 99, //     ^
+                //TypeDeobfuscationCharsPerUniquifier = 999,// Remove Limit
+                //TypeDeobfuscationMaxUniquifiers = 99, //     ^
             };
             if (deobb)
                 opts.ReadRenameMap("WorldLoader\\RenameMap.csv.gz");

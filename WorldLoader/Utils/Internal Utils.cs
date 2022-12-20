@@ -2,6 +2,7 @@
 using Il2CppGen.Runtime.Injection;
 using Il2CppGen.Runtime.Runtime;
 using Il2CppGen.Runtime.Runtime.VersionSpecific.Class;
+using Mono.Cecil;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,12 +13,13 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using UnityEngine;
+using WorldLoader.DataClasses;
 using WorldLoader.HookUtils;
 
 namespace WorldLoader.Utils;
 
 internal static class Internal_Utils {
+	internal static Dictionary<string, string> UnhollowedAssemblys { get; set; } = new();
 
 	[DllImport("kernel32.dll")]
 	private static extern int AllocConsole();
@@ -50,11 +52,8 @@ internal static class Internal_Utils {
 			
 		if (Il2CppClassPointerStore<MonoEnumeratorWrapper>.NativeClassPtr == IntPtr.Zero)
 			ClassInjector.RegisterTypeInIl2Cpp<MonoEnumeratorWrapper>(rev);
-		if (!ClassInjector.IsTypeRegisteredInIl2Cpp(typeof(MonoBehv)))
-			ClassInjector.RegisterTypeInIl2Cpp<MonoBehv>();
-        var obj = new GameObject("TestOBJ").AddComponent<MonoBehv>();
-        UnityEngine.Object.DontDestroyOnLoad(obj);
-    }
+		new Runtime.Il2cpp.Main();
+	}
 
 	internal static void PrepConsole() {
 		AllocConsole();
@@ -77,6 +76,38 @@ internal static class Internal_Utils {
 			Logs.Error(ErrorMessage, e);
 			if (ShowError) MessageBox.Show(e.ToString(), "Fatal Error");
 		}
+	}
+
+
+	public static string RemoveFullPath(this string fileOrDirectoryName)
+	{ // i used AI to gen this o.o BE SCAREDD
+	  // Get the index of the last directory separator character
+		int lastSeparatorIndex = fileOrDirectoryName.LastIndexOf(Path.DirectorySeparatorChar);
+
+		// If a separator was found, return the file or directory name without the path
+		if (lastSeparatorIndex >= 0)
+			return fileOrDirectoryName.Substring(lastSeparatorIndex + 1);
+		// Otherwise, return the original file or directory name
+		else
+			return fileOrDirectoryName;
+	}
+
+	internal static void AssemblyResolveFix() {
+		Console.WriteLine("Started");
+		var files = Directory.GetFiles(Directory.GetCurrentDirectory() + "\\WorldLoader\\UnhollowedAsm");
+		if (files == null) throw new Exception("Files Are Null!");
+		foreach (var Asm in files) {
+			if (Asm.EndsWith(".dll"))
+				UnhollowedAssemblys.Add(Asm.RemoveFullPath(), Asm);
+		}
+		Console.WriteLine("Pass");
+		AppDomain.CurrentDomain.AssemblyResolve += (sender, args) => {
+			Logs.Debug($"[AssemblyResolve] Failed Finding an Assembly Normally! Checking Unhollowed For Assembly {args.Name} ({sender})");
+			if (UnhollowedAssemblys.TryGetValue(args.Name, out var asm))
+				return Assembly.Load(File.ReadAllBytes(asm));
+			Logs.Warn($"Sender {sender} Tried to get an Assembly ({args.Name}) and FAILED!");
+			return null;
+		};
 	}
 
 	internal static void RunInTry(this MethodInfo Info, string ErrorMessage = null) => RunInTry(Info, ErrorMessage);

@@ -8,7 +8,7 @@ using WorldLoader.HookUtils;
 
 namespace WorldLoader.DataClasses
 {
-    internal class UnityAppInfo
+    public class UnityAppInfo
     {
         internal static string UnityVer;
 

@@ -85,23 +85,23 @@ namespace WorldLoader.Il2CppUnhollower
                 AssemblyGenerationNeeded = true;
 
             if (!AssemblyGenerationNeeded && !ForceRegen) {
-                if (File.Exists(Path.Combine(Directory.GetCurrentDirectory(), "WorldLoader", "DeobbMaps.json"))) {
-                    long CurrentDeObbMapHash = ModUtils.GetByteSize("WorldLoader\\DeobbMaps.json");
-                    Logs.Log("Getting DeObbMap...", "Assembly Generation");
-                    Logs.Log($"Last DeObbMap ByteSize: {C.L.Config.DeObbMapHash}", "Assembly Generation");
-                    Logs.Log($"Current DeObbMap ByteSize: {CurrentDeObbMapHash}", "Assembly Generation");
-                    if (CurrentDeObbMapHash != C.L.Config.DeObbMapHash) {
-                        Core.Cpp2ILOutputFolder = Cpp2IL.LoadAssembliesFrom(Directory.CreateDirectory(dumper.OutputFolder));
-                        Logs.Log("Warning! DeObb Sizes are Incorrect!", "Deobfuscation");
-                        try {
-                            assemblyunhollower.Execute();
-                        }
-                        finally { 
-                            C.L.Config.DeObbMapHash = ModUtils.GetByteSize("WorldLoader\\DeobbMaps.json");
-                            C.L.Save();
-                        }
-                    }
-                }
+                //if (File.Exists(Path.Combine(Directory.GetCurrentDirectory(), "WorldLoader", "DeobbMaps.json"))) {
+                //    long CurrentDeObbMapHash = ModUtils.GetByteSize("WorldLoader\\DeobbMaps.json");
+                //    Logs.Log("Getting DeObbMap...", "Assembly Generation");
+                //    Logs.Log($"Last DeObbMap ByteSize: {C.L.Config.DeObbMapHash}", "Assembly Generation");
+                //    Logs.Log($"Current DeObbMap ByteSize: {CurrentDeObbMapHash}", "Assembly Generation");
+                //    if (CurrentDeObbMapHash != C.L.Config.DeObbMapHash) {
+                //        Core.Cpp2ILOutputFolder = Cpp2IL.LoadAssembliesFrom(Directory.CreateDirectory(dumper.OutputFolder));
+                //        Logs.Log("Warning! DeObb Sizes are Incorrect!", "Deobfuscation");
+                //        try {
+                //            assemblyunhollower.Execute();
+                //        }
+                //        finally { 
+                //            C.L.Config.DeObbMapHash = ModUtils.GetByteSize("WorldLoader\\DeobbMaps.json");
+                //            C.L.Save();
+                //        }
+                //    }
+                //}
                 Logs.Log("Assembly is up to date! Regeneration Not Needed.", "Assembly Generation");
                 return 0;
             }

@@ -8,7 +8,7 @@ namespace WorldLoader.Utils
 {
     public static class CoroutinesHandler
     {
-        internal static List<IEnumerator> BackLog = new();
+        public static List<IEnumerator> BackLog = new();
 
         public static void Start(this IEnumerator enumerator) {
             BackLog.Add(enumerator);

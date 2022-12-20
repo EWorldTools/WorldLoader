@@ -1,14 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using WorldLoader;
 using WorldLoader.HookUtils;
 
-namespace WorldLoader
+namespace Runtime.Il2cpp
 {
-    internal partial class WorldLoader
+    internal class SceneHook
     {
         private static void OnSceneUnload(Scene scene) { if (scene == null) return; 
-            foreach (var c in _ModManager.Mods)
+            foreach (var c in WorldLoader.WorldLoader._ModManager.Mods)
                 try {
                     c.OnSceneWasUnloaded(scene.buildIndex, scene.name);
                 } catch (Exception e) {
@@ -17,7 +22,7 @@ namespace WorldLoader
         }
 
         private static void OnSceneLoad(Scene scene, LoadSceneMode mode) { if (scene == null) return; 
-            foreach (var c in _ModManager.Mods)
+            foreach (var c in WorldLoader.WorldLoader._ModManager.Mods)
                 try {
                     c.OnSceneWasLoaded(scene.buildIndex, scene.name);
                 } catch (Exception e) {
@@ -25,7 +30,7 @@ namespace WorldLoader
                 } 
         }
 
-        internal void SceneManagementInit()
+        public static void SceneManagementInit()
         {
             try
             {

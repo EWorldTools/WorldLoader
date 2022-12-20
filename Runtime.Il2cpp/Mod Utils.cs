@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
+using System.Windows.Forms;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -23,13 +24,25 @@ namespace WorldLoader.HookUtils
             return path;
         }
 
-        /// <summary>
-        ///  Returns a string with the color (Works With Hex)
-        /// </summary>
-        /// <param name="text"></param>
-        /// <param name="color"></param>
-        /// <returns></returns>
-        public static string UnityColor(this string text, string color) =>
+
+		internal static void RunInTry(this Action action
+			, string ErrorMessage = null, bool ShowError = false) {
+			try {
+				action();
+			}
+			catch (Exception e) {
+				Logs.Error(ErrorMessage, e);
+				if (ShowError) MessageBox.Show(e.ToString(), "Fatal Error");
+			}
+		}
+
+		/// <summary>
+		///  Returns a string with the color (Works With Hex)
+		/// </summary>
+		/// <param name="text"></param>
+		/// <param name="color"></param>
+		/// <returns></returns>
+		public static string UnityColor(this string text, string color) =>
             $"<color={color}>{text}</color>";
 
         /// <summary>
@@ -63,6 +76,7 @@ namespace WorldLoader.HookUtils
             
             return stringBuilder.ToString();
         }
+
 
         public static long GetByteSize(string FilePath) => 
             new System.IO.FileInfo(FilePath).Length;

@@ -13,7 +13,7 @@ public static class HarmonySupport
     }
 }
 
-internal class HarmonySupportComponent : IHostComponent
+public class HarmonySupportComponent : IHostComponent
 {
     public void Dispose() => PatchManager.ResolvePatcher -= TryResolve;
 
