@@ -10,8 +10,8 @@ namespace Runtime.Il2cpp
     public class Main
     {
         public Main() {
-            SceneHook.SceneManagementInit();
             MonoBehv.Prep();
+            SceneHook.SceneManagementInit();
         }
     }
 }

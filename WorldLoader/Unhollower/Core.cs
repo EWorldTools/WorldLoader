@@ -9,6 +9,7 @@ using WorldLoader.Discord;
 using WorldLoader.Il2CppUnhollower.Packages;
 using WorldLoader.Il2CppUnhollower.Packages.Models;
 using WorldLoader.HookUtils;
+using WorldLoader.Utils;
 
 namespace WorldLoader.Il2CppUnhollower
 {
@@ -58,6 +59,7 @@ namespace WorldLoader.Il2CppUnhollower
             } catch (Exception e) {
                 Logs.Error("Error During AssemblyGeneration Stuff", e);
             }
+            Internal_Utils.RunInTry(Internal_Utils.AssemblyResolveFix);
         }
 
         internal static float Run(bool ForceRegen = false)
@@ -71,8 +73,6 @@ namespace WorldLoader.Il2CppUnhollower
                 || !Dependencies.Setup())
                 return 1;
 
-            if (!assemblyunhollower.Setup())
-                return 1;
             //DeobfuscationRegex.Setup();
 
             string CurrentGameAssemblyHash = FileHandler.Hash(C.L.Config.GameAssemblyPath);

@@ -2,7 +2,7 @@
 
 namespace WorldLoader.Il2CppUnhollower.Packages
 {
-    internal class UnityDependencies : Models.PackageBase
+    internal class UnityDependencies : Models.PackageBase // MelonLoader
     {
         internal UnityDependencies()
         {

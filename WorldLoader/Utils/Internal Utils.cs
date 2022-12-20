@@ -20,7 +20,7 @@ namespace WorldLoader.Utils;
 
 internal static class Internal_Utils {
 	internal static Dictionary<string, string> UnhollowedAssemblys { get; set; } = new();
-
+	public static List<DirectoryInfo> AdditionalChecks = new();
 	[DllImport("kernel32.dll")]
 	private static extern int AllocConsole();
 
@@ -84,7 +84,7 @@ internal static class Internal_Utils {
 	  // Get the index of the last directory separator character
 		int lastSeparatorIndex = fileOrDirectoryName.LastIndexOf(Path.DirectorySeparatorChar);
 
-		// If a separator was found, return the file or directory name without the path
+		// If a separator was found, return the file or directory name without the Path
 		if (lastSeparatorIndex >= 0)
 			return fileOrDirectoryName.Substring(lastSeparatorIndex + 1);
 		// Otherwise, return the original file or directory name
@@ -92,20 +92,31 @@ internal static class Internal_Utils {
 			return fileOrDirectoryName;
 	}
 
+
+	// Because, for no reason it had to be so mega extra (at AssemblyResolveFix (Line 95, InternalUtils) It kept on giving an error cause it was trying to acess the Unity Core, FOR NO REASON
+	// IT DOESN'T NEED THE UNITY CORE HERE
+	// https://media.discordapp.net/attachments/983750352476176494/1054574598773018795/image.png
 	internal static void AssemblyResolveFix() {
-		Console.WriteLine("Started");
 		var files = Directory.GetFiles(Directory.GetCurrentDirectory() + "\\WorldLoader\\UnhollowedAsm");
 		if (files == null) throw new Exception("Files Are Null!");
 		foreach (var Asm in files) {
 			if (Asm.EndsWith(".dll"))
 				UnhollowedAssemblys.Add(Asm.RemoveFullPath(), Asm);
 		}
-		Console.WriteLine("Pass");
 		AppDomain.CurrentDomain.AssemblyResolve += (sender, args) => {
-			Logs.Debug($"[AssemblyResolve] Failed Finding an Assembly Normally! Checking Unhollowed For Assembly {args.Name} ({sender})");
-			if (UnhollowedAssemblys.TryGetValue(args.Name, out var asm))
+			string name = args.Name;
+			byte[] ByteData = null;
+			if (args.Name.Contains(','))
+				name = args.Name.Substring(0, args.Name.IndexOf(','));// This isn't too good, but it works ig
+			Logs.Debug($"[AssemblyResolve] Failed Finding an Assembly Normally! Checking Unhollowed For Assembly {name} ({sender})");
+			if (UnhollowedAssemblys.TryGetValue(name + ".dll", out var asm))
 				return Assembly.Load(File.ReadAllBytes(asm));
-			Logs.Warn($"Sender {sender} Tried to get an Assembly ({args.Name}) and FAILED!");
+			if (AdditionalChecks.Count > 0) AdditionalChecks.ForEach(a => {
+				var files = a.GetFiles();
+				ByteData = File.ReadAllBytes(files.FirstOrDefault(a=>a.Name == name).FullName);
+			});
+			return Assembly.Load(ByteData);
+			Logs.Warn($"Sender {sender} Tried to get an Assembly ({name}) and FAILED!");
 			return null;
 		};
 	}

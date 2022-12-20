@@ -33,7 +33,6 @@ namespace WorldLoader
 		protected internal static void Login() {
             Internal_Utils.RunInTry(Load, null, true);
 			Internal_Utils.RunInTry(Preint.Start);
-			Internal_Utils.RunInTry(Internal_Utils.AssemblyResolveFix);
 
 			Logs.Log(ConsoleColor.DarkCyan, "Logging In And Checking Tags...");
             Logs.Debug(" -=========================== Debug Mode On! ===========================- ", ConsoleColor.Gray);

@@ -7,13 +7,14 @@ namespace WorldLoader.Il2CppUnhollower.Packages
 {
     internal class Cpp2IL : Models.ExecutablePackage // MelonLoader
     {
+        internal string Name;
+        internal string URL;
+        internal string FilePath;
+        internal string Destination;
+        internal string Version = "";
+
         internal Cpp2IL()
         {
-            //Version = Il2CppUnhollower.ForceVersion_Dumper;
-#if !DEBUG
-            if (string.IsNullOrEmpty(Version) || Version.Equals("0.0.0.0"))
-                Version = RemoteAPI.Info.ForceDumperVersion;
-#endif
             if (string.IsNullOrEmpty(Version) || Version.Equals("0.0.0.0"))
                 Version = "2022.1.0-pre-release.3";
             C.L.Config.DumperVersion = Version;
