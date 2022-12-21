@@ -97,7 +97,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     switch (ul_reason_for_call)
     {
         case DLL_PROCESS_ATTACH:
-            main();
+            main(); // This is just basic textbook use of CoreCLR and Minhook, Provided By Unix <3
         break;
         case DLL_THREAD_ATTACH:
         case DLL_THREAD_DETACH:
