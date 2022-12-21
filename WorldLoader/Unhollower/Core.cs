@@ -59,7 +59,9 @@ namespace WorldLoader.Il2CppUnhollower
             } catch (Exception e) {
                 Logs.Error("Error During AssemblyGeneration Stuff", e);
             }
-            Internal_Utils.RunInTry(Internal_Utils.AssemblyResolveFix);
+            Internal_Utils.RunInTry(() => {
+                WorldLoader._AssemblyResolveManager = new();
+            });
         }
 
         internal static float Run(bool ForceRegen = false)

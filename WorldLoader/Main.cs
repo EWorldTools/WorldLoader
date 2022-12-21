@@ -11,6 +11,7 @@ using Il2CppGen;
 using WorldLoader.DataClasses;
 using Il2CppGen.Runtime.Injection;
 using WorldLoader.Il2CppGen.HarmonySupport;
+using WorldLoader.ModulesLibs.Managers;
 
 namespace WorldLoader
 {
@@ -26,6 +27,7 @@ namespace WorldLoader
 		public static UnityAppInfo appInfo { get; private set; }
 		public static ModManager _ModManager { get; set; }
 		internal static PluginManager _PluginManager { get; set; }
+		internal static AssemblyResolveManager _AssemblyResolveManager { get; set; }
 		internal static LoaderMenu Menu { get; set; }
 		public static HarmonySupportComponent harmonySupportComponent { get; set; }
 		internal static HarmonyLib.Harmony HarmonyInstance { get; set; }

@@ -19,15 +19,6 @@ using WorldLoader.HookUtils;
 namespace WorldLoader.Utils;
 
 public static class Internal_Utils {
-	internal static Dictionary<string, string> UnhollowedAssemblys { get; set; } = new();
-	public static List<DirectoryInfo> AdditionalChecks = new();
-	public static List<FileInfo> AdditionalFiles = new();
-	/// <summary>
-	/// Adds an Additional Asm Check to the AssemblyResolveFix, 
-	/// </summary>
-	/// <param name="string">name</param>
-	/// <param name="Assembly">asm</param>
-	public static Dictionary<string, Assembly> AdditionalAsmChecks = new();
 	[DllImport("kernel32.dll")]
 	private static extern int AllocConsole();
 
@@ -100,39 +91,6 @@ public static class Internal_Utils {
 		// Otherwise, return the original file or directory name
 		else
 			return fileOrDirectoryName;
-	}
-
-
-
-	internal static void AssemblyResolveFix() {
-		var files = Directory.GetFiles(Directory.GetCurrentDirectory() + "\\WorldLoader\\UnhollowedAsm");
-		if (files == null) throw new Exception("Files Are Null!");
-		foreach (var Asm in files) {
-			if (Asm.EndsWith(".dll"))
-				UnhollowedAssemblys.Add(Asm.RemoveFullPath(), Asm);
-		}
-		AdditionalChecks.Add(Directory.CreateDirectory("UserLibs"));
-		AppDomain.CurrentDomain.AssemblyResolve += (sender, args) => {
-			string name = args.Name;
-			byte[] ByteData = null;
-			if (args.Name.Contains(','))
-				name = args.Name.Substring(0, args.Name.IndexOf(','));// This isn't too good, but it works ig
-			if (AdditionalFiles.Any(a => a.Name == name)) return Assembly.Load(File.ReadAllBytes(AdditionalFiles.SingleOrDefault(a => a.Name == name).FullName));
-			if (AdditionalAsmChecks.TryGetValue(name, out var prasm)) return prasm;
-			Logs.Debug($"[AssemblyResolve] Failed Finding an Assembly Normally! Checking Unhollowed For Assembly {name}");
-			if (UnhollowedAssemblys.TryGetValue(name + ".dll", out var asm))
-				return Assembly.Load(File.ReadAllBytes(asm));
-			if (AdditionalChecks.Count > 0) AdditionalChecks.ForEach(a => {
-				var files = a.GetFiles();
-				var filepath = files.FirstOrDefault(a => a.Name == name).FullName;
-				if (!string.IsNullOrEmpty(filepath))
-				ByteData = File.ReadAllBytes(filepath);
-			});
-			if (ByteData.Length > 10)
-				return Assembly.Load(ByteData);
-			Logs.Warn($"Sender {sender} Tried to get an Assembly ({name}) and FAILED!");
-			return null;
-		};
 	}
 
 	internal static void RunInTry(this MethodInfo Info, string ErrorMessage = null) => RunInTry(Info, ErrorMessage);

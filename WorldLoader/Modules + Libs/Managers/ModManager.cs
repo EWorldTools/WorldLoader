@@ -8,8 +8,9 @@ using System.Text;
 using WorldLoader.Attributes;
 using WorldLoader.HookUtils;
 using WorldLoader.Il2CppGen.Internal.Extensions;
+using WorldLoader.Mods;
 
-namespace WorldLoader.Mods;
+namespace WorldLoader.ModulesLibs.Managers;
 
 public sealed class ModManager
 {

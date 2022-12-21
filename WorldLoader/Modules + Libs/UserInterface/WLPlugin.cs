@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using WorldLoader.Attributes;
 using WorldLoader.HookUtils;
+using WorldLoader.ModulesLibs.Managers;
 using WorldLoader.ModulesLibs.UserInterface;
 
 namespace WorldLoader.Plugins

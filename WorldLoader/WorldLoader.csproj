@@ -161,6 +161,7 @@
     </Compile>
     <Compile Include="FlatUI\Helpers.cs" />
     <Compile Include="FlatUI\MouseState.cs" />
+    <Compile Include="Modules + Libs\Managers\AssemblyResolveManager.cs" />
     <Compile Include="Modules + Libs\UserInterface\WLMod.cs" />
     <Compile Include="UIMenu\Menu.cs">
       <SubType>Form</SubType>
