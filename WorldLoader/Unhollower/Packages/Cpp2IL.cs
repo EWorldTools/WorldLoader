@@ -7,11 +7,6 @@ namespace WorldLoader.Il2CppUnhollower.Packages
 {
     internal class Cpp2IL : Models.ExecutablePackage // MelonLoader
     {
-        internal string Name;
-        internal string URL;
-        internal string FilePath;
-        internal string Destination;
-        internal string Version = "";
 
         internal Cpp2IL()
         {
@@ -40,7 +35,6 @@ namespace WorldLoader.Il2CppUnhollower.Packages
         private bool ExecuteNew()
         {
             if (Execute(new string[] {
-                //MelonDebug.IsEnabled() ? "--verbose" : string.Empty,
                 "--game-path",
                 "\"" + Path.GetDirectoryName(C.L.Config.GameAssemblyPath) + "\"",
                 "--exe-name",
@@ -61,7 +55,6 @@ namespace WorldLoader.Il2CppUnhollower.Packages
         private bool ExecuteOld()
         {
             if (Execute(new string[] {
-                //MelonDebug.IsEnabled() ? "--verbose" : string.Empty,
                 "--game-path",
                 "\"" + Path.GetDirectoryName(C.L.Config.GameAssemblyPath) + "\"",
                 "--exe-name",
