@@ -22,7 +22,6 @@ namespace FlatUI
             set
             {
                 _Checked = value;
-                InvalidateControls();
                 CheckedChanged?.Invoke( this );
                 Invalidate();
             }
@@ -39,22 +38,9 @@ namespace FlatUI
             base.OnClick( e );
         }
 
-        private void InvalidateControls()
-        {
-            if ( !IsHandleCreated || !_Checked )
-                return;
-            foreach ( Control C in Parent.Controls )
-                if ( !ReferenceEquals( C, this ) && C is FlatRadioButton )
-                {
-                    ( (FlatRadioButton) C ).Checked = false;
-                    Invalidate();
-                }
-        }
-
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
-            InvalidateControls();
         }
 
         [Flags()]

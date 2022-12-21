@@ -215,9 +215,9 @@ namespace WorldLoader
             // 
             this.TabsConsole.ActiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(2)))), ((int)(((byte)(105)))));
             this.TabsConsole.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(22)))), ((int)(((byte)(43)))));
+            this.TabsConsole.Controls.Add(this.tabPage1);
             this.TabsConsole.Controls.Add(this.ConsoleTab);
             this.TabsConsole.Controls.Add(this.DebugTab);
-            this.TabsConsole.Controls.Add(this.tabPage1);
             this.TabsConsole.Font = new System.Drawing.Font("Tahoma", 10F);
             this.TabsConsole.ItemSize = new System.Drawing.Size(120, 40);
             this.TabsConsole.Location = new System.Drawing.Point(12, 43);

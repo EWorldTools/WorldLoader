@@ -18,9 +18,16 @@ using WorldLoader.HookUtils;
 
 namespace WorldLoader.Utils;
 
-internal static class Internal_Utils {
+public static class Internal_Utils {
 	internal static Dictionary<string, string> UnhollowedAssemblys { get; set; } = new();
 	public static List<DirectoryInfo> AdditionalChecks = new();
+	public static List<FileInfo> AdditionalFiles = new();
+	/// <summary>
+	/// Adds an Additional Asm Check to the AssemblyResolveFix, 
+	/// </summary>
+	/// <param name="string">name</param>
+	/// <param name="Assembly">asm</param>
+	public static Dictionary<string, Assembly> AdditionalAsmChecks = new();
 	[DllImport("kernel32.dll")]
 	private static extern int AllocConsole();
 
@@ -52,7 +59,10 @@ internal static class Internal_Utils {
 			
 		if (Il2CppClassPointerStore<MonoEnumeratorWrapper>.NativeClassPtr == IntPtr.Zero)
 			ClassInjector.RegisterTypeInIl2Cpp<MonoEnumeratorWrapper>(rev);
-		new Runtime.Il2cpp.Main();
+		try {
+			new Runtime.Il2cpp.Main();
+		}
+		catch (Exception e) { Logs.Error(e); }
 	}
 
 	internal static void PrepConsole() {
@@ -93,9 +103,7 @@ internal static class Internal_Utils {
 	}
 
 
-	// Because, for no reason it had to be so mega extra (at AssemblyResolveFix (Line 95, InternalUtils) It kept on giving an error cause it was trying to acess the Unity Core, FOR NO REASON
-	// IT DOESN'T NEED THE UNITY CORE HERE
-	// https://media.discordapp.net/attachments/983750352476176494/1054574598773018795/image.png
+
 	internal static void AssemblyResolveFix() {
 		var files = Directory.GetFiles(Directory.GetCurrentDirectory() + "\\WorldLoader\\UnhollowedAsm");
 		if (files == null) throw new Exception("Files Are Null!");
@@ -109,7 +117,9 @@ internal static class Internal_Utils {
 			byte[] ByteData = null;
 			if (args.Name.Contains(','))
 				name = args.Name.Substring(0, args.Name.IndexOf(','));// This isn't too good, but it works ig
-			Logs.Debug($"[AssemblyResolve] Failed Finding an Assembly Normally! Checking Unhollowed For Assembly {name} ({sender})");
+			if (AdditionalFiles.Any(a => a.Name == name)) return Assembly.Load(File.ReadAllBytes(AdditionalFiles.SingleOrDefault(a => a.Name == name).FullName));
+			if (AdditionalAsmChecks.TryGetValue(name, out var prasm)) return prasm;
+			Logs.Debug($"[AssemblyResolve] Failed Finding an Assembly Normally! Checking Unhollowed For Assembly {name}");
 			if (UnhollowedAssemblys.TryGetValue(name + ".dll", out var asm))
 				return Assembly.Load(File.ReadAllBytes(asm));
 			if (AdditionalChecks.Count > 0) AdditionalChecks.ForEach(a => {

@@ -24,7 +24,9 @@ namespace WorldLoader.Mods
 		}
 
 		public ModManager ModManager { get; private set; }
-		public UnityMod Mod;
+		public UnityMod Mod { get; private set; }
+		public bool AllowUnloading { get; set; } = true;
+
 
 		public virtual void OnUnload() { 
 			

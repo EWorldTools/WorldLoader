@@ -185,6 +185,9 @@ public sealed class ModManager
 	public void UnloadMod(UnityMod Mod)
 	{
 		if (_Mods.Contains(Mod)) {
+			if (!Mod.AllowUnloading) {
+				Logs.Warn("Mod Doesn't Support Unloading!"); return;
+			}
 			_Mods.Remove(Mod);
 			Logs.Log($"{Mod} unloaded!");
 		}

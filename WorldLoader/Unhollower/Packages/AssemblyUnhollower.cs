@@ -12,17 +12,19 @@ using WorldLoader.HookUtils;
 namespace WorldLoader.Il2CppUnhollower.Packages
 {
 
-    internal class AssemblyUnhollower
+    public class AssemblyUnhollower
     {
         internal static GeneratorOptions opts;
-        internal static bool deobb = false;
+        public static bool deobb { get; private set; } = false;
+        public static string DeobfuMap { get; private set; }
 
         internal bool Execute()
         {
             if (Directory.GetCurrentDirectory().ToLower().Contains("vrchat"))
             {
                 Logs.Debug("Running VRC, Using DeObfu Map..");
-                Core.webClient.DownloadFile("https://raw.githubusercontent.com/WorldVRC/DeobfuscationMaps/main/VRChat/1275.csv.gz", "WorldLoader\\RenameMap.csv.gz"); // THIS NEEDS TO BE CHANGED TO NOT BE VRC ONLY
+                DeobfuMap = "https://raw.githubusercontent.com/WorldVRC/DeobfuscationMaps/main/VRChat/1275.csv.gz";
+                Core.webClient.DownloadFile(DeobfuMap, "WorldLoader\\RenameMap.csv.gz"); // THIS NEEDS TO BE CHANGED TO NOT BE VRC ONLY
                 deobb = true;
             }
             else Logs.Debug("No DeObfu Maps " + Directory.GetCurrentDirectory());
