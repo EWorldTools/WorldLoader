@@ -41,20 +41,20 @@ namespace WorldLoader
             this.flatClose1 = new FlatUI.FlatClose();
             this.DownloadDataButton = new FlatUI.FlatButton();
             this.TabsConsole = new FlatUI.FlatTabControl();
-            this.ConsoleTab = new System.Windows.Forms.TabPage();
-            this.flatLabel1 = new FlatUI.FlatLabel();
-            this.DebugTab = new System.Windows.Forms.TabPage();
-            this.flatLabel2 = new FlatUI.FlatLabel();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.ResetBtn = new FlatUI.FlatButton();
             this.UnhollowerLogTraceTgl = new FlatUI.FlatRadioButton();
             this.HollowerPassAllNamesTlg = new FlatUI.FlatRadioButton();
             this.DebugTog = new FlatUI.FlatRadioButton();
+            this.ConsoleTab = new System.Windows.Forms.TabPage();
+            this.flatLabel1 = new FlatUI.FlatLabel();
+            this.DebugTab = new System.Windows.Forms.TabPage();
+            this.flatLabel2 = new FlatUI.FlatLabel();
             this.formSkin1.SuspendLayout();
             this.TabsConsole.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.ConsoleTab.SuspendLayout();
             this.DebugTab.SuspendLayout();
-            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // formSkin1
@@ -227,53 +227,6 @@ namespace WorldLoader
             this.TabsConsole.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.TabsConsole.TabIndex = 3;
             // 
-            // ConsoleTab
-            // 
-            this.ConsoleTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(30)))), ((int)(((byte)(59)))));
-            this.ConsoleTab.Controls.Add(this.flatLabel1);
-            this.ConsoleTab.Location = new System.Drawing.Point(4, 44);
-            this.ConsoleTab.Name = "ConsoleTab";
-            this.ConsoleTab.Padding = new System.Windows.Forms.Padding(3);
-            this.ConsoleTab.Size = new System.Drawing.Size(371, 271);
-            this.ConsoleTab.TabIndex = 0;
-            this.ConsoleTab.Text = "Console";
-            this.ConsoleTab.Click += new System.EventHandler(this.ConsoleTab_Click);
-            // 
-            // flatLabel1
-            // 
-            this.flatLabel1.AutoEllipsis = true;
-            this.flatLabel1.AutoSize = true;
-            this.flatLabel1.BackColor = System.Drawing.Color.Transparent;
-            this.flatLabel1.Font = new System.Drawing.Font("Bahnschrift", 8F);
-            this.flatLabel1.ForeColor = System.Drawing.Color.White;
-            this.flatLabel1.Location = new System.Drawing.Point(3, 0);
-            this.flatLabel1.MaximumSize = new System.Drawing.Size(3700, 0);
-            this.flatLabel1.Name = "flatLabel1";
-            this.flatLabel1.Size = new System.Drawing.Size(0, 13);
-            this.flatLabel1.TabIndex = 0;
-            // 
-            // DebugTab
-            // 
-            this.DebugTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(30)))), ((int)(((byte)(59)))));
-            this.DebugTab.Controls.Add(this.flatLabel2);
-            this.DebugTab.Location = new System.Drawing.Point(4, 44);
-            this.DebugTab.Name = "DebugTab";
-            this.DebugTab.Padding = new System.Windows.Forms.Padding(3);
-            this.DebugTab.Size = new System.Drawing.Size(371, 271);
-            this.DebugTab.TabIndex = 1;
-            this.DebugTab.Text = "DebugTab";
-            // 
-            // flatLabel2
-            // 
-            this.flatLabel2.AutoSize = true;
-            this.flatLabel2.BackColor = System.Drawing.Color.Transparent;
-            this.flatLabel2.Font = new System.Drawing.Font("Bahnschrift", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.flatLabel2.ForeColor = System.Drawing.Color.White;
-            this.flatLabel2.Location = new System.Drawing.Point(6, 3);
-            this.flatLabel2.Name = "flatLabel2";
-            this.flatLabel2.Size = new System.Drawing.Size(0, 13);
-            this.flatLabel2.TabIndex = 0;
-            // 
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(30)))), ((int)(((byte)(59)))));
@@ -345,6 +298,53 @@ namespace WorldLoader
             this.DebugTog.Text = "Debug";
             this.DebugTog.CheckedChanged += new FlatUI.FlatRadioButton.CheckedChangedEventHandler(this.DebugTog_CheckedChanged);
             // 
+            // ConsoleTab
+            // 
+            this.ConsoleTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(30)))), ((int)(((byte)(59)))));
+            this.ConsoleTab.Controls.Add(this.flatLabel1);
+            this.ConsoleTab.Location = new System.Drawing.Point(4, 44);
+            this.ConsoleTab.Name = "ConsoleTab";
+            this.ConsoleTab.Padding = new System.Windows.Forms.Padding(3);
+            this.ConsoleTab.Size = new System.Drawing.Size(371, 271);
+            this.ConsoleTab.TabIndex = 0;
+            this.ConsoleTab.Text = "Console";
+            this.ConsoleTab.Click += new System.EventHandler(this.ConsoleTab_Click);
+            // 
+            // flatLabel1
+            // 
+            this.flatLabel1.AutoEllipsis = true;
+            this.flatLabel1.AutoSize = true;
+            this.flatLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.flatLabel1.Font = new System.Drawing.Font("Bahnschrift", 8F);
+            this.flatLabel1.ForeColor = System.Drawing.Color.White;
+            this.flatLabel1.Location = new System.Drawing.Point(3, 0);
+            this.flatLabel1.MaximumSize = new System.Drawing.Size(3700, 0);
+            this.flatLabel1.Name = "flatLabel1";
+            this.flatLabel1.Size = new System.Drawing.Size(0, 13);
+            this.flatLabel1.TabIndex = 0;
+            // 
+            // DebugTab
+            // 
+            this.DebugTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(30)))), ((int)(((byte)(59)))));
+            this.DebugTab.Controls.Add(this.flatLabel2);
+            this.DebugTab.Location = new System.Drawing.Point(4, 44);
+            this.DebugTab.Name = "DebugTab";
+            this.DebugTab.Padding = new System.Windows.Forms.Padding(3);
+            this.DebugTab.Size = new System.Drawing.Size(371, 271);
+            this.DebugTab.TabIndex = 1;
+            this.DebugTab.Text = "DebugTab";
+            // 
+            // flatLabel2
+            // 
+            this.flatLabel2.AutoSize = true;
+            this.flatLabel2.BackColor = System.Drawing.Color.Transparent;
+            this.flatLabel2.Font = new System.Drawing.Font("Bahnschrift", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.flatLabel2.ForeColor = System.Drawing.Color.White;
+            this.flatLabel2.Location = new System.Drawing.Point(6, 3);
+            this.flatLabel2.Name = "flatLabel2";
+            this.flatLabel2.Size = new System.Drawing.Size(0, 13);
+            this.flatLabel2.TabIndex = 0;
+            // 
             // LoaderMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -358,11 +358,11 @@ namespace WorldLoader
             this.formSkin1.ResumeLayout(false);
             this.formSkin1.PerformLayout();
             this.TabsConsole.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
             this.ConsoleTab.ResumeLayout(false);
             this.ConsoleTab.PerformLayout();
             this.DebugTab.ResumeLayout(false);
             this.DebugTab.PerformLayout();
-            this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

@@ -35,6 +35,7 @@ namespace FlatUI
         {
             if ( !_Checked )
                 Checked = true;
+            else Checked = false;
             base.OnClick( e );
         }
 

@@ -43,7 +43,7 @@ namespace WorldLoader.ModulesLibs.Managers
 				});
 				if (ByteData.Length > 10)
 					return Assembly.Load(ByteData);
-				Logs.Warn($"Sender {sender} Tried to get an Assembly ({name}) and FAILED!");
+				Logs.Warn($"Sender {args.RequestingAssembly.FullName} Tried to get an Assembly ({name}) and FAILED!"); // I dont think i did this right
 				return null;
 			};
 		}
