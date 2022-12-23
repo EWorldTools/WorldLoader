@@ -19,7 +19,6 @@ namespace WorldLoader.HookUtils
             public static IntPtr DisableHook { get; set; }
         }
 
-        // (LPVOID pTarget, LPVOID pDetour, LPVOID* ppOrig)
         public delegate void _CreateHook(IntPtr pTarget, IntPtr pDetour, out IntPtr ppOrig);
         public delegate void _RemoveHook(IntPtr pTarget);
         public delegate void _EnableHook(IntPtr pTarget);

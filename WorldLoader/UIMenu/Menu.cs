@@ -12,6 +12,8 @@ using WorldLoader.Il2CppUnhollower.Packages;
 using WorldLoader.HookUtils;
 using System.Reflection;
 using System.Diagnostics;
+using WorldLoader.Il2CppGen.Generator;
+using WorldLoader.Il2CppGen.Generator.Runners;
 
 namespace WorldLoader
 {
@@ -117,6 +119,24 @@ namespace WorldLoader
         private void DownloadDataButton_Click(object sender, EventArgs e)
         {
             Process.Start(Logs.LogLocation);
+        }
+
+        private void GenMaop_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine("Input (Non Obfu Assemblys)");
+            var src = Console.ReadLine().Replace("\"",String.Empty);
+            Console.WriteLine("Output");
+            var output = Console.ReadLine().Replace("\"", String.Empty);
+            var opts = new GeneratorOptions
+            {
+                Source = Cpp2IL.LoadAssembliesFrom(Directory.CreateDirectory(src)),
+                DeobfuscationNewAssembliesPath = Core.dumper.OutputFolder,
+                OutputDir = output,
+            };
+
+            Il2CppGenGenerator.Create(opts)
+                                  .AddDeobfuscationMapGenerator()
+                                  .Run();
         }
     }
 }

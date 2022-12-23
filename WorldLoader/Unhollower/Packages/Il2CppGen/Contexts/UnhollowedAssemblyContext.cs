@@ -37,7 +37,18 @@ public class UnhollowedAssemblyContext
 
     internal TypeRewriteContext GetContextForOriginalType(TypeDefinition type)
     {
-        return myOldTypeMap[type];
+        try
+        {
+            return myOldTypeMap[type];
+        }
+        catch
+        {
+            foreach (var oldtype in myOldTypeMap.Keys)
+            {
+                if (type.Name == oldtype.Name) return myOldTypeMap[oldtype];
+            }
+            return myNewTypeMap[type];
+        }
     }
 
     internal TypeRewriteContext? TryGetContextForOriginalType(TypeDefinition type)
@@ -129,16 +140,30 @@ public class UnhollowedAssemblyContext
             return sourceModule.ImportReference(GlobalContext.GetAssemblyByName("mscorlib")
                 .GetTypeByName("System.Attribute").NewType);
 
-        var originalTypeDef = typeRef.Resolve();
+        TypeDefinition? originalTypeDef;
+        try
+        {
+            originalTypeDef = typeRef.Resolve();
+        }
+        catch
+        {
+            return Imports.Il2CppObjectBase;
+        }
         var targetAssembly = GlobalContext.GetNewAssemblyForOriginal(originalTypeDef.Module.Assembly);
-        var target = targetAssembly.GetContextForOriginalType(originalTypeDef).NewType;
+        var target = targetAssembly?.GetContextForOriginalType(originalTypeDef).NewType;
 
         return sourceModule.ImportReference(target);
     }
 
     internal TypeRewriteContext GetTypeByName(string name)
     {
-        return myNameTypeMap[name];
+        return myNameTypeMap.TryGetValue(name, out var result1) ?
+             result1 :
+             myNameTypeMap.TryGetValue(name.Replace("System", "Il2CppSystem"), out var result2) ?
+             result2 :
+             myNameTypeMap.TryGetValue(name.Replace("Il2CppSystem", "System"), out var result3) ?
+             result3 :
+             null;
     }
 
     internal TypeRewriteContext? TryGetTypeByName(string name)

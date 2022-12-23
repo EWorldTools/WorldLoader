@@ -131,9 +131,8 @@ internal class DeobfuscationMapGeneratorRunner : IRunner
                 var matchedField =
                     cleanType.OriginalType.Fields[obfuscatedType.OriginalType.Fields.IndexOf(originalTypeField)];
 
-                writer.WriteLine(obfuscatedType.NewType.GetNamespacePrefix() + "." + obfuscatedType.NewType.Name +
-                                 "::" + Pass22GenerateEnums.GetUnmangledName(originalTypeField) + ";" +
-                                 matchedField.Name + ";0");
+                writer.WriteLine(obfuscatedType.NewType.GetNamespacePrefix() + obfuscatedType.NewType.Name + "::" + Pass22GenerateEnums.GetUnmangledName(originalTypeField) + ";" + matchedField.Name + ";0");
+
             }
         }
 
@@ -232,8 +231,12 @@ internal class DeobfuscationMapGeneratorRunner : IRunner
                 if (tryBase?.Name == currentBase?.Name && tryBase?.Namespace == currentBase?.Namespace)
                     break;
 
-                tryBase = tryBase?.Resolve().BaseType;
-                actualBaseDepth++;
+                try
+                {
+                    tryBase = tryBase?.Resolve().BaseType;
+                    actualBaseDepth++;
+                }
+                catch { break; }
             }
 
             if (tryBase == null && currentBase != null)

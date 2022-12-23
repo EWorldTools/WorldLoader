@@ -31,6 +31,7 @@ namespace WorldLoader
         private void InitializeComponent()
         {
             this.formSkin1 = new FlatUI.FormSkin();
+            this.GenMaop = new FlatUI.FlatButton();
             this.flatTextBox1 = new FlatUI.FlatTextBox();
             this.flatButton1 = new FlatUI.FlatButton();
             this.flatLabel3 = new FlatUI.FlatLabel();
@@ -62,6 +63,7 @@ namespace WorldLoader
             this.formSkin1.BackColor = System.Drawing.Color.White;
             this.formSkin1.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(1)))), ((int)(((byte)(77)))));
             this.formSkin1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(58)))), ((int)(((byte)(60)))));
+            this.formSkin1.Controls.Add(this.GenMaop);
             this.formSkin1.Controls.Add(this.flatTextBox1);
             this.formSkin1.Controls.Add(this.flatButton1);
             this.formSkin1.Controls.Add(this.flatLabel3);
@@ -82,6 +84,21 @@ namespace WorldLoader
             this.formSkin1.Size = new System.Drawing.Size(730, 400);
             this.formSkin1.TabIndex = 0;
             this.formSkin1.Text = "WorldLoader";
+            // 
+            // GenMaop
+            // 
+            this.GenMaop.BackColor = System.Drawing.Color.Transparent;
+            this.GenMaop.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(2)))), ((int)(((byte)(105)))));
+            this.GenMaop.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.GenMaop.Font = new System.Drawing.Font("Tahoma", 12F);
+            this.GenMaop.Location = new System.Drawing.Point(504, 330);
+            this.GenMaop.Name = "GenMaop";
+            this.GenMaop.Rounded = true;
+            this.GenMaop.Size = new System.Drawing.Size(106, 32);
+            this.GenMaop.TabIndex = 26;
+            this.GenMaop.Text = "GenMap";
+            this.GenMaop.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(252)))), ((int)(((byte)(255)))));
+            this.GenMaop.Click += new System.EventHandler(this.GenMaop_Click);
             // 
             // flatTextBox1
             // 
@@ -389,6 +406,7 @@ namespace WorldLoader
         private FlatRadioButton UnhollowerLogTraceTgl;
         private FlatButton ResetBtn;
         private FlatTextBox flatTextBox1;
+        private FlatButton GenMaop;
     }
 }
 
