@@ -30,6 +30,8 @@ WL is just a little project i used for learning about Il2Cpp and System assembly
 
 ## LICENSING & CREDITS:
 
+- Massive Thanks to @notunixian for some help on debugging and a lot of help on Maps <3
+
 Third-party Libraries used as Source Code and/or bundled in Binary Form:
 
 - [Mono](https://github.com/Unity-Technologies/mono) is licensed under multiple licenses. See [LICENSE](https://github.com/Unity-Technologies/mono/blob/unity-master/LICENSE) for full details.
