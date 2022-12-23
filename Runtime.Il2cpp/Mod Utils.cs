@@ -68,11 +68,18 @@ namespace WorldLoader.HookUtils
                                select temp[randomString.Next(temp.Length)]).ToArray<char>());
         }
 
-		public static string Random(this string s, int length = 9, bool numbersOnly = false) {
+		private static string lastsrt;
+
+		public static string Random(this string s, string spliter = " ", int length = 9, bool numbersOnly = false) {
 			System.Random randomString = new System.Random();
 			string element = numbersOnly ? "0123456789" : "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789";
-			return s + " " + new string((from temp in Enumerable.Repeat<string>(element, length)
-							   select temp[randomString.Next(temp.Length)]).ToArray<char>());
+			var randomstr = new string((from temp in Enumerable.Repeat<string>(element, length)
+										select temp[randomString.Next(temp.Length)]).ToArray<char>());
+			if (randomstr== lastsrt)
+				randomstr = new string((from temp in Enumerable.Repeat<string>(element, length)
+							select temp[randomString.Next(temp.Length*2)]).ToArray<char>());
+			lastsrt = randomstr;
+			return s + spliter + randomstr;
 		}
 
 		public static string SHA256(string value) {

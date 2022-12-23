@@ -12,13 +12,34 @@ namespace WorldLoader.Il2CppGen.Generator.Passes;
 
 internal static class Pass10CreateTypedefs
 {
+
+    internal static Dictionary<string, TypeDefinition> usedname = new();
     internal static void DoPass(RewriteGlobalContext context)
     {
-        foreach (var assemblyContext in context.Assemblies)
+        foreach (var assemblyContext in context.Assemblies) {
             foreach (var type in assemblyContext.OriginalAssembly.MainModule.Types)
                 if (type.Namespace != "Cpp2ILInjected" && type.Name != "<Module>")
                     ProcessType(type, assemblyContext, null, assemblyContext.OriginalAssembly.Name.Name);
+            usedname.Clear();
+        }
+
     }
+
+
+    private static string lastsrt;
+    public static string LocalRandom(this string s, string spliter = " ", int length = 9, bool numbersOnly = false)
+    {
+        System.Random randomString = new System.Random();
+        string element = numbersOnly ? "0123456789" : "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789";
+        var randomstr = new string((from temp in Enumerable.Repeat<string>(element, length)
+                                    select temp[randomString.Next(temp.Length)]).ToArray<char>());
+        if (randomstr == lastsrt)
+            randomstr = new string((from temp in Enumerable.Repeat<string>(element, length * 2)
+                                    select temp[randomString.Next(temp.Length)]).ToArray<char>());
+        lastsrt = randomstr;
+        return s + spliter + randomstr;
+    }
+
 
     private static void ProcessType(TypeDefinition type, UnhollowedAssemblyContext assemblyContext,
         TypeDefinition? parentType, string? AssemblyName = null)
@@ -121,6 +142,15 @@ internal static class Pass10CreateTypedefs
                 convertedTypeName = newName;
             }
 
+            if (usedname.TryGetValue(convertedTypeName, out var sameAsm))
+            {
+                if (sameAsm.Namespace == type.Namespace) {
+                    var RnnewName = "_Duplicate".LocalRandom("_");
+                    Logger.Instance.LogTrace($"[Rename issue] {convertedTypeName} already exists in {type.Module.Name}, Givng new name [{RnnewName}");
+                    convertedTypeName += RnnewName;
+                }
+            }
+            usedname.Add(convertedTypeName, type);
             return (null, convertedTypeName);
         }
 
