@@ -30,7 +30,7 @@ WL is just a little project i used for learning about Il2Cpp and System assembly
 
 ## LICENSING & CREDITS:
 
-- Massive Thanks to @notunixian for some help on debugging and a lot of help on Maps <3
+- Massive Thanks to [@notunixian](https://github.com/notunixian) for some help on debugging and a lot of help on Maps <3
 
 Third-party Libraries used as Source Code and/or bundled in Binary Form:
 
