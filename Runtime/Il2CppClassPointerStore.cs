@@ -53,7 +53,7 @@ public static class Il2CppClassPointerStore<T>
 
         if (targetType.IsPrimitive || targetType == typeof(string))
             RuntimeHelpers.RunClassConstructor(AppDomain.CurrentDomain.GetAssemblies()
-                .Single(it => it.GetName().Name == "Il2Cppmscorlib").GetType("Il2Cpp" + targetType.FullName)
+                .FirstOrDefault(it => it.GetName().Name == "Il2Cppmscorlib").GetType("Il2Cpp" + targetType.FullName)
                 .TypeHandle);
 
         foreach (var customAttribute in targetType.CustomAttributes)
