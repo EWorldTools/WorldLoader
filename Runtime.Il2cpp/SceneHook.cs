@@ -10,7 +10,7 @@ using WorldLoader.HookUtils;
 
 namespace Runtime.Il2cpp
 {
-    internal class SceneHook // ML
+    public class SceneHook // ML
     {
         private static void OnSceneUnload(Scene scene) { if (scene == null) return; 
             foreach (var c in WorldLoader.WorldLoader._ModManager.Mods.Keys)

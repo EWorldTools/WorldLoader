@@ -14,9 +14,9 @@ namespace WorldLoader.HookUtils
 {
     public static class ModUtils
     {
-        private static string GetGameObjectPath(Transform transform)
-        {
-            string path = transform.name;
+		public static string GetGameObjectPath(this Transform transform)
+		{
+			string path = transform.name;
             while (transform.parent != null) {
                 transform = transform.parent;
                 path = transform.name + "/" + path;
@@ -146,9 +146,11 @@ namespace WorldLoader.HookUtils
         {
             List<string> list = new();
             Component[] components = Obj.GetComponents<Component>();
-            for (int i = 0; i < components.Length; i++)
-                Logs.Log(components[i].ToString());
-            return list;
+            for (int i = 0; i < components.Length; i++) {
+				Logs.Log(components[i].ToString());
+
+			}
+			return list;
         }
 
         public static List<string> LogAllComponets(this GameObject Obj)

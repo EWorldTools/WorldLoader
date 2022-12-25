@@ -11,7 +11,8 @@ internal class Update
 {
     public static void UpdateRPC(string state = null, string details = null, int partySize = -1)
     {
-        if (!Discord.Active)
+        if (!Discord.Active) 
+            return;
         Logs.Debug($"Updated Presence At {DateTime.Now}:{DateTime.Now.Second} With Value "
             + (string.IsNullOrEmpty(state) ? string.Empty : $"State {state} ")
             + (string.IsNullOrEmpty(details) ? string.Empty : $"Details {details}"));

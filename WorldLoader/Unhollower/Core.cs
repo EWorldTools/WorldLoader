@@ -10,6 +10,7 @@ using WorldLoader.Il2CppUnhollower.Packages;
 using WorldLoader.Il2CppUnhollower.Packages.Models;
 using WorldLoader.HookUtils;
 using WorldLoader.Utils;
+using Runtime.Il2cpp;
 
 namespace WorldLoader.Il2CppUnhollower
 {
@@ -62,6 +63,13 @@ namespace WorldLoader.Il2CppUnhollower
             Internal_Utils.RunInTry(() => {
                 WorldLoader._AssemblyResolveManager = new();
             });
+
+            try {
+                SceneHook.SceneManagementInit();
+            }
+            catch (Exception e) {
+                Logs.Error(e);
+            }
         }
 
         internal static float Run(bool ForceRegen = false)

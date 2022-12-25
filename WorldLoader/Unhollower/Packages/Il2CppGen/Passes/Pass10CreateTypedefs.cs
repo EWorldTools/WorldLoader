@@ -141,16 +141,21 @@ internal static class Pass10CreateTypedefs
 
                 convertedTypeName = newName;
             }
-
-            if (usedname.TryGetValue(convertedTypeName, out var sameAsm))
-            {
-                if (sameAsm.Namespace == type.Namespace) {
-                    var RnnewName = "_Duplicate".LocalRandom("_");
-                    Logger.Instance.LogTrace($"[Rename issue] {convertedTypeName} already exists in {type.Module.Name}, Givng new name [{RnnewName}");
-                    convertedTypeName += RnnewName;
+            try {
+                if (usedname.TryGetValue(convertedTypeName, out var sameAsm))
+                {
+                    if (sameAsm.Namespace == type.Namespace)
+                    {
+                        var RnnewName = "_Duplicate".LocalRandom("_");
+                        Logger.Instance.LogTrace($"[Rename issue] {convertedTypeName} already exists in {type.Module.Name}, Givng new name [{RnnewName}");
+                        convertedTypeName += RnnewName;
+                    }
                 }
+                if (!usedname.ContainsValue(type) && !usedname.ContainsKey(convertedTypeName))
+                    usedname.Add(convertedTypeName, type);
+            } catch { //throw, i dont know why this started erroring
             }
-            usedname.Add(convertedTypeName, type);
+
             return (null, convertedTypeName);
         }
 

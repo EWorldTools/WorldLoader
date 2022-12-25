@@ -6,12 +6,17 @@ using WorldLoader.HookUtils;
 
 namespace WorldLoader.Discord;
 
-internal class Discord
+public class Discord
 {
     internal static DiscordRpc.RichPresence presence;
     internal static DiscordRpc.EventHandlers eventHandlers;
 
-    public static bool Active { get; set; } = true;
+    private static bool privatestate = true;
+
+    public static bool Active { get => privatestate; set {
+            privatestate = value;
+        }
+    }
 
     internal static void Init()
     {

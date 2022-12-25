@@ -8,6 +8,7 @@ using System.Text;
 using Il2CppGen.Runtime.Injection;
 using Il2CppGen.Runtime.InteropTypes;
 using Il2CppGen.Runtime.Runtime;
+using WorldLoader.HookUtils;
 using WorldLoader.Il2CppGen.Internal;
 using Object = Il2CppSystem.Object;
 using ValueType = Il2CppSystem.ValueType;
@@ -210,7 +211,7 @@ public static class DelegateSupport
 
     private static void LogError(string message)
     {
-        Logger.Instance.LogError($"{message}");
+        Logs.Error(message);
     }
 
     public static TIl2Cpp? ConvertDelegate<TIl2Cpp>(Delegate @delegate) where TIl2Cpp : Il2CppObjectBase

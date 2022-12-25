@@ -190,6 +190,7 @@ public sealed class ModManager
 				Logs.Warn("Mod Doesn't Support Unloading!"); return;
 			}
 			_Mods.Remove(Mod);
+			Mods.Remove(Mod);
 			Logs.Log($"{Mod} unloaded!");
 		}
 	}

@@ -256,7 +256,7 @@ internal unsafe class Il2CppDetourMethodPatcher : MethodPatcher
             unmanagedParams[paramStartIndex - 1] = typeof(IntPtr);
         }
 
-        unmanagedParams[1] = typeof(Il2CppMethodInfo*);
+        unmanagedParams[unmanagedParams.Length - 1] = typeof(Il2CppMethodInfo*);
         Array.Copy(managedParams.Select(TrampolineHelpers.NativeType).ToArray(), 0,
             unmanagedParams, paramStartIndex, managedParams.Length);
 

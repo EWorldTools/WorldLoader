@@ -40,7 +40,7 @@ namespace WorldLoader
 
 			Logs.Log(ConsoleColor.DarkCyan, "Logging In And Checking Tags...");
             Logs.Debug(" -=========================== Debug Mode On! ===========================- ", ConsoleColor.Gray);
-            Internal_Utils.RunInTry(Il2CppUnhollower.Core.OnInitialize);
+			Il2CppUnhollower.Core.OnInitialize();
             Self.Awake();
             Internal_Utils.RunInTry(Interface.StartLoadMods);
             LoggedIn = true;

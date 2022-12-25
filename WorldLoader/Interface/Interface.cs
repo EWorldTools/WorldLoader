@@ -20,7 +20,7 @@ internal sealed class Interface : AppDomainManager, INetDomain
 		InitializationFlags = AppDomainManagerInitializationOptions.RegisterWithHost;
 
 	public void OnCLRInit() => 
-		Internal_Utils.RunInTry(WorldLoader.Login);
+		WorldLoader.Login();
 
 	public static void StartLoadMods() =>
 		global::WorldLoader.WorldLoader.Self.Start();
