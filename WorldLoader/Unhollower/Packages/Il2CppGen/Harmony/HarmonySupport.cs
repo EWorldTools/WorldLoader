@@ -112,18 +112,16 @@ internal unsafe class Il2CppDetourMethodPatcher : MethodPatcher
     /// <inheritdoc />
     public override DynamicMethodDefinition PrepareOriginal() => null;
 
-    private IntPtr PatchPointer;
-
     /// <inheritdoc />
     public override MethodBase DetourTo(MethodBase replacement)
     {
-        // // Unpatch an existing detour if it exists
-        if (PatchPointer != IntPtr.Zero)
-        {
-            // Point back to the original method before we unpatch
-            modifiedNativeMethodInfo.MethodPointer = originalNativeMethodInfo.MethodPointer;
-            MinHook.RemoveHook(PatchPointer);
-        }
+        //// // Unpatch an existing detour if it exists
+        //if (nativeDetour != null)
+        //{
+        //    // Point back to the original method before we unpatch
+        //    modifiedNativeMethodInfo.MethodPointer = originalNativeMethodInfo.MethodPointer;
+        //    nativeDetour.Dispose();
+        //}
 
         // Generate a new DMD of the modified unhollowed method, and apply harmony patches to it
         var copiedDmd = CopyOriginal();
@@ -142,11 +140,11 @@ internal unsafe class Il2CppDetourMethodPatcher : MethodPatcher
         var unmanagedDelegate = unmanagedTrampolineMethod.CreateDelegate(unmanagedDelegateType);
         DelegateCache.Add(unmanagedDelegate);
 
-        MinHook.CreateHook(originalNativeMethodInfo.MethodPointer, Marshal.GetFunctionPointerForDelegate(unmanagedDelegate), out var OriginalMethod);
-        PatchPointer = OriginalMethod;
+        IntPtr targetVarPointer = originalNativeMethodInfo.MethodPointer;
+        MinHook.CreateHook(targetVarPointer, Marshal.GetFunctionPointerForDelegate(unmanagedDelegate), out var og);
         MinHook.EnableHook(originalNativeMethodInfo.MethodPointer);
 
-       
+        modifiedNativeMethodInfo.MethodPointer = og;
 
         // TODO: Add an ILHook for the original unhollowed method to go directly to managedHookedMethod
         // Right now it goes through three times as much interop conversion as it needs to, when being called from managed side
@@ -350,7 +348,7 @@ internal unsafe class Il2CppDetourMethodPatcher : MethodPatcher
     }
 
     private static void ReportException(Exception ex) =>
-        Logger.Instance.LogError("During invoking native->managed trampoline\n" + ex);
+        Logs.Error("During invoking native->managed trampoline", ex);
 
     private static void EmitConvertManagedTypeToIL2CPP(ILGenerator il, Type returnType)
     {

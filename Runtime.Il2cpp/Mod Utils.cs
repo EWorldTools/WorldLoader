@@ -82,6 +82,18 @@ namespace WorldLoader.HookUtils
 			return s + spliter + randomstr;
 		}
 
+		internal static List<GameObject> GetChildren(this Transform transform)
+		{
+			List<GameObject> list = new List<GameObject>();
+			for (int i = 0; i < transform.childCount; i++)
+			{
+				GameObject gameObject = transform.GetChild(i).gameObject;
+				list.Add(gameObject);
+			}
+			return list;
+		}
+
+
 		public static string SHA256(string value) {
             HashAlgorithm hashAlgorithm = new SHA256Managed();
             StringBuilder stringBuilder = new StringBuilder();
