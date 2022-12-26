@@ -13,7 +13,7 @@ namespace Il2CppGen.Runtime.IL2CppPatch;
 
 public static class QuickPatch
 {
-    private static unsafe TDelegate FastHook<TDelegate>(MethodInfo targetMethod, MethodInfo patch, Action AfterHook) where TDelegate : Delegate
+    public static unsafe TDelegate FastHook<TDelegate>(MethodInfo targetMethod, MethodInfo patch, Action AfterHook) where TDelegate : Delegate
     {
         try {
             var method = *(IntPtr*)(IntPtr)Il2CppGenUtils.GetIl2CppMethodInfoPointerFieldForGeneratedMethod(targetMethod).GetValue(null);

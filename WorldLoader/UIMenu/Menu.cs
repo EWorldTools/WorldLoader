@@ -97,14 +97,21 @@ namespace WorldLoader
 
         }
 
-        private void DebugTog_CheckedChanged(object sender)=>
+        private void DebugTog_CheckedChanged(object sender)
+        {
             C.L.Config.Debug = DebugTog.Checked;
+            C.L.Save();
+        }
 
-        private void HollowerPassAllNamesTlg_CheckedChanged(object sender) =>
+        private void HollowerPassAllNamesTlg_CheckedChanged(object sender) {
             C.L.Config.HollowerPassAllNames = HollowerPassAllNamesTlg.Checked;
+            C.L.Save();
+        }
 
-        private void UnhollowerLogTraceTgl_CheckedChanged(object sender) => 
+        private void UnhollowerLogTraceTgl_CheckedChanged(object sender) {
             C.L.Config.UnhollowerLogTrace = UnhollowerLogTraceTgl.Checked;
+            C.L.Save();
+        }
 
         private void ResetBtn_Click(object sender, EventArgs e)
         {

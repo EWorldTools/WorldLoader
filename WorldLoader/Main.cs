@@ -12,6 +12,7 @@ using WorldLoader.DataClasses;
 using Il2CppGen.Runtime.Injection;
 using WorldLoader.Il2CppGen.HarmonySupport;
 using WorldLoader.ModulesLibs.Managers;
+using System.Threading.Tasks;
 
 namespace WorldLoader
 {
@@ -51,8 +52,10 @@ namespace WorldLoader
         internal static void Load() {
             AppDomain.CurrentDomain.UnhandledException +=
                 (sender, args) => Logs.Error((args.ExceptionObject as Exception).ToString());
+			TaskScheduler.UnobservedTaskException  +=
+				(sender, args) => Logs.Error(args.Exception.ToString());
 
-            HarmonyInstance = new HarmonyLib.Harmony("WorldLoader");
+			HarmonyInstance = new HarmonyLib.Harmony("WorldLoader");
 			harmonySupportComponent = new();
 			harmonySupportComponent.Start();
 

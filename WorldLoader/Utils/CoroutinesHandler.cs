@@ -2,7 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
+using WorldLoader.HookUtils;
 
 namespace WorldLoader.Utils;
 
@@ -37,6 +37,15 @@ public class MonoEnumeratorWrapper : Il2CppSystem.Object // From Melonloader htt
         };
     }
 
-    public bool MoveNext() => enumerator.MoveNext();
+    public bool MoveNext() {
+        bool temp = false;
+        try
+        {
+            temp = enumerator.MoveNext();
+        } catch (Exception e) { 
+            Logs.Error(e);
+        }
+        return temp;
+    }
     public void Reset() => enumerator.Reset();
 }

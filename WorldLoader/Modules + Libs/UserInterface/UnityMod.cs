@@ -36,6 +36,7 @@ namespace WorldLoader.Mods
 		public void Unload() {
 			OnUnload();
 			ModManager.UnloadMod(this);
+			harmonyInstance.UnpatchSelf();
 		}
 
 
