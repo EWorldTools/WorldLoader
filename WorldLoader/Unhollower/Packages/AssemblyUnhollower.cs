@@ -16,7 +16,9 @@ namespace WorldLoader.Il2CppUnhollower.Packages
     {
         internal static GeneratorOptions opts;
         public static bool deobb { get; private set; } = false;
+        public static bool Jsondeobb { get; private set; } = false;
         public static string DeobfuMap { get; private set; }
+        public static string JsonDeobfuMap { get; private set; }
 
         internal bool Execute()
         {
@@ -24,8 +26,11 @@ namespace WorldLoader.Il2CppUnhollower.Packages
             {
                 Logs.Debug("Running VRC, Using DeObfu Map..");
                 DeobfuMap = "https://raw.githubusercontent.com/WorldVRC/DeobfuscationMaps/main/VRChat/1275.csv.gz";
+                JsonDeobfuMap = "https://raw.githubusercontent.com/WorldVRC/DeobfuscationMaps/main/VRChat/LocalRenameMap.json";
                 Core.webClient.DownloadFile(DeobfuMap, "WorldLoader\\RenameMap.csv.gz"); // THIS NEEDS TO BE CHANGED TO NOT BE VRC ONLY
+                Core.webClient.DownloadFile(JsonDeobfuMap, "WorldLoader\\LocalRenameMap.json"); // THIS NEEDS TO BE CHANGED TO NOT BE VRC ONLY
                 deobb = true;
+                Jsondeobb = true;
             }
             else Logs.Debug("No DeObfu Maps " + Directory.GetCurrentDirectory());
             opts = new GeneratorOptions
@@ -35,12 +40,12 @@ namespace WorldLoader.Il2CppUnhollower.Packages
                 OutputDir = Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\WorldLoader\\UnhollowedAsm").FullName, // Path to which generate the assemblies
                 UnityBaseLibsDir = Core.Dependencies.Destination, // Path to managed Unity core libraries (UnityEngine.dll etc)
                 Parallel = false,
-                PassthroughNames = C.L.Config.HollowerPassAllNames,
-                //TypeDeobfuscationCharsPerUniquifier = 999,// Remove Limit
-                //TypeDeobfuscationMaxUniquifiers = 99, //     ^
+                PassthroughNames = C.L.Config.HollowerPassAllNames
             };
-            if (deobb)
+            if (deobb) {
                 opts.ReadRenameMap("WorldLoader\\RenameMap.csv.gz");
+                opts.DeObbJson = JsonConvert.DeserializeObject<List<Deobb>>(File.ReadAllText("WorldLoader\\LocalRenameMap.json"));
+            }
 
             opts.AdditionalAssembliesBlacklist.Add("ICSharpCode");
             opts.AdditionalAssembliesBlacklist.Add("Newtonsoft");

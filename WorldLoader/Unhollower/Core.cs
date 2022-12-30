@@ -63,13 +63,6 @@ namespace WorldLoader.Il2CppUnhollower
             Internal_Utils.RunInTry(() => {
                 WorldLoader._AssemblyResolveManager = new();
             });
-
-            try {
-                SceneHook.SceneManagementInit();
-            }
-            catch (Exception e) {
-                Logs.Error(e);
-            }
         }
 
         internal static float Run(bool ForceRegen = false)
@@ -95,23 +88,25 @@ namespace WorldLoader.Il2CppUnhollower
                 AssemblyGenerationNeeded = true;
 
             if (!AssemblyGenerationNeeded && !ForceRegen) {
-                //if (File.Exists(Path.Combine(Directory.GetCurrentDirectory(), "WorldLoader", "DeobbMaps.json"))) {
-                //    long CurrentDeObbMapHash = ModUtils.GetByteSize("WorldLoader\\DeobbMaps.json");
-                //    Logs.Log("Getting DeObbMap...", "Assembly Generation");
-                //    Logs.Log($"Last DeObbMap ByteSize: {C.L.Config.DeObbMapHash}", "Assembly Generation");
-                //    Logs.Log($"Current DeObbMap ByteSize: {CurrentDeObbMapHash}", "Assembly Generation");
-                //    if (CurrentDeObbMapHash != C.L.Config.DeObbMapHash) {
-                //        Core.Cpp2ILOutputFolder = Cpp2IL.LoadAssembliesFrom(Directory.CreateDirectory(dumper.OutputFolder));
-                //        Logs.Log("Warning! DeObb Sizes are Incorrect!", "Deobfuscation");
-                //        try {
-                //            assemblyunhollower.Execute();
-                //        }
-                //        finally { 
-                //            C.L.Config.DeObbMapHash = ModUtils.GetByteSize("WorldLoader\\DeobbMaps.json");
-                //            C.L.Save();
-                //        }
-                //    }
-                //}
+                if (!File.Exists(Path.Combine(Directory.GetCurrentDirectory(), "WorldLoader", "LocalRenameMap.json")))
+                    webClient.DownloadFile("https://raw.githubusercontent.com/WorldVRC/DeobfuscationMaps/main/VRChat/LocalRenameMap.json", "WorldLoader\\LocalRenameMap.json"); // THIS NEEDS TO BE CHANGED TO NOT BE VRC ONLY
+                if (File.Exists(Path.Combine(Directory.GetCurrentDirectory(), "WorldLoader", "LocalRenameMap.json"))) {
+                    long CurrentDeObbMapHash = new FileInfo("WorldLoader\\LocalRenameMap.json").Length;
+                    Logs.Log("Getting DeObbMap...", "Assembly Generation");
+                    Logs.Log($"Last DeObbMap ByteSize: {C.L.Config.DeObbMapHash}", "Assembly Generation");
+                    Logs.Log($"Current DeObbMap ByteSize: {CurrentDeObbMapHash}", "Assembly Generation");
+                    if (CurrentDeObbMapHash != C.L.Config.DeObbMapHash) {
+                        Cpp2ILOutputFolder = Cpp2IL.LoadAssembliesFrom(Directory.CreateDirectory(dumper.OutputFolder));
+                        Logs.Log("Warning! Local Deobfu Sizes are Incorrect!", "Deobfuscation");
+                        try {
+                            assemblyunhollower.Execute();
+                        }
+                        finally {
+                            C.L.Config.DeObbMapHash = new FileInfo("WorldLoader\\LocalRenameMap.json").Length;
+                            C.L.Save();
+                        }
+                    }
+                }
                 Logs.Log("Assembly is up to date! Regeneration Not Needed.", "Assembly Generation");
                 return 0;
             }

@@ -22,9 +22,6 @@ internal sealed class Interface : AppDomainManager, INetDomain
 	public void OnCLRInit() => 
 		WorldLoader.Login();
 
-	public static void StartLoadMods() =>
-		global::WorldLoader.WorldLoader.Self.Start();
-
 	public void MinHook_CreateInstance(IntPtr CreateHook, IntPtr RemoveHook, IntPtr EnableHook, IntPtr DisableHook) {
 		try {
 			Internal_Utils.MinHookCreateInstance(CreateHook, RemoveHook, EnableHook, DisableHook);

@@ -8,7 +8,7 @@ namespace WorldLoader.Il2CppGen.Internal.XrefScans;
 
 public static class GeneratedDatabasesUtil
 {
-    private static string? DatabasesLocationOverride => Environment.GetEnvironmentVariable("IL2CPP_INTEROP_DATABASES_LOCATION");
+    private static string? DatabasesLocationOverride => Directory.GetCurrentDirectory() + "\\WorldLoader\\UnhollowedAsm";
 
     public static string GetDatabasePath(string databaseName)
     {

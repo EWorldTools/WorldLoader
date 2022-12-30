@@ -111,7 +111,7 @@ internal unsafe class Il2CppDetourMethodPatcher : MethodPatcher
 
     /// <inheritdoc />
     public override DynamicMethodDefinition PrepareOriginal() => null;
-
+    private static IntPtr nativeDetour;
     /// <inheritdoc />
     public override MethodBase DetourTo(MethodBase replacement)
     {
@@ -120,7 +120,7 @@ internal unsafe class Il2CppDetourMethodPatcher : MethodPatcher
         //{
         //    // Point back to the original method before we unpatch
         //    modifiedNativeMethodInfo.MethodPointer = originalNativeMethodInfo.MethodPointer;
-        //    nativeDetour.Dispose();
+        //    MinHook.RemoveHook(nativeDetour);
         //}
 
         // Generate a new DMD of the modified unhollowed method, and apply harmony patches to it
@@ -142,6 +142,7 @@ internal unsafe class Il2CppDetourMethodPatcher : MethodPatcher
 
         IntPtr targetVarPointer = originalNativeMethodInfo.MethodPointer;
         MinHook.CreateHook(targetVarPointer, Marshal.GetFunctionPointerForDelegate(unmanagedDelegate), out var og);
+        nativeDetour = og;
         MinHook.EnableHook(originalNativeMethodInfo.MethodPointer);
 
         modifiedNativeMethodInfo.MethodPointer = og;

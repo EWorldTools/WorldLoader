@@ -102,7 +102,6 @@ internal static class Pass10CreateTypedefs
                 ? type.Namespace
                 : enclosingType.GetNamespacePrefix() + "." + enclosingType.Name;
             if (assemblyContextGlobalContext.Options.DeObbJson != null)
-                if (assemblyContextGlobalContext.Options.DeObbJson.Count > 0)
                 {
                     var deobbsMap = CheckName(assemblyContextGlobalContext, type, AssemblyName);
                     if (deobbsMap != null)
@@ -188,11 +187,16 @@ internal static class Pass10CreateTypedefs
                     if (S.WithMethods.Count > 0 || S.WithOutMethods.Count > 0)
                         foreach (var Method in Methods)
                         {
-                            // TODO: Add a Way to get the UnObfuscated name of the Method and check that with the Deobb Maps for Easier Deobbcuation
-                            //if (Method.Name.IsObfuscated(context.Options))
-                            //{
-                            //}
-                            //else
+                            if (Method.Name.StartsWith("get_") && S.WithFields.Count > 0 && Fields != null)
+                            {
+                                var MthfieldName = Method.Name.Remove(Method.Name.IndexOf('_') + 1);
+                                foreach (var Field in Fields)
+                                    if (S.WithFields.Contains(MthfieldName))
+                                    {
+                                        IsAssembly++;
+                                        Logs.Debug("Method Matched Field " + Field.FullName);
+                                    }
+                            }
                             if (S.WithOutMethods.Contains(Method.Name))
                             {
                                 IsAssemblySkipped = true;

@@ -13,6 +13,7 @@ using Il2CppGen.Runtime.Injection;
 using WorldLoader.Il2CppGen.HarmonySupport;
 using WorldLoader.ModulesLibs.Managers;
 using System.Threading.Tasks;
+using Runtime.Il2cpp;
 
 namespace WorldLoader
 {
@@ -43,7 +44,7 @@ namespace WorldLoader
             Logs.Debug(" -=========================== Debug Mode On! ===========================- ", ConsoleColor.Gray);
 			Il2CppUnhollower.Core.OnInitialize();
             Self.Awake();
-            Internal_Utils.RunInTry(Interface.StartLoadMods);
+            Internal_Utils.RunInTry(Self.Start);
             LoggedIn = true;
             Logs.Log("Welcome to WL <3", "LoaderInit", ConsoleColor.Green);
             //Update.UpdateRPC("Logged in! <3");
@@ -101,6 +102,13 @@ namespace WorldLoader
                 UnityVersion = InternalInfo.EngineVersion.version
 			});
 
+			try {
+				SceneHook.SceneManagementInit();
+			}
+			catch (Exception e) {
+				Logs.Error(e);
+			}
+
 			"==================================- Start -==================================".WriteLineToConsole(ConsoleColor.DarkGray);
 			Logs.Log();
 
@@ -112,13 +120,13 @@ namespace WorldLoader
 					vrMod.OnInject();
 				}
 				catch (Exception e) {
-                    Logs.Error($"Error In OnInject For {vrMod.Name}", e);
+                    vrMod.Error(e);
 				}
 			}
 
 			"==================================- Start -==================================".WriteLineToConsole(ConsoleColor.DarkGray);
 			Logs.Log();
-			"[Start]".WriteToConsole(ConsoleColor.DarkGreen).WriteLineToConsole("Done Loading Mods!");
+			"[Start]".WriteToConsole(ConsoleColor.DarkGreen).WriteLineToConsole("Done Loading Mods!", ConsoleColor.DarkGreen);
 			Update.UpdateRPC(null, $"Using {count} Mod{((count == 1) ? String.Empty : "s")}!");
 			C.L.Save();
 		}

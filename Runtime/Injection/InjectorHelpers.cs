@@ -15,7 +15,6 @@ using Il2CppGen.Runtime.Runtime.VersionSpecific.Class;
 using Il2CppGen.Runtime.Runtime.VersionSpecific.FieldInfo;
 using Il2CppGen.Runtime.Runtime.VersionSpecific.Image;
 using Il2CppGen.Runtime.Runtime.VersionSpecific.MethodInfo;
-using Il2CppGen.Runtime.IL2CppPatch;
 using WorldLoader.HookUtils;
 using WorldLoader.Il2CppGen.Internal.Extensions;
 

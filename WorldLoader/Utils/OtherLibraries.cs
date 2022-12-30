@@ -15,15 +15,15 @@ public class WorldConfig<T> where T : class
     {
         FilePath = Path;
 
-        var Watch = System.IO.Path.GetDirectoryName(FilePath);
+        //var Watch = System.IO.Path.GetDirectoryName(FilePath);
 
-        if (Watch != null) {
-            var watcher = new FileSystemWatcher(Watch, System.IO.Path.GetFileName(FilePath)) {
-                NotifyFilter = NotifyFilters.LastWrite,
-                EnableRaisingEvents = true
-            };
-            watcher.Changed += UpdateConfig;
-        }
+        //if (Watch != null) {
+        //    var watcher = new FileSystemWatcher(Watch, System.IO.Path.GetFileName(FilePath)) {
+        //        NotifyFilter = NotifyFilters.LastWrite,
+        //        EnableRaisingEvents = true
+        //    };
+        //    watcher.Changed += UpdateConfig;
+        //}
         CheckConfig();
 
         Config = JsonConvert.DeserializeObject<T>(File.ReadAllText(FilePath));

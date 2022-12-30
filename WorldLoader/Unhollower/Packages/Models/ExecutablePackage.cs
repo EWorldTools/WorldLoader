@@ -95,7 +95,7 @@ namespace WorldLoader.Il2CppUnhollower.Packages.Models // MelonLoader
             return inputAssemblies;
         }
 
-        private static void OutputStream(object sender, DataReceivedEventArgs e) { if (e.Data == null) ResetEvent_Output.Set(); else Logs.Debug(e.Data); }
+        private static void OutputStream(object sender, DataReceivedEventArgs e) { if (e.Data == null) ResetEvent_Output.Set(); else Logs.Log(e.Data); }
         private static void ErrorStream(object sender, DataReceivedEventArgs e) { if (e.Data == null) ResetEvent_Error.Set(); else Logs.Error(e.Data); }
     }
 

@@ -182,7 +182,7 @@ public static class Logs
 	public static void Error(string message, Exception Error = null, string Name = "WorldLoader")
 	{
 		var time = WriteTime();
-		string s = $"{time}[{Name}] " + (string.IsNullOrEmpty(message) ? "Unknown Error: " : message) + "\n" + $"{Error.ToString()}\n";
+		string s = $"{time}[{Name}] " + (string.IsNullOrEmpty(message) ? "Unknown Error: " : message) + "\n" + $"{Error}\n";
 		Console.ForegroundColor = ConsoleColor.Red;
 		Console.Write("[");
 		Console.ForegroundColor = ConsoleColor.Red;
@@ -194,7 +194,7 @@ public static class Logs
 		Console.ForegroundColor = ConsoleColor.Gray;
 		if (Error != null) {
 			Console.ForegroundColor = ConsoleColor.Red;
-			Console.WriteLine($"{Error.ToString()}");
+			Console.WriteLine($"{Error}\n === StackTrase ===\n{Error.StackTrace}");
 
 			Console.ForegroundColor = ConsoleColor.Gray;
 		}
