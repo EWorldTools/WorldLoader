@@ -102,15 +102,17 @@ internal static class Pass10CreateTypedefs
                 ? type.Namespace
                 : enclosingType.GetNamespacePrefix() + "." + enclosingType.Name;
             if (assemblyContextGlobalContext.Options.DeObbJson != null)
+            {
+                var deobbsMap = CheckName(assemblyContextGlobalContext, type, AssemblyName);
+                if (deobbsMap != null)
                 {
-                    var deobbsMap = CheckName(assemblyContextGlobalContext, type, AssemblyName);
-                    if (deobbsMap != null)
+                    if (type.Module.Types.Any(t => t.FullName == deobbsMap.AssemblyName))
                     {
-                        if (type.Module.Types.Any(t => t.FullName == deobbsMap.AssemblyName))
-                        {
-                            Logger.Instance.LogWarning($"[Rename map issue] {deobbsMap.AssemblyName} already exists in {type.Module.Name} (mapped from {fullName}.{convertedTypeName})");
-                            deobbsMap.AssemblyName += "_Duplicate";
-                        }
+                        Logger.Instance.LogWarning($"[Rename map issue] {deobbsMap.AssemblyName} already exists in {type.Module.Name} (mapped from {fullName}.{convertedTypeName})");
+                        deobbsMap.AssemblyName += "_Duplicate";
+                    }
+                    if (deobbsMap.AssemblyName.Contains("."))
+                    {
                         var lastDotPosition = deobbsMap.AssemblyName.LastIndexOf(".");
                         if (lastDotPosition >= 0)
                         {
@@ -119,7 +121,10 @@ internal static class Pass10CreateTypedefs
                             return (ns, name);
                         }
                     }
+                    else return (null, deobbsMap.AssemblyName);
                 }
+
+            }
 
             if (assemblyContextGlobalContext.Options.RenameMap.TryGetValue(fullName + "." + convertedTypeName,
                     out var newName))
@@ -243,7 +248,6 @@ internal static class Pass10CreateTypedefs
 
                 if (IsAssembly == Count) {
                     Logs.Log($"{typeDefinition.Name} => {S.AssemblyName} (Count {Count})", "Assembly Generation", "Deobfuscation");
-                    settings.DeObbJson.Remove(S);
                     Passes++;
                     return S;
                 }
