@@ -50,7 +50,6 @@ public static class Il2CppClassPointerStore<T>
                 NativeClassPtr =
                     IL2CPP.GetIl2CppClass(targetType.Module.Name, targetType.Namespace ?? "", targetType.Name);
         }
-
         if (targetType.IsPrimitive || targetType == typeof(string))
             RuntimeHelpers.RunClassConstructor(AppDomain.CurrentDomain.GetAssemblies()
                 .FirstOrDefault(it => it.GetName().Name == "Il2Cppmscorlib").GetType("Il2Cpp" + targetType.FullName)

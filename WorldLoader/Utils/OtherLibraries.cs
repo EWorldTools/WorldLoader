@@ -14,23 +14,13 @@ public class WorldConfig<T> where T : class
     public WorldConfig(string Path)
     {
         FilePath = Path;
-
-        var Watch = System.IO.Path.GetDirectoryName(FilePath);
-
-        if (Watch != null) {
-            var watcher = new FileSystemWatcher(Watch, System.IO.Path.GetFileName(FilePath)) {
-                NotifyFilter = NotifyFilters.LastWrite,
-                EnableRaisingEvents = true
-            };
-            watcher.Changed += UpdateConfig;
-        }
         CheckConfig();
 
         Config = JsonConvert.DeserializeObject<T>(File.ReadAllText(FilePath));
     }
 
     private void CheckConfig() {
-        if (!File.Exists(FilePath) || new System.IO.FileInfo(FilePath).Length < 2)
+        if (!File.Exists(FilePath))
             File.WriteAllText(FilePath, JsonConvert.SerializeObject(Activator.CreateInstance(typeof(T)), Formatting.Indented, new JsonSerializerSettings()));
     }
 
