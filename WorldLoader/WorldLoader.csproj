@@ -275,6 +275,7 @@
     <Compile Include="Unhollower\Packages\Semver.cs" />
     <Compile Include="Unhollower\Packages\UnityDependencies.cs" />
     <Compile Include="Utils\CoroutinesHandler.cs" />
+    <Compile Include="Utils\MultiTextWriter.cs" />
     <Compile Include="Utils\OtherLibraries.cs" />
     <Compile Include="Utils\Internal Utils.cs" />
     <Compile Include="Utils\Logs.cs" />

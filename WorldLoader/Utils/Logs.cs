@@ -26,7 +26,6 @@ public static class Logs
 		Console.ForegroundColor = color;
 		Console.Write(text + " ");
 		Console.ResetColor();
-		AddToLog($"{time}[WorldLoader] {flagsToLog}{text} ", false);
 		return text;
 	}
 
@@ -41,7 +40,6 @@ public static class Logs
 		Console.ForegroundColor = color;
 		Console.Write(text.EndsWith(" ") ? String.Empty : " " + AddText);
 		Console.ResetColor();
-		AddToLog($" {AddText}", false);
 		return text;
 	}
 
@@ -50,7 +48,6 @@ public static class Logs
 		Console.ForegroundColor = color;
 		Console.Write(text.EndsWith(" ") ? String.Empty : " " + AddText);
 		Console.ResetColor();
-		AddToLog($" {AddText}", false);
 		return text;
 	}
 
@@ -76,7 +73,6 @@ public static class Logs
 		Console.ForegroundColor = color;
 		Console.WriteLine(text);
 		Console.ResetColor();
-		AddToLog($"{time}[WorldLoader] {flagsToLog}{text}");
 		return text;
 	}
 
@@ -95,7 +91,6 @@ public static class Logs
 		Console.ForegroundColor = GetRandomConsoleColor();
 		Console.WriteLine(text);
 		Console.ResetColor();
-		AddToLog($"{time}[WorldLoader] {flagsToLog}{text}");
 		return text;
 	}
 
@@ -107,11 +102,10 @@ public static class Logs
 
 	// New Stuff (i like these a lot ^w^
 
-	public static void Log(string message = null, string flag = "", ConsoleColor Color = ConsoleColor.White, ConsoleColor flagColor = ConsoleColor.Red, string Name = "WorldLoader")
+	public static void Log(string message = null, string flag = "", ConsoleColor Color = ConsoleColor.White, ConsoleColor flagColor = ConsoleColor.Red, ConsoleColor textColor = ConsoleColor.DarkRed, string Name = "WorldLoader")
 	{
 		if (message == null) {
 			Console.WriteLine();
-			AddToLog();
 			return;
 		}
 		var time = WriteTime();
@@ -121,11 +115,9 @@ public static class Logs
 		Console.Write(Name);
 		Console.ForegroundColor = flagColor;
 		Console.Write("] " + (string.IsNullOrEmpty(flag) ? "" : $"[{flag}] "));
-		Console.ForegroundColor = Color;
+		Console.ForegroundColor = textColor;
 		Console.WriteLine(message);
 		Console.ForegroundColor = ConsoleColor.Gray;
-
-		AddToLog($"{time}[{Name}] " + (string.IsNullOrEmpty(flag) ? "" : $"[{flag}] ") + message);
 	}
 
 	// Just Here to make things Faster
@@ -142,7 +134,6 @@ public static class Logs
 	public static void Warn(string message = null, string flag = "", ConsoleColor Color = ConsoleColor.White, ConsoleColor flagColor = ConsoleColor.Red, string Name = "WorldLoader") {
 		if (message == null) {
 			Console.WriteLine();
-			AddToLog();
 			return;
 		}
 		var time = WriteTime();
@@ -155,15 +146,13 @@ public static class Logs
 		Console.ForegroundColor = Color;
 		Console.WriteLine(message);
 		Console.ForegroundColor = ConsoleColor.Gray;
-
-		AddToLog($"{time}[{Name}] " + (string.IsNullOrEmpty(flag) ? "" : $"[{flag}] ") + message);
 	}
 
 	public static string Debug(string message = null, ConsoleColor Color = ConsoleColor.White, string Name = "WorldLoader", string flag = "") {
 		if (C.L.Config.Debug) {
 			if (message == null) {
 				Console.WriteLine();
-				return AddToLog(null, true, true);
+				return null;
 			}
 			WriteTime();
 			Console.ForegroundColor = ConsoleColor.DarkGray;
@@ -174,7 +163,7 @@ public static class Logs
 			Console.WriteLine(message);
 			Console.ForegroundColor = ConsoleColor.Gray;
 		}
-		return AddToLog($"{DateTime.Now.ToString("HH:mm:ss.fff")}[{Name}] [Debug] " + message, true, true);
+		return $"{DateTime.Now.ToString("HH:mm:ss.fff")}[{Name}] [Debug] " + message;
 	}
 
 	public static void Error(Exception e) => Error(null, e);
@@ -182,7 +171,6 @@ public static class Logs
 	public static void Error(string message, Exception Error = null, string Name = "WorldLoader")
 	{
 		var time = WriteTime();
-		string s = $"{time}[{Name}] " + (string.IsNullOrEmpty(message) ? "Unknown Error: " : message) + "\n" + $"{Error}\n";
 		Console.ForegroundColor = ConsoleColor.Red;
 		Console.Write("[");
 		Console.ForegroundColor = ConsoleColor.Red;
@@ -194,11 +182,10 @@ public static class Logs
 		Console.ForegroundColor = ConsoleColor.Gray;
 		if (Error != null) {
 			Console.ForegroundColor = ConsoleColor.Red;
-			Console.WriteLine($"{Error}\n === StackTrase ===\n{Error.StackTrace}");
+			Console.WriteLine($"{Error}");
 
 			Console.ForegroundColor = ConsoleColor.Gray;
 		}
-		AddToLog(s);
 	}
 
 	internal static string WriteTime(ConsoleColor color = ConsoleColor.DarkRed, ConsoleColor color2 = ConsoleColor.DarkRed) {
@@ -225,29 +212,5 @@ public static class Logs
 			return ConsoleColor.DarkMagenta;
 		lastcolor = color;
 		return color;
-	}
-
-	internal static string AddToLog(string Data = null, bool NewLine = true, bool IsDebug = false)
-	{
-		try {
-			if (WorldLoader.Menu.Created) {
-				if (!IsDebug)
-					WorldLoader.Menu.flatLabel1.Text += Data + Environment.NewLine;
-				else WorldLoader.Menu.flatLabel2.Text += Data + Environment.NewLine;
-			}
-		} catch (Exception e) { // throw ig
-			//Console.ForegroundColor = ConsoleColor.Red;
-			//Console.WriteLine("[Error] " + e);
-			//Console.ResetColor();
-		}
-		if (!Directory.Exists("WorldLoader\\"))
-			Directory.CreateDirectory("WorldLoader\\");
-
-		if (!IsWriting) File.WriteAllText(LogLocation, string.Empty);
-		IsWriting = true;
-		if (string.IsNullOrWhiteSpace(Data))
-			File.AppendAllText(LogLocation, "\n");
-		File.AppendAllText(LogLocation, Data + (NewLine ? "\n" : ""));
-		return Data;
 	}
 }

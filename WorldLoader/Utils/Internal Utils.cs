@@ -63,6 +63,11 @@ public static class Internal_Utils {
 		};
 		Console.SetOut(Swr);
 		Console.SetIn(new StreamReader(Console.OpenStandardInput()));
+
+		// Create a new StreamWriter to log console output to a file
+		StreamWriter fileOutput = new StreamWriter("WorldLoader\\Log.txt");
+		Console.SetOut(new MultiTextWriter(Swr, fileOutput));
+
 		Console.Clear();
 		Console.Title = "WorldLoader";
 		SetForegroundWindow(GetConsoleWindow());

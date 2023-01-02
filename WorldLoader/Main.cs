@@ -28,7 +28,7 @@ namespace WorldLoader
 		public static WorldLoader Self { get; set; }
 		public static UnityAppInfo appInfo { get; private set; }
 		public static ModManager _ModManager { get; set; }
-		internal static PluginManager _PluginManager { get; set; }
+		public static PluginManager _PluginManager { get; set; }
 		internal static AssemblyResolveManager _AssemblyResolveManager { get; set; }
 		internal static LoaderMenu Menu { get; set; }
 		public static HarmonySupportComponent harmonySupportComponent { get; set; }
