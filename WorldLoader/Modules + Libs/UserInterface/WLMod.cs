@@ -25,13 +25,13 @@ public class WLMod
 	/// </summary>
 	/// <param name="message"></param>
 	/// <param name="color"></param>
-	public void Log(string message = null, ConsoleColor color = ConsoleColor.Black, ConsoleColor textColor = ConsoleColor.White)
+	public void Log(string message = null, ConsoleColor color = ConsoleColor.Black)
 	{
 		if (message == null) {
 			Console.WriteLine();
 			return;
 		}
-		Logs.Log(message, null, color.Equals(ConsoleColor.Black) ? this.ModColor : color, ConsoleColor.Red, textColor, this.Name);
+		Logs.Log(message, null, this.ModColor, ConsoleColor.Red, color, this.Name);
 	}
 
 	/// <summary>
@@ -39,13 +39,13 @@ public class WLMod
 	/// </summary>
 	/// <param name="message"></param>
 	/// <param name="color"></param>
-	public void Log(ConsoleColor color = ConsoleColor.Black, ConsoleColor textColor = ConsoleColor.White, string message = null)
+	public void Log(ConsoleColor color = ConsoleColor.Black, string message = null)
 	{
 		if (String.IsNullOrWhiteSpace(message)) {
 			Console.WriteLine();
 			return;
 		}
-		Logs.Log(message, null, color.Equals(ConsoleColor.Black) ? this.ModColor : color, ConsoleColor.Red, textColor, this.Name);
+		Logs.Log(message, null, this.ModColor, ConsoleColor.Red, color, this.Name);
 	}
 
 	public void Error(string message = null, Exception e = null)
