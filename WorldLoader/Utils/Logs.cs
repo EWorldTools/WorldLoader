@@ -102,7 +102,7 @@ public static class Logs
 
 	// New Stuff (i like these a lot ^w^
 
-	public static void Log(string message = null, string flag = "", ConsoleColor Color = ConsoleColor.White, ConsoleColor flagColor = ConsoleColor.Red, ConsoleColor textColor = ConsoleColor.DarkRed, string Name = "WorldLoader")
+	public static void Log(string message = null, string flag = "", ConsoleColor Color = ConsoleColor.White, ConsoleColor flagColor = ConsoleColor.Red, ConsoleColor textColor = ConsoleColor.Magenta, string Name = "WorldLoader")
 	{
 		if (message == null) {
 			Console.WriteLine();
