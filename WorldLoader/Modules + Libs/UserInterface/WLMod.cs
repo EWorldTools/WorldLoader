@@ -21,31 +21,31 @@ public class WLMod
 
 
 	/// <summary>
-	///  Log (Uses Mod Name, ConsoleColor.Black = Mod Color)
+	///  Log 
 	/// </summary>
 	/// <param name="message"></param>
 	/// <param name="color"></param>
-	public void Log(string message = null, ConsoleColor color = ConsoleColor.Black)
+	public void Log(string message = null, ConsoleColor color = ConsoleColor.DarkGray)
 	{
 		if (message == null) {
 			Console.WriteLine();
 			return;
 		}
-		Logs.Log(message, null, this.ModColor, ConsoleColor.Red, color, this.Name);
+		Logs.Log(message, null, color, this.ModColor, this.Name);
 	}
 
 	/// <summary>
-	///  Log (Uses Mod Name, ConsoleColor.Black = Mod Color)
+	///  Log 
 	/// </summary>
 	/// <param name="message"></param>
 	/// <param name="color"></param>
-	public void Log(ConsoleColor color = ConsoleColor.Black, string message = null)
+	public void Log(ConsoleColor color = ConsoleColor.DarkGray, string message = null)
 	{
 		if (String.IsNullOrWhiteSpace(message)) {
 			Console.WriteLine();
 			return;
 		}
-		Logs.Log(message, null, this.ModColor, ConsoleColor.Red, color, this.Name);
+		Logs.Log(message, null, color, this.ModColor, this.Name);
 	}
 
 	public void Error(string message = null, Exception e = null)
