@@ -114,11 +114,5 @@ public static class Internal_Utils {
 		MinHook.EnableHook = NativeUtils.CreateDelegate<MinHook._EnableHook>(EnableHook);
 		MinHook.DisableHook = NativeUtils.CreateDelegate<MinHook._DisableHook>(DisableHook);
 	}
-
-	internal static void KillEAC() {
-		foreach (var runningPr in Process.GetProcesses())
-			if (runningPr.ProcessName == "EasyAntiCheat_EOS")
-				runningPr.Kill();
-	}
 }
 
