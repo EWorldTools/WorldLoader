@@ -1,8 +1,6 @@
 
-<p align="center">
-  <header>
-    <h1>Here at WorldVRC we dont not support hacking or cheating! </h1>
-  </header>
+
+# WorldLoader is just an Interface and use of [Il2CppInterop](https://github.com/BepInEx/Il2CppInterop/) By BepInEx!</h1>
 <p align="center">
   <a href="#"><img src="https://raw.githubusercontent.com/Hacker1254/WorldClient-Files/main/WorldClient.png"></a>
 </p>
