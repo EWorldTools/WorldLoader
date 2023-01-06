@@ -9,11 +9,18 @@ namespace WorldLoader.Utils;
 
 public class MultiTextWriter : TextWriter
 {
-    private readonly IEnumerable<TextWriter> _writers;
+    private readonly List<TextWriter> _writers;
+
+    public Action<string> MessageCallBack = new Action<string>((str) => File.AppendAllText("WorldLoader\\Log.txt", str));
 
     public MultiTextWriter(params TextWriter[] writers) =>
-        _writers = writers;
-    
+        _writers = writers.ToList();
+
+    public MultiTextWriter(TextWriter writer) {
+        _writers = new();
+        _writers.Add(writer);
+    }
+
     public override Encoding Encoding => Encoding.UTF8;
 
     public override void Write(char value) {
@@ -24,11 +31,13 @@ public class MultiTextWriter : TextWriter
     public override void Write(string value) {
         foreach (TextWriter writer in _writers)
             writer.Write(value);
+        MessageCallBack?.Invoke(value);
     }
 
     public override void WriteLine(string value) {
         foreach (TextWriter writer in _writers)
             writer.WriteLine(value);
+        MessageCallBack?.Invoke(value + "\n");
     }
 
     protected override void Dispose(bool disposing) {

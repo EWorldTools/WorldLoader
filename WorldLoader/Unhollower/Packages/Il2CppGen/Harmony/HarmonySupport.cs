@@ -115,11 +115,12 @@ internal unsafe class Il2CppDetourMethodPatcher : MethodPatcher
     /// <inheritdoc />
     public override MethodBase DetourTo(MethodBase replacement)
     {
-        //// // Unpatch an existing detour if it exists
+        // Unpatch an existing detour if it exists
         //if (nativeDetour != null)
         //{
         //    // Point back to the original method before we unpatch
         //    modifiedNativeMethodInfo.MethodPointer = originalNativeMethodInfo.MethodPointer;
+        //    MinHook.DisableHook(nativeDetour);
         //    MinHook.RemoveHook(nativeDetour);
         //}
 
