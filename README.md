@@ -22,9 +22,7 @@ WL is just a little project i used for learning about Il2Cpp and System assembly
 
    
 ## Known Issues: 
-        - Dup Class names in some games 
-            [ This is due to the Gen Opt's ( TypeDeobfuscationMaxUniquifiers && TypeDeobfuscationCharsPerUniquifier ) Being set to 0 
-                    ( CLR has the strings a lot smaller then how the CLI Sees it, thus causing the maps not work )
+- i messed up Harmony Support, [The Base By BepInEx](https://github.com/BepInEx/Il2CppInterop/tree/master/Il2CppInterop.HarmonySupport) Probly would work, and someone can Pr and Fix it
 
 ## LICENSING & CREDITS:
 
