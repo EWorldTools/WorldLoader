@@ -13,20 +13,21 @@ WL is just a little project i used for learning about Il2Cpp and System assembly
 # Features
 
   - Inject At Anytime
-  - IL2Cpp Support    
   - Uses CLR          
+  - (Theres more, i just hate typing)
 
 # How To Install
 
- (Not Ready Yet)
-
+Head Over to Releases, Down the .Zip file and Extraxt it into Any *IL2CPP UNITY* Game (MONO IS NOT SUPPORTED - Im lazy)
+Use any dll injector to inti the CoreCLR Dll into the UNITY applaction, and it will do the rest from there
    
 ## Known Issues: 
-- i messed up Harmony Support, [The Base By BepInEx](https://github.com/BepInEx/Il2CppInterop/tree/master/Il2CppInterop.HarmonySupport) Probly would work, and someone can Pr and Fix it
+- This is the Biggest Issue - i messed up Harmony Support, [The Base By BepInEx](https://github.com/BepInEx/Il2CppInterop/tree/master/Il2CppInterop.HarmonySupport) Probly would work, and someone can Pr and Fix it
 
 ## LICENSING & CREDITS:
 
 - Massive Thanks to [@notunixian](https://github.com/notunixian) for some help on debugging and a lot of help on Maps <3
+- If it wasn't for the [BepInEx Team](https://github.com/BepInEx), [MelonLoader](https://github.com/LavaGang/MelonLoader/) and [AssemblyUnhollower](https://github.com/knah/Il2CppAssemblyUnhollower), this loader wouldn't exist ^w^
 
 Third-party Libraries used as Source Code and/or bundled in Binary Form:
 
