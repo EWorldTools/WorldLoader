@@ -111,18 +111,21 @@ internal unsafe class Il2CppDetourMethodPatcher : MethodPatcher
 
     /// <inheritdoc />
     public override DynamicMethodDefinition PrepareOriginal() => null;
-    private static IntPtr nativeDetour;
+    private IntPtr nativeDetour = IntPtr.Zero;
+
     /// <inheritdoc />
     public override MethodBase DetourTo(MethodBase replacement)
     {
-        // Unpatch an existing detour if it exists
-        //if (nativeDetour != null)
-        //{
-        //    // Point back to the original method before we unpatch
-        //    modifiedNativeMethodInfo.MethodPointer = originalNativeMethodInfo.MethodPointer;
-        //    MinHook.DisableHook(nativeDetour);
-        //    MinHook.RemoveHook(nativeDetour);
-        //}
+        // Unpatch an existing detour if it exists, this is to stop AOT errors (THIS REMOVES THE PREV PATCH!)
+        if (nativeDetour != IntPtr.Zero)
+        {
+            // Point back to the original method before we unpatch
+            modifiedNativeMethodInfo.MethodPointer = originalNativeMethodInfo.MethodPointer;
+            //MinHook.DisableHook(nativeDetour);
+            MinHook.RemoveHook(nativeDetour);
+            nativeDetour = IntPtr.Zero;
+            Logs.Debug("Dup Hook Detected, Unpatching...");
+        }else Logs.Debug($"First Time Detouring");
 
         // Generate a new DMD of the modified unhollowed method, and apply harmony patches to it
         var copiedDmd = CopyOriginal();
@@ -143,7 +146,7 @@ internal unsafe class Il2CppDetourMethodPatcher : MethodPatcher
 
         IntPtr targetVarPointer = originalNativeMethodInfo.MethodPointer;
         MinHook.CreateHook(targetVarPointer, Marshal.GetFunctionPointerForDelegate(unmanagedDelegate), out var og);
-        nativeDetour = og;
+        nativeDetour = targetVarPointer;
         MinHook.EnableHook(originalNativeMethodInfo.MethodPointer);
 
         modifiedNativeMethodInfo.MethodPointer = og;
@@ -352,16 +355,11 @@ internal unsafe class Il2CppDetourMethodPatcher : MethodPatcher
     private static void ReportException(Exception ex) =>
         Logs.Error("During invoking native->managed trampoline", ex);
 
-    private static void EmitConvertManagedTypeToIL2CPP(ILGenerator il, Type returnType)
-    {
+    private static void EmitConvertManagedTypeToIL2CPP(ILGenerator il, Type returnType) {
         if (returnType == typeof(string))
-        {
             il.Emit(OpCodes.Call, ManagedToIL2CPPStringMethodInfo);
-        }
         else if (!returnType.IsValueType && returnType.IsSubclassOf(typeof(Il2CppObjectBase)))
-        {
             il.Emit(OpCodes.Call, ObjectBaseToPtrMethodInfo);
-        }
     }
 
     private static void EmitConvertArgumentToManaged(ILGenerator il,
