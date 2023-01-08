@@ -22,7 +22,7 @@ namespace WorldLoader.ModulesLibs.Managers
         [Obsolete]
         public AssemblyResolveManager() { 
 			AppDomain.CurrentDomain.AppendPrivatePath(Directory.GetCurrentDirectory() + "\\WorldLoader\\UnhollowedAsm");
-			AppDomain.CurrentDomain.AppendPrivatePath(Directory.CreateDirectory("UserLibs").FullName);			
+			AppDomain.CurrentDomain.AppendPrivatePath(Directory.CreateDirectory(PathDataInfo.LibsPath).FullName);			
 		}
 
 		private static void invOnRelv(Assembly assembly) {

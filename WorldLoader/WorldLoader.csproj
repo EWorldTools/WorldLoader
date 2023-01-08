@@ -166,6 +166,7 @@
     <Compile Include="FlatUI\Helpers.cs" />
     <Compile Include="FlatUI\MouseState.cs" />
     <Compile Include="Modules + Libs\Managers\AssemblyResolveManager.cs" />
+    <Compile Include="Modules + Libs\PathDataInfo.cs" />
     <Compile Include="Modules + Libs\UserInterface\WLMod.cs" />
     <Compile Include="UIMenu\Menu.cs">
       <SubType>Form</SubType>
@@ -176,7 +177,6 @@
     <Compile Include="Interface\Interface.cs" />
     <Compile Include="Unhollower\Core.cs" />
     <Compile Include="Unhollower\FileHandler.cs" />
-    <Compile Include="Modules + Libs\Libs.cs" />
     <Compile Include="Modules + Libs\Managers\ModManager.cs" />
     <Compile Include="Modules + Libs\Managers\PluginManager.cs" />
     <Compile Include="Modules + Libs\UserInterface\UnityMod.cs" />

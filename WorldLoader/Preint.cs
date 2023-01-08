@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 using System.Net;
 using WorldLoader.OtherLibraries;
 using WorldLoader.DataClasses;
+using WorldLoader.ModulesLibs;
 
 public class C {
     public static WorldConfig<Values> L;
@@ -33,7 +34,9 @@ namespace WorldLoader
     {
         private static readonly string[] Folders = {
             InternalInfo.Name,
-            "Mods",
+            PathDataInfo.ModPath,
+            PathDataInfo.LibsPath
+            PathDataInfo.PluginsPath
         };
 
         public const int STD_INPUT_HANDLE = -10;

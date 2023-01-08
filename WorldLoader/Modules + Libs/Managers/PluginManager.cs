@@ -16,87 +16,82 @@ public sealed class PluginManager
 {
 	public List<WLPlugin> LoadedPlugins { get; private set; } = new List<WLPlugin>();
 
-	internal void LoadPlugins(string path = "Plugins\\")
+	internal void LoadPlugins()
 	{
-		if (!Directory.Exists(path)) {
-			Directory.CreateDirectory(path);
-			Logs.Log("Plugins folder does not exist.");
-			{
-				Logs.Log(ConsoleColor.DarkGray, "==================================- Plugins -==================================");
-				Logs.Log();
-				foreach (string text in Directory.GetFiles(path)) {
+		Logs.Log(ConsoleColor.DarkGray, "==================================- Plugins -==================================");
+		Logs.Log();
+		foreach (string text in Directory.GetFiles(PathDataInfo.PluginsPath))
+		{
+			try {
+				if (Path.GetExtension(text) == ".dll") {
+					Assembly assembly = null;
 					try {
-						if (Path.GetExtension(text) == ".dll") {
-							Assembly assembly = null;
-							try {
-								assembly = Assembly.Load(File.ReadAllBytes(text));
-							}
-							catch (Exception ex) {
-								Logs.Error($"Error loading \"{Path.GetFileName(text)}\". Are you sure this is a valid assembly?\n", ex);
-							}
+						assembly = Assembly.Load(File.ReadAllBytes(text));
+					}
+					catch (Exception ex) {
+						Logs.Error($"Error loading \"{Path.GetFileName(text)}\". Are you sure this is a valid assembly?\n", ex);
+					}
 
-							if (assembly == null) {
-								Logs.Log($"[Error] {text} Plugin Assemblys Are Null!");
-								continue;
-							}
+					if (assembly == null) {
+						Logs.Log($"[Error] {text} Plugin Assemblys Are Null!");
+						continue;
+					}
 
-							WLPlugin mod = null;
+					WLPlugin mod = null;
 
-							try {
-								try {
-									mod = assembly.GetTypesSafe().Where(o => o.IsSubclassOf(typeof(WLPlugin))).Select(a => (WLPlugin)Activator.CreateInstance(a)).FirstOrDefault();
-								}
-								catch (ReflectionTypeLoadException ex) {
-									StringBuilder sb = new StringBuilder();
-									foreach (Exception exSub in ex.LoaderExceptions) {
-										sb.AppendLine(exSub.Message);
-										FileNotFoundException exFileNotFound = exSub as FileNotFoundException;
-										if (exFileNotFound != null) {
-											if (!string.IsNullOrEmpty(exFileNotFound.FusionLog)) {
-												sb.AppendLine("Fusion Log:");
-												sb.AppendLine(exFileNotFound.FusionLog);
-											}
-										}
-										sb.AppendLine();
+					try
+					{
+						try {
+							mod = assembly.GetTypesSafe().Where(o => o.IsSubclassOf(typeof(WLPlugin))).Select(a => (WLPlugin)Activator.CreateInstance(a)).FirstOrDefault();
+						}
+						catch (ReflectionTypeLoadException ex) {
+							StringBuilder sb = new StringBuilder();
+							foreach (Exception exSub in ex.LoaderExceptions) {
+								sb.AppendLine(exSub.Message);
+								FileNotFoundException exFileNotFound = exSub as FileNotFoundException;
+								if (exFileNotFound != null) {
+									if (!string.IsNullOrEmpty(exFileNotFound.FusionLog)) {
+										sb.AppendLine("Fusion Log:");
+										sb.AppendLine(exFileNotFound.FusionLog);
 									}
-									Logs.Error(sb.ToString());
 								}
+								sb.AppendLine();
 							}
-							catch (Exception e) {
-								Logs.Error($"[Error] Plugin Was Not Found Inside Of Dll {text}!", e);
-								continue;
-							}
-							PluginAttribute PluginAttributes = null;
-							try {
-								PluginAttributes = mod.GetType().GetCustomAttributes(typeof(PluginAttribute), true).FirstOrDefault<object>() as PluginAttribute;
-							}
-							catch (Exception e)
-							{
-								Logs.Error("Unable To get Main Type of the Mod for Attributes!", e);
-							}
-
-							if (PluginAttributes != null) {
-								WLPlugin Plugin = mod;
-								LoadedPlugins.Add(Plugin);
-								Plugin.Initialize(PluginAttributes, this);
-
-								Logs.Log(Plugin.ModColor, $"======= [{Plugin.Name}] - {Plugin.Version} =======");
-								Logs.Log(Plugin.ModColor, $"   Made By: {Plugin.Author}");
-								if (!string.IsNullOrEmpty(Plugin.Link))
-									Logs.Log(Plugin.ModColor, $"   Link By: {Plugin.Link}");
-								Logs.Log();
-							}
-							else {
-								Logs.Error("Attributes Are Null! - " + text);
-							}
+							Logs.Error(sb.ToString());
 						}
 					}
 					catch (Exception e) {
-						Logs.Error("UnKnown Error Loading Plugin - " + text, e);
+						Logs.Error($"[Error] Plugin Was Not Found Inside Of Dll {text}!", e);
+						continue;
+					}
+					PluginAttribute PluginAttributes = null;
+					try {
+						PluginAttributes = mod.GetType().GetCustomAttributes(typeof(PluginAttribute), true).FirstOrDefault<object>() as PluginAttribute;
+					}
+					catch (Exception e) {
+						Logs.Error("Unable To get Main Type of the Mod for Attributes!", e);
+					}
+
+					if (PluginAttributes != null){
+						WLPlugin Plugin = mod;
+						LoadedPlugins.Add(Plugin);
+						Plugin.Initialize(PluginAttributes, this);
+
+						Logs.Log(Plugin.ModColor, $"======= [{Plugin.Name}] - {Plugin.Version} =======");
+						Logs.Log(Plugin.ModColor, $"   Made By: {Plugin.Author}");
+						if (!string.IsNullOrEmpty(Plugin.Link))
+							Logs.Log(Plugin.ModColor, $"   Link By: {Plugin.Link}");
+						Logs.Log();
+					}
+					else {
+						Logs.Error("Attributes Are Null! - " + text);
 					}
 				}
-				Logs.Log(ConsoleColor.DarkGray, "==================================- Plugins -==================================");
+			}
+			catch (Exception e) {
+				Logs.Error("UnKnown Error Loading Plugin - " + text, e);
 			}
 		}
-	}  
+		Logs.Log(ConsoleColor.DarkGray, "==================================- Plugins -==================================");
+	}
 }

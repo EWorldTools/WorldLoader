@@ -56,11 +56,7 @@ int main()
     ICLRMetaHost* meta_host = NULL;
     ICLRRuntimeInfo* runtime_info = NULL;
     ICLRRuntimeHost* runtime_host = NULL;
-    if (!AllocConsole())
-    {
-        MessageBoxA(NULL, "failed to init console", "failure", MB_OK);
-        return 1;
-    }
+    AllocConsole();
     CLRCreateInstance(CLSID_CLRMetaHost, IID_ICLRMetaHost, ((LPVOID*)&meta_host));
     meta_host->GetRuntime(L"v4.0.30319", IID_ICLRRuntimeInfo, (LPVOID*)&runtime_info);
     runtime_info->GetInterface(CLSID_CLRRuntimeHost, IID_ICLRRuntimeHost, (LPVOID*)&runtime_host);

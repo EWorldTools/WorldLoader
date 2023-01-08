@@ -19,6 +19,14 @@ using WorldLoader.HookUtils;
 namespace WorldLoader.Utils;
 
 public static class Internal_Utils {
+	private static int internal_MLLoaded = -1;
+	public static bool IsLoadedWithML{
+		get	{
+			if (internal_MLLoaded == -1) internal_MLLoaded = Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), "MelonLoader")) ? 1 : 0;
+			return internal_MLLoaded == 1;
+		}
+	}
+
 	[DllImport("kernel32.dll")]
 	private static extern int AllocConsole();
 
