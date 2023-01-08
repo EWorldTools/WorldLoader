@@ -35,7 +35,7 @@ namespace WorldLoader
         private static readonly string[] Folders = {
             InternalInfo.Name,
             PathDataInfo.ModPath,
-            PathDataInfo.LibsPath
+            PathDataInfo.LibsPath,
             PathDataInfo.PluginsPath
         };
 
