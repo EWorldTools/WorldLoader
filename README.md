@@ -20,7 +20,12 @@ WL is just a little project i used for learning about Il2Cpp and System assembly
 
 Head Over to Releases, Down the .Zip file and Extraxt it into Any *IL2CPP UNITY* Game (MONO IS NOT SUPPORTED - Im lazy)
 Use any dll injector to inti the CoreCLR Dll into the UNITY applaction, and it will do the rest from there
-   
+
+## How to use 
+
+As WL Uses CLR, all u have to do is open a Clr inst in the Target Game, then invoke the start Methods
+i've included a DLL project as an example, you can just use that with ur fav injector and call the Dll Attch
+
 ## Known Issues: 
 			
 ## LICENSING & CREDITS:
