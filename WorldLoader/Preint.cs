@@ -17,13 +17,13 @@ public class C {
 
 public class Values
 {
-    public bool Debug { get; set; } = true;
+    public bool Debug { get; set; } = false;
     public bool HollowerPassAllNames { get; set; } = false;
     public bool UnhollowerLogTrace { get; set; } = false;
     public string GameAssemblyPath { get; set; } = "";
     public string GameAssemblyHash { get; set; } = "";
     public long DeObbMapHash { get; set; } = 0;
-    public string DeobfuscationRegex { get; set; } = "";
+    //public string DeobfuscationRegex { get; set; } = "";
     public string UnityVersion { get; set; } = "0.0.0.0";
     public string DumperVersion { get; set; } = "0.0.0.0";
 }

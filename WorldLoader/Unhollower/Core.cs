@@ -122,6 +122,7 @@ namespace WorldLoader.Il2CppUnhollower
                 return 3;
             Logs.Log("Successful!", "Assembly Generation");
             C.L.Config.GameAssemblyHash = CurrentGameAssemblyHash;
+            C.L.Config.DeObbMapHash = new FileInfo("WorldLoader\\LocalRenameMap.json").Length;
             C.L.Save();
 
             return 0;
