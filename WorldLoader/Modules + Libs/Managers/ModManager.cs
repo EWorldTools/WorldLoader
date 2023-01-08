@@ -19,12 +19,12 @@ public sealed class ModManager
 	public static Dictionary<UnityMod, (string, FileInfo)> Mods = new();
 
 	public static UnityMod LoadMod(byte[] modBytes, bool InvokeOnInject = true, bool LogInfo = true) => LoadMod(Assembly.Load(modBytes), InvokeOnInject, LogInfo);
-	public static UnityMod LoadMod(Assembly assembly, bool InvokeOnInject = true, bool LogInfo = true) {
-		FileInfo fileinfo = null;
-		if (assembly.Location != null) {
+	public static UnityMod LoadMod(Assembly assembly, bool InvokeOnInject = true, bool LogInfo = true, FileInfo path = null) {
+		if (!string.IsNullOrWhiteSpace(assembly.Location) && path == null) {
 			Logs.Debug("Loading a Mod From " + assembly.Location);
-			fileinfo = new(assembly.Location);
+			path = new(assembly.Location);
 		}
+		else if (path == null) path = new FileInfo(Directory.GetCurrentDirectory());
 		if (assembly == null) {
 			Logs.Log("[Error] Mods Assemblys Are Null!");
 			return null;
@@ -52,7 +52,7 @@ public sealed class ModManager
 		if ((ModAttributes = type.GetCustomAttributes(typeof(ModAttribute), true).FirstOrDefault<object>() as ModAttribute) != null)
 		{
 			_Mods.Add(vrMod);
-			Mods.Add(vrMod, (fileinfo.FullName, fileinfo));
+			Mods.Add(vrMod, (path.FullName, path));
 			vrMod.Initialize(ModAttributes);
 			WorldLoader.Menu.flatComboBox2.Items.Add(vrMod.Name);
 
@@ -106,7 +106,7 @@ public sealed class ModManager
 			catch (Exception ex) {
 				Logs.Error($"Error loading \"{Path.GetFileName(FilePath)}\". Are you sure this is a valid assembly?\n", ex);
 			}
-			LoadMod(assembly, InvokeOnInject, LogInfo);
+			LoadMod(assembly, InvokeOnInject, LogInfo, new(FilePath));
 		}
 		else Logs.Error("FILE NOT DLL!", new FormatException());
 		return null;
