@@ -19,7 +19,6 @@ public sealed class ModManager
 	public static Dictionary<UnityMod, (string, FileInfo)> Mods = new();
 
 	public static UnityMod LoadMod(byte[] modBytes, bool InvokeOnInject = true, bool LogInfo = true) => LoadMod(Assembly.Load(modBytes), InvokeOnInject, LogInfo);
-
 	public static UnityMod LoadMod(Assembly assembly, bool InvokeOnInject = true, bool LogInfo = true) {
 		FileInfo fileinfo = new(assembly.Location);
 		if (assembly == null) {
@@ -94,7 +93,6 @@ public sealed class ModManager
 		}
 		return null;
 	}
-
 	public static UnityMod LoadMod(string FilePath, bool InvokeOnInject = true, bool LogInfo = true) {
 		if (Path.GetExtension(FilePath) == ".dll") {
 			Assembly assembly = null;

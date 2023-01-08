@@ -22,10 +22,8 @@ namespace WorldLoader
 		public static readonly bool IsAuth = LoggedIn;
 		private static bool LoggedIn = false;
 		internal static bool MonoBhvMade = false;
-		private int count;
+		private static int count;
 
-
-		public static WorldLoader Self { get; set; }
 		public static UnityAppInfo appInfo { get; private set; }
 		internal static AssemblyResolveManager _AssemblyResolveManager { get; set; }
 		internal static LoaderMenu Menu { get; set; }
@@ -41,8 +39,8 @@ namespace WorldLoader
 			Logs.Log(ConsoleColor.DarkCyan, "Logging In And Checking Tags...");
             Logs.Debug(" -=========================== Debug Mode On! ===========================- ", ConsoleColor.Gray);
 			Il2CppUnhollower.Core.OnInitialize();
-            Self.Awake();
-            Internal_Utils.RunInTry(Self.Start);
+            Awake();
+            Internal_Utils.RunInTry(Start);
             LoggedIn = true;
             Logs.Log("Welcome to WL <3", "LoaderInit", ConsoleColor.Green);
             //Update.UpdateRPC("Logged in! <3");
@@ -58,26 +56,18 @@ namespace WorldLoader
 			harmonySupportComponent = new();
 			harmonySupportComponent.Start();
 
-			try
-			{
-				Self = new WorldLoader();
-				Self.Plugins();
-			} catch (Exception e) { 
-				Logs.Error(e);
-			}
-
 			Watermark.Send();
 			appInfo = new();
 		}
 
-		internal void Awake()
+		internal static void Awake()
 		{
 			//Libs.FindLibs();
 			count = ModManager.FindMods().Count;
 			Logs.Log(ConsoleColor.DarkGray, $"          -==================- {count} Mod{((count == 1) ? String.Empty : "s")} loaded. -==================-");
 		}
 
-		internal void Plugins()
+		internal static void Plugins()
 		{
 			PluginManager.LoadPlugins();
 			int count = PluginManager.LoadedPlugins.Count;
@@ -91,7 +81,7 @@ namespace WorldLoader
 				}
 		}
 
-		internal void Start()
+		internal static void Start()
 		{
 			InternalInfo.EngineVersion = new UnityVer();
 			GetReady.Create(new Configuration {
