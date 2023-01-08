@@ -44,3 +44,9 @@ Third-party Libraries used as Source Code and/or bundled in Binary Form:
 
 External Libraries that's downloaded and used During Runtime:
 - [Cpp2IL](https://github.com/SamboyCoding/Cpp2IL) is licensed under the MIT License. See [LICENSE](https://github.com/SamboyCoding/Cpp2IL/blob/master/LICENSE) for the full License.
+
+## Legal Info
+
+WorldLoader is a project for Educational and Debug use ONLY
+
+	its NOT a loader for a certain game, its a universal unity Il2Cpp Game Loader!  
