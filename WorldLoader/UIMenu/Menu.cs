@@ -63,7 +63,7 @@ namespace WorldLoader
                 var filePath = OpenFile.FileName;
                 DialogResult dialogResult = MessageBox.Show("Would You Like to Invoke \"OnInject\"?", "WorldLoader", MessageBoxButtons.YesNo);
                 try {
-                    ModManager.LoadMod(filePath, dialogResult == DialogResult.Yes);
+                    ModManager.LoadMod(File.ReadAllBytes(filePath), dialogResult == DialogResult.Yes);
                 }
                 catch (Exception E) { 
                     Logs.Error("Error Loading Mod", E);

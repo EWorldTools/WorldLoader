@@ -20,7 +20,11 @@ public sealed class ModManager
 
 	public static UnityMod LoadMod(byte[] modBytes, bool InvokeOnInject = true, bool LogInfo = true) => LoadMod(Assembly.Load(modBytes), InvokeOnInject, LogInfo);
 	public static UnityMod LoadMod(Assembly assembly, bool InvokeOnInject = true, bool LogInfo = true) {
-		FileInfo fileinfo = new(assembly.Location);
+		FileInfo fileinfo = null;
+		if (assembly.Location != null) {
+			Logs.Debug("Loading a Mod From " + assembly.Location);
+			fileinfo = new(assembly.Location);
+		}
 		if (assembly == null) {
 			Logs.Log("[Error] Mods Assemblys Are Null!");
 			return null;
