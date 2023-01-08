@@ -25,8 +25,8 @@ public class Discord
         presence.state = $"Using beta <3";
         presence.largeImageKey = "wclogo";
         presence.largeImageText = $"discord.gg/erpers - <3";
-        presence.smallImageKey = "eac";
-        presence.smallImageText = "Imagine EAC <3";
+        presence.smallImageKey = "eac"; // Cat Image
+        presence.smallImageText = "Imagine <3";
         presence.partySize = 0;
         presence.partyMax = 0;
         presence.startTimestamp = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
