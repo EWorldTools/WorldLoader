@@ -22,8 +22,7 @@ Head Over to Releases, Down the .Zip file and Extraxt it into Any *IL2CPP UNITY*
 Use any dll injector to inti the CoreCLR Dll into the UNITY applaction, and it will do the rest from there
    
 ## Known Issues: 
-- This is the Biggest Issue - i messed up Harmony Support, [The Base By BepInEx](https://github.com/BepInEx/Il2CppInterop/tree/master/Il2CppInterop.HarmonySupport) Probly would work, and someone can Pr and Fix it
-
+			
 ## LICENSING & CREDITS:
 
 - Massive Thanks to [@notunixian](https://github.com/notunixian) for some help on debugging and a lot of help on Maps <3
