@@ -27,8 +27,6 @@ namespace WorldLoader
 
 		public static WorldLoader Self { get; set; }
 		public static UnityAppInfo appInfo { get; private set; }
-		public static ModManager _ModManager { get; set; }
-		public static PluginManager _PluginManager { get; set; }
 		internal static AssemblyResolveManager _AssemblyResolveManager { get; set; }
 		internal static LoaderMenu Menu { get; set; }
 		public static HarmonySupportComponent harmonySupportComponent { get; set; }
@@ -75,18 +73,16 @@ namespace WorldLoader
 		internal void Awake()
 		{
 			//Libs.FindLibs();
-			_ModManager = new ModManager();
-			count = _ModManager.FindMods().Count;
+			count = ModManager.FindMods().Count;
 			Logs.Log(ConsoleColor.DarkGray, $"          -==================- {count} Mod{((count == 1) ? String.Empty : "s")} loaded. -==================-");
 		}
 
 		internal void Plugins()
 		{
-			_PluginManager = new PluginManager();
-			_PluginManager.LoadPlugins();
-			int count = _PluginManager.LoadedPlugins.Count;
+			PluginManager.LoadPlugins();
+			int count = PluginManager.LoadedPlugins.Count;
 			Logs.Log(ConsoleColor.DarkGray, $"          -==================- {count} Plugin{((count == 1) ? "" : "s")} loaded. -==================-");
-			foreach (var plugin in _PluginManager.LoadedPlugins)
+			foreach (var plugin in PluginManager.LoadedPlugins)
 				try {
 					plugin.OnLoad();
 				}
@@ -114,7 +110,7 @@ namespace WorldLoader
 
 			Update.UpdateRPC(null, $"Loading {count} Mods...");
 			Internal_Utils.SetUpMainMono();
-			foreach (UnityMod vrMod in _ModManager.Mods.Keys) {
+			foreach (UnityMod vrMod in ModManager.Mods.Keys) {
 				try {
 					"[OnInject] -".WriteToConsole(ConsoleColor.Green).WriteLineToConsole(vrMod.Name, ConsoleColor.Magenta);
 					vrMod.OnInject();

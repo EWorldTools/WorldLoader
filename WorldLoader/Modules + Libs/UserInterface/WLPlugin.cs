@@ -16,14 +16,11 @@ namespace WorldLoader.Plugins
 			this.type = type;
 		}
 
-		public PluginManager PluginManager { get; private set; }
-
-		internal void Initialize(PluginAttribute PluginInfo, PluginManager PluginMger)
+		internal void Initialize(PluginAttribute PluginInfo)
 		{
 			this.Name = PluginInfo.Name;
 			this.Version = PluginInfo.Version.ToString(); // TODO: THIS
 			this.Author = PluginInfo.Author;
-			this.PluginManager = PluginMger;
 		}
 	
 		/// <summary>

@@ -7,13 +7,14 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using WorldLoader;
 using WorldLoader.HookUtils;
+using WorldLoader.ModulesLibs.Managers;
 
 namespace Runtime.Il2cpp
 {
     public class SceneHook // ML
     {
         private static void OnSceneUnload(Scene scene) { if (scene == null) return; 
-            foreach (var c in WorldLoader.WorldLoader._ModManager.Mods.Keys)
+            foreach (var c in ModManager.Mods.Keys)
                 try {
                     c.OnSceneWasUnloaded(scene.buildIndex, scene.name);
                 } catch (Exception e) {
@@ -22,7 +23,7 @@ namespace Runtime.Il2cpp
         }
 
         private static void OnSceneLoad(Scene scene, LoadSceneMode mode) { if (scene == null) return; 
-            foreach (var c in WorldLoader.WorldLoader._ModManager.Mods.Keys)
+            foreach (var c in ModManager.Mods.Keys)
                 try {
                     c.OnSceneWasLoaded(scene.buildIndex, scene.name);
                 } catch (Exception e) {

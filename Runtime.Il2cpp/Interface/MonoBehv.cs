@@ -9,6 +9,7 @@ using UnityEngine;
 using WorldLoader.HookUtils;
 using WorldLoader.Mods;
 using WorldLoader.Utils;
+using WorldLoader.ModulesLibs.Managers;
 
 namespace WorldLoader
 {
@@ -27,7 +28,7 @@ namespace WorldLoader
 
         void Update()
         {
-            foreach (UnityMod vrMod in WorldLoader._ModManager.Mods.Keys) ModUtils.RunInTry(vrMod.OnUpdate, $"Error During Update on {vrMod.Name}\n");
+            foreach (UnityMod vrMod in ModManager.Mods.Keys) ModUtils.RunInTry(vrMod.OnUpdate, $"Error During Update on {vrMod.Name}\n");
             foreach (var Emn in CoroutinesHandler.BackLog) {
                 var Wrapper = new MonoEnumeratorWrapper(Emn);
                 StartCoroutine(new Il2CppSystem.Collections.IEnumerator(Wrapper.Pointer));
@@ -37,7 +38,7 @@ namespace WorldLoader
 
         void OnGUI()
         {
-            foreach (UnityMod vrMod in WorldLoader._ModManager.Mods.Keys) ModUtils.RunInTry(vrMod.OnGui, $"Error During OnGUI on {vrMod.Name}\n");
+            foreach (UnityMod vrMod in ModManager.Mods.Keys) ModUtils.RunInTry(vrMod.OnGui, $"Error During OnGUI on {vrMod.Name}\n");
         }
     }
 }

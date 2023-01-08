@@ -23,8 +23,6 @@ namespace WorldLoader.Mods
 		internal UnityMod(Type type) {
 			this.type = type;
 		}
-
-		public ModManager ModManager { get; private set; }
 		public UnityMod Mod { get; private set; }
 		public bool AllowUnloading { get; set; } = true;
 
@@ -40,12 +38,11 @@ namespace WorldLoader.Mods
 		}
 
 
-		internal void Initialize(ModAttribute ModInfo, ModManager ModMger)
+		internal void Initialize(ModAttribute ModInfo)
 		{
 			Name = ModInfo.Name;
 			Version = ModInfo.Version;
 			Author = ModInfo.Author;
-			ModManager = ModMger;
 			Mod = this;
 			harmonyInstance = new(Name + Version.Random("-"));
 		}

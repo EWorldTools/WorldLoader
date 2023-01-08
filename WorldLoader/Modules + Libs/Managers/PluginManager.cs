@@ -14,9 +14,9 @@ namespace WorldLoader.ModulesLibs.Managers;
 
 public sealed class PluginManager
 {
-	public List<WLPlugin> LoadedPlugins { get; private set; } = new List<WLPlugin>();
+	public static List<WLPlugin> LoadedPlugins { get; private set; } = new List<WLPlugin>();
 
-	internal void LoadPlugins()
+	internal static void LoadPlugins()
 	{
 		Logs.Log(ConsoleColor.DarkGray, "==================================- Plugins -==================================");
 		Logs.Log();
@@ -75,7 +75,7 @@ public sealed class PluginManager
 					if (PluginAttributes != null){
 						WLPlugin Plugin = mod;
 						LoadedPlugins.Add(Plugin);
-						Plugin.Initialize(PluginAttributes, this);
+						Plugin.Initialize(PluginAttributes);
 
 						Logs.Log(Plugin.ModColor, $"======= [{Plugin.Name}] - {Plugin.Version} =======");
 						Logs.Log(Plugin.ModColor, $"   Made By: {Plugin.Author}");

@@ -14,6 +14,7 @@ using System.Reflection;
 using System.Diagnostics;
 using WorldLoader.Il2CppGen.Generator;
 using WorldLoader.Il2CppGen.Generator.Runners;
+using WorldLoader.ModulesLibs.Managers;
 
 namespace WorldLoader
 {
@@ -62,7 +63,7 @@ namespace WorldLoader
                 var filePath = OpenFile.FileName;
                 DialogResult dialogResult = MessageBox.Show("Would You Like to Invoke \"OnInject\"?", "WorldLoader", MessageBoxButtons.YesNo);
                 try {
-                    WorldLoader._ModManager.LoadMod(filePath, dialogResult == DialogResult.Yes);
+                    ModManager.LoadMod(filePath, dialogResult == DialogResult.Yes);
                 }
                 catch (Exception E) { 
                     Logs.Error("Error Loading Mod", E);
@@ -75,7 +76,7 @@ namespace WorldLoader
             if (flatComboBox2.SelectedItem == null) return;
             var name = flatComboBox2.SelectedItem.ToString();
             if (name == null) return;
-            WorldLoader._ModManager.UnloadMod(name);
+            ModManager.UnloadMod(name);
             flatComboBox2.Items.Remove(flatComboBox2.SelectedItem);
         }
 
