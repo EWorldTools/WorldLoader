@@ -22,8 +22,7 @@ Head Over to Releases, Down the .Zip file and Extraxt it into Any *IL2CPP UNITY*
 Use any dll injector to inti the CoreCLR Dll into the UNITY applaction, and it will do the rest from there
    
 ## Known Issues: 
-- This is the Biggest Issue - i messed up Harmony Support, [The Base By BepInEx](https://github.com/BepInEx/Il2CppInterop/tree/master/Il2CppInterop.HarmonySupport) Probly would work, and someone can Pr and Fix it
-
+			
 ## LICENSING & CREDITS:
 
 - Massive Thanks to [@notunixian](https://github.com/notunixian) for some help on debugging and a lot of help on Maps <3
@@ -44,3 +43,9 @@ Third-party Libraries used as Source Code and/or bundled in Binary Form:
 
 External Libraries that's downloaded and used During Runtime:
 - [Cpp2IL](https://github.com/SamboyCoding/Cpp2IL) is licensed under the MIT License. See [LICENSE](https://github.com/SamboyCoding/Cpp2IL/blob/master/LICENSE) for the full License.
+
+## Legal Info
+
+WorldLoader is a project for Educational and Debug use ONLY
+
+	its NOT a loader for a certain game, its a universal unity Il2Cpp Game Loader!  
