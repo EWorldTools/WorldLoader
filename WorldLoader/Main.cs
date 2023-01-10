@@ -9,6 +9,7 @@ using WorldLoader.DataClasses;
 using WorldLoader.ModulesLibs.Managers;
 using System.Threading.Tasks;
 using Runtime.Il2cpp;
+using Il2CppInterop.HarmonySupport;
 
 namespace WorldLoader
 {
@@ -19,11 +20,11 @@ namespace WorldLoader
 		internal static bool MonoBhvMade = false;
 		private static int count;
 
-		//public static UnityAppInfo appInfo { get; private set; }
-		internal static AssemblyResolveManager _AssemblyResolveManager { get; set; }
+        //public static UnityAppInfo appInfo { get; private set; }
+        internal static AssemblyResolveManager _AssemblyResolveManager { get; set; }
 		internal static LoaderMenu Menu { get; set; }
-		//public static HarmonySupportComponent harmonySupportComponent { get; set; }
-		internal static HarmonyLib.Harmony HarmonyInstance { get; set; }
+        public static HarmonySupportComponent harmonySupportComponent { get; set; }
+        internal static HarmonyLib.Harmony HarmonyInstance { get; set; }
 
 		protected internal static void Login() {
             Internal_Utils.RunInTry(Load, null, true);
@@ -48,8 +49,8 @@ namespace WorldLoader
 				(sender, args) => Logs.Error(args.Exception.ToString());
 
 			HarmonyInstance = new HarmonyLib.Harmony("WorldLoader");
-            //harmonySupportComponent = new();
-            //harmonySupportComponent.Start();
+            harmonySupportComponent = new();
+            harmonySupportComponent.Start();
 
             Watermark.Send();
             //appInfo = new();

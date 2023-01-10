@@ -89,6 +89,8 @@
     <Compile Include="Extensions\TypeReferenceEx.cs" />
     <Compile Include="Extensions\WriterEx.cs" />
     <Compile Include="GeneratorOptions.cs" />
+    <Compile Include="Harmony\HarmonyBackendComponent.cs" />
+    <Compile Include="Harmony\HarmonySupport.cs" />
     <Compile Include="Host\BaseHost.cs" />
     <Compile Include="Host\IHostComponent.cs" />
     <Compile Include="Il2CppInteropGenerator.cs" />
