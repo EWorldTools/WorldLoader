@@ -7,8 +7,8 @@
     <ProjectGuid>{675AF739-A353-4060-BB74-8AC8E47C57C6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Il2CppGen.Runtime</RootNamespace>
-    <AssemblyName>Il2CppGen.Runtime</AssemblyName>
+    <RootNamespace>Il2CppInterop.Runtime</RootNamespace>
+    <AssemblyName>Il2CppInterop.Runtime</AssemblyName>
     <LangVersion>10</LangVersion>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -34,9 +34,12 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="IL2CppGen">
+      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\IL2CppGen.dll</HintPath>
+    </Reference>
     <Reference Include="Il2Cppmscorlib, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Libs\Il2Cppmscorlib.dll</HintPath>
+      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\WorldLoader\UnhollowedAsm\Il2Cppmscorlib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

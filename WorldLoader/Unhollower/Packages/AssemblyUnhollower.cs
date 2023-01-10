@@ -1,6 +1,6 @@
-﻿using WorldLoader.Il2CppGen.Generator;
-using WorldLoader.Il2CppGen.Generator.Runners;
-using WorldLoader.Il2CppGen.Json;
+﻿using Il2CppInterop.Generator;
+using Il2CppInterop.Generator.Runners;
+using Il2CppInterop.Json;
 using Mono.Cecil;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -53,7 +53,7 @@ namespace WorldLoader.Il2CppUnhollower.Packages
             opts.AdditionalAssembliesBlacklist.Add("Valve.Newtonsoft");
             opts.AdditionalAssembliesBlacklist.Add("Newtonsoft.Json");
             
-            Il2CppGenGenerator.Create(opts)
+            Il2CppInteropGenerator.Create(opts)
                                   .AddAssemblyGenerator()
                                   .Run();
             return true; 

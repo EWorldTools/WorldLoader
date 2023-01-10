@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Il2CppGen.Runtime.Attributes;
+namespace Il2CppInterop.Runtime.Attributes;
 
 [AttributeUsage(AttributeTargets.Class)]
 public class ClassInjectionAssemblyTargetAttribute : Attribute

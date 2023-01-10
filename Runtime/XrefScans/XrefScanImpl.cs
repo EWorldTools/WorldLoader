@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Linq;
 using System.Runtime.InteropServices;
-using Il2CppGen.Runtime.InteropTypes.Arrays;
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using Il2CppSystem.Reflection;
-using WorldLoader.Il2CppGen.Internal.XrefScans;
+using Il2CppInterop.Internal.XrefScans;
 using BindingFlags = System.Reflection.BindingFlags;
-namespace Il2CppGen.Runtime.XrefScans;
+
+namespace Il2CppInterop.Runtime.XrefScans;
 
 internal class XrefScanImpl : IXrefScannerImpl
 {

@@ -5,15 +5,15 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.InteropServices;
 using System.Text;
-using Il2CppGen.Runtime.Injection;
-using Il2CppGen.Runtime.InteropTypes;
-using Il2CppGen.Runtime.Runtime;
+using Il2CppInterop.Runtime.Injection;
+using Il2CppInterop.Runtime.InteropTypes;
+using Il2CppInterop.Runtime.Runtime;
 using WorldLoader.HookUtils;
-using WorldLoader.Il2CppGen.Internal;
+using Il2CppInterop.Internal;
 using Object = Il2CppSystem.Object;
 using ValueType = Il2CppSystem.ValueType;
 
-namespace Il2CppGen.Runtime;
+namespace Il2CppInterop.Runtime;
 
 public static class DelegateSupport
 {

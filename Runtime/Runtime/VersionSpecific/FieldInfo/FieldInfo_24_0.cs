@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Il2CppGen.Runtime.Runtime.VersionSpecific.FieldInfo;
+namespace Il2CppInterop.Runtime.Runtime.VersionSpecific.FieldInfo;
 
 [ApplicableToUnityVersionsSince("2018.3.0")]
 public unsafe class NativeFieldInfoStructHandler_24_0 : INativeFieldInfoStructHandler

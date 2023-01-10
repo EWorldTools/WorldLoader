@@ -1,7 +1,7 @@
-﻿using Il2CppGen.Runtime;
-using Il2CppGen.Runtime.Injection;
-using Il2CppGen.Runtime.Runtime;
-using Il2CppGen.Runtime.Runtime.VersionSpecific.Class;
+﻿using Il2CppInterop.Runtime;
+using Il2CppInterop.Runtime.Injection;
+using Il2CppInterop.Runtime.Runtime;
+using Il2CppInterop.Runtime.Runtime.VersionSpecific.Class;
 using Mono.Cecil;
 using System;
 using System.Collections.Generic;

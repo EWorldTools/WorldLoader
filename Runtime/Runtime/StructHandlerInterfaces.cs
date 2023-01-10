@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Il2CppGen.Runtime.Runtime;
+namespace Il2CppInterop.Runtime.Runtime;
 
 public interface INativeStructHandler
 {

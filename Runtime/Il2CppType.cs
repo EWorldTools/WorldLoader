@@ -2,7 +2,7 @@ using Il2CppSystem;
 using ArgumentException = System.ArgumentException;
 using IntPtr = System.IntPtr;
 
-namespace Il2CppGen.Runtime;
+namespace Il2CppInterop.Runtime;
 
 public static class Il2CppType
 {

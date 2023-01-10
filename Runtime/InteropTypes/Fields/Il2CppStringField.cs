@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Il2CppGen.Runtime.InteropTypes.Fields;
+namespace Il2CppInterop.Runtime.InteropTypes.Fields;
 
 public unsafe class Il2CppStringField
 {

@@ -1,11 +1,11 @@
 using System;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using Il2CppGen.Runtime.Attributes;
+using Il2CppInterop.Runtime.Attributes;
 using String = Il2CppSystem.String;
 using Void = Il2CppSystem.Void;
 
-namespace Il2CppGen.Runtime;
+namespace Il2CppInterop.Runtime;
 
 public static class Il2CppClassPointerStore
 {

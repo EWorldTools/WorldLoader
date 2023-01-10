@@ -7,19 +7,19 @@ using System.Reflection.Emit;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Text;
-using WorldLoader.Il2CppGen.Internal;
-using Il2CppGen.Runtime.Attributes;
-using Il2CppGen.Runtime.InteropTypes;
-using Il2CppGen.Runtime.InteropTypes.Arrays;
-using Il2CppGen.Runtime.InteropTypes.Fields;
-using Il2CppGen.Runtime.Runtime;
-using Il2CppGen.Runtime.Runtime.VersionSpecific.Class;
-using Il2CppGen.Runtime.Runtime.VersionSpecific.MethodInfo;
+using Il2CppInterop.Internal;
+using Il2CppInterop.Runtime.Attributes;
+using Il2CppInterop.Runtime.InteropTypes;
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
+using Il2CppInterop.Runtime.InteropTypes.Fields;
+using Il2CppInterop.Runtime.Runtime;
+using Il2CppInterop.Runtime.Runtime.VersionSpecific.Class;
+using Il2CppInterop.Runtime.Runtime.VersionSpecific.MethodInfo;
 using ValueType = Il2CppSystem.ValueType;
 using Void = Il2CppSystem.Void;
 using WorldLoader.HookUtils;
 
-namespace Il2CppGen.Runtime.Injection;
+namespace Il2CppInterop.Runtime.Injection;
 
 public unsafe class Il2CppInterfaceCollection : List<INativeClassStruct>
 {
@@ -1071,7 +1071,7 @@ public static unsafe partial class ClassInjector
         return RewriteType(type);
     }
 
-    //internal static Il2CppMethodInfo* hkGenericMethodGetMethod(Il2CppGenericMethod* gmethod, bool copyMethodPtr)
+    //internal static Il2CppMethodInfo* hkGenericMethodGetMethod(Il2CppInteropericMethod* gmethod, bool copyMethodPtr)
     //{
     //    if (InflatedMethodFromContextDictionary.TryGetValue((IntPtr)gmethod->methodDefinition, out var methods))
     //    {

@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Il2CppGen.Runtime.Runtime;
+namespace Il2CppInterop.Runtime.Runtime;
 
 public static class NativeStructUtils
 {

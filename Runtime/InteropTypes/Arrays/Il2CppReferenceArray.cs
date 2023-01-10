@@ -1,8 +1,8 @@
 using System;
 using System.Reflection;
-using Il2CppGen.Runtime.Runtime;
+using Il2CppInterop.Runtime.Runtime;
 
-namespace Il2CppGen.Runtime.InteropTypes.Arrays;
+namespace Il2CppInterop.Runtime.InteropTypes.Arrays;
 
 public class Il2CppReferenceArray<T> : Il2CppArrayBase<T> where T : Il2CppObjectBase
 {

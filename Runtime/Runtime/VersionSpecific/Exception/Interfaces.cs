@@ -1,4 +1,4 @@
-﻿namespace Il2CppGen.Runtime.Runtime.VersionSpecific.Exception;
+﻿namespace Il2CppInterop.Runtime.Runtime.VersionSpecific.Exception;
 
 public interface INativeExceptionStructHandler : INativeStructHandler
 {

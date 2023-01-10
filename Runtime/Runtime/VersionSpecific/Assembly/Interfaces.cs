@@ -1,6 +1,6 @@
-﻿using Il2CppGen.Runtime.Runtime.VersionSpecific.AssemblyName;
+﻿using Il2CppInterop.Runtime.Runtime.VersionSpecific.AssemblyName;
 
-namespace Il2CppGen.Runtime.Runtime.VersionSpecific.Assembly;
+namespace Il2CppInterop.Runtime.Runtime.VersionSpecific.Assembly;
 
 public interface INativeAssemblyStructHandler : INativeStructHandler
 {

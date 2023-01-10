@@ -3,9 +3,9 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
-using Il2CppGen.Runtime.Runtime;
+using Il2CppInterop.Runtime.Runtime;
 
-namespace Il2CppGen.Runtime.InteropTypes;
+namespace Il2CppInterop.Runtime.InteropTypes;
 
 public class Il2CppObjectBase
 {

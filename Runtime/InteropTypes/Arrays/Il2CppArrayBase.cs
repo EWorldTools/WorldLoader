@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Il2CppGen.Runtime.InteropTypes.Arrays;
+namespace Il2CppInterop.Runtime.InteropTypes.Arrays;
 
 public abstract class Il2CppArrayBase<T> : Il2CppObjectBase, IList<T>
 {

@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Il2CppGen.Runtime.Runtime.VersionSpecific.AssemblyName;
+namespace Il2CppInterop.Runtime.Runtime.VersionSpecific.AssemblyName;
 
 [ApplicableToUnityVersionsSince("2018.1.0")]
 public unsafe class NativeAssemblyNameStructHandler_24_0 : INativeAssemblyNameStructHandler

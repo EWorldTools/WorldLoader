@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
-using Il2CppGen.Runtime.InteropTypes;
+using Il2CppInterop.Runtime.InteropTypes;
 
-namespace Il2CppGen.Runtime.Injection;
+namespace Il2CppInterop.Runtime.Injection;
 
 public static class TrampolineHelpers
 {

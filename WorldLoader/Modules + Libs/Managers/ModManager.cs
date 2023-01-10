@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text;
 using WorldLoader.Attributes;
 using WorldLoader.HookUtils;
-using WorldLoader.Il2CppGen.Internal.Extensions;
+using Il2CppInterop.Internal.Extensions;
 using WorldLoader.Mods;
 
 namespace WorldLoader.ModulesLibs.Managers;

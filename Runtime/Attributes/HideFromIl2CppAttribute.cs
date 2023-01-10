@@ -1,6 +1,6 @@
 using System;
 
-namespace Il2CppGen.Runtime.Attributes;
+namespace Il2CppInterop.Runtime.Attributes;
 
 /// <summary>
 ///     This attribute indicates that the target should not be exposed to IL2CPP in injected classes

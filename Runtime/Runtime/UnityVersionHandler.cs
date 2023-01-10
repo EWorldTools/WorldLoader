@@ -2,21 +2,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using WorldLoader.Il2CppGen.Internal;
-using Il2CppGen.Runtime.Runtime.VersionSpecific.Assembly;
-using Il2CppGen.Runtime.Runtime.VersionSpecific.AssemblyName;
-using Il2CppGen.Runtime.Runtime.VersionSpecific.Class;
-using Il2CppGen.Runtime.Runtime.VersionSpecific.EventInfo;
-using Il2CppGen.Runtime.Runtime.VersionSpecific.Exception;
-using Il2CppGen.Runtime.Runtime.VersionSpecific.FieldInfo;
-using Il2CppGen.Runtime.Runtime.VersionSpecific.Image;
-using Il2CppGen.Runtime.Runtime.VersionSpecific.MethodInfo;
-using Il2CppGen.Runtime.Runtime.VersionSpecific.ParameterInfo;
-using Il2CppGen.Runtime.Runtime.VersionSpecific.PropertyInfo;
-using Il2CppGen.Runtime.Runtime.VersionSpecific.Type;
-using WorldLoader.Il2CppGen.Internal.Extensions;
+using Il2CppInterop.Internal;
+using Il2CppInterop.Runtime.Runtime.VersionSpecific.Assembly;
+using Il2CppInterop.Runtime.Runtime.VersionSpecific.AssemblyName;
+using Il2CppInterop.Runtime.Runtime.VersionSpecific.Class;
+using Il2CppInterop.Runtime.Runtime.VersionSpecific.EventInfo;
+using Il2CppInterop.Runtime.Runtime.VersionSpecific.Exception;
+using Il2CppInterop.Runtime.Runtime.VersionSpecific.FieldInfo;
+using Il2CppInterop.Runtime.Runtime.VersionSpecific.Image;
+using Il2CppInterop.Runtime.Runtime.VersionSpecific.MethodInfo;
+using Il2CppInterop.Runtime.Runtime.VersionSpecific.ParameterInfo;
+using Il2CppInterop.Runtime.Runtime.VersionSpecific.PropertyInfo;
+using Il2CppInterop.Runtime.Runtime.VersionSpecific.Type;
+using Il2CppInterop.Internal.Extensions;
 
-namespace Il2CppGen.Runtime.Runtime;
+namespace Il2CppInterop.Runtime.Runtime;
 
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
 internal class ApplicableToUnityVersionsSinceAttribute : Attribute

@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 using System.Linq;
-using WorldLoader.Il2CppGen.Internal.XrefScans;
+using Il2CppInterop.Internal.XrefScans;
 
-namespace Il2CppGen.Runtime;
+namespace Il2CppInterop.Runtime;
 
 internal class MemoryUtils
 {

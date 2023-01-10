@@ -1,11 +1,11 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
-using WorldLoader.Il2CppGen.Internal.XrefScans;
+using Il2CppInterop.Internal.XrefScans;
 using Il2CppSystem;
 using IntPtr = System.IntPtr;
 using InvalidOperationException = System.InvalidOperationException;
 
-namespace Il2CppGen.Runtime.XrefScans;
+namespace Il2CppInterop.Runtime.XrefScans;
 
 public static class XrefInstanceExtensions
 {

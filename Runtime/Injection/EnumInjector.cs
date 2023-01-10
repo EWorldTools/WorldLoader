@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using WorldLoader.Il2CppGen.Internal;
-using Il2CppGen.Runtime.Runtime;
+using Il2CppInterop.Internal;
+using Il2CppInterop.Runtime.Runtime;
 using Il2CppSystem;
 using ArgumentException = System.ArgumentException;
 using Convert = System.Convert;
@@ -11,7 +11,7 @@ using Enum = System.Enum;
 using IntPtr = System.IntPtr;
 using Type = System.Type;
 
-namespace Il2CppGen.Runtime.Injection;
+namespace Il2CppInterop.Runtime.Injection;
 
 public static unsafe class EnumInjector
 {

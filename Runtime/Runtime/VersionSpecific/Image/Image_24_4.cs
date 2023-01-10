@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Il2CppGen.Runtime.Runtime.VersionSpecific.Image;
+namespace Il2CppInterop.Runtime.Runtime.VersionSpecific.Image;
 
 [ApplicableToUnityVersionsSince("2019.1.0")]
 public unsafe class NativeImageStructHandler_24_4 : INativeImageStructHandler

@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace Il2CppGen.Runtime;
+namespace Il2CppInterop.Runtime;
 
 public class Il2CppException : Exception
 {

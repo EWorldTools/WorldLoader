@@ -9,36 +9,36 @@ namespace WorldLoader;
 
 internal class Watermark
 {
+    private static string[] Heart =
+{
+"_░▒███████",
+"░██▓▒░░▒▓██",
+"██▓▒░__░▒▓██___██████",
+"██▓▒░____░▓███▓__░▒▓██",
+"██▓▒░___░▓██▓_____░▒▓██",
+"██▓▒░_______________░▒▓██",
+" ██▓▒░______________░▒▓██",
+"  ██▓▒░____________░▒▓██",
+"   ██▓▒░__________░▒▓██",
+"    ██▓▒░________░▒▓██",
+"     ██▓▒░_____░▒▓██",
+"      ██▓▒░__░▒▓██",
+"       █▓▒░░▒▓██",
+"         ░▒▓██",
+"       ░▒▓██",
+"      ░▒▓██"
+        };
+
     internal static void Send()
     {
-        Console.Write("                                   -======-  ");
-        Console.Write("   WorldClient");
+        Console.Write("                    -======-  ");
+        Console.Write("   WorldLoader");
         Console.Write("    -======-  ");
         Console.Write("    \n");
 
-        Logs.Log(ConsoleColor.DarkMagenta, "             |                          .                      |");
-        Logs.Log(ConsoleColor.DarkMagenta, "             |     *   .                  .               .    |");
-        Logs.Log(ConsoleColor.DarkMagenta, "             |  .         .  .           .      .        .     |");
-        Logs.Log(ConsoleColor.DarkMagenta, "             |        o              .                   .     |");
-        Logs.Log(ConsoleColor.DarkMagenta, "             |         .              .                  .     |");
-        Logs.Log(ConsoleColor.DarkMagenta, "             |          0     .                                |");
-        Logs.Log(ConsoleColor.DarkMagenta, "             |                 .         .             ,      ,|");
-        Logs.Log(ConsoleColor.DarkMagenta, "             | .           .        .                         .|");
-        Logs.Log(ConsoleColor.DarkMagenta, "             |      .          ,                               |");
-        Logs.Log(ConsoleColor.DarkMagenta, "             |   .        .  ,      .                 .        |");
-        Logs.Log(ConsoleColor.DarkMagenta, "             |     .                           ,               |");
-        Logs.Log(ConsoleColor.DarkMagenta, "             |                           .                     |");
-        Logs.Log(ConsoleColor.DarkMagenta, "             |                .                        .       |");
-        Logs.Log(ConsoleColor.DarkMagenta, "             |   .         *      .        .   .       ,       |");
-        Logs.Log(ConsoleColor.DarkMagenta, "             |        .     *                         .        |");
-        Logs.Log(ConsoleColor.DarkMagenta, "             |      .                    .                     |");
-        Logs.Log(ConsoleColor.DarkMagenta, "             |          .             .                    .   |");
-        Logs.Log(ConsoleColor.DarkMagenta, "             |                      \\          .               |");
-        Logs.Log(ConsoleColor.DarkMagenta, "             |____^/\\___^--____/\\___________________/\\/\\--/    |");
-        Logs.Log(ConsoleColor.DarkMagenta, "             |   /\\^   ^  ^    ^                     ^^ ^  '\\ ^|");
-        Logs.Log(ConsoleColor.DarkMagenta, "             |         --            -             --  -      -|");
-        Logs.Log(ConsoleColor.DarkMagenta, "             |    --  __                          ___--  ^  ^  |");
-        Console.Write("                                     Made By ");
+        foreach (var line in Heart)
+            Logs.Log(ConsoleColor.Magenta, "         " + line);
+        Console.Write("                 Made By ");
         Console.ForegroundColor = ConsoleColor.DarkRed;
         Console.Write("_1254                   \n");
         Console.ResetColor();

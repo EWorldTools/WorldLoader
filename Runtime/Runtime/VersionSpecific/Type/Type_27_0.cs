@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Il2CppGen.Runtime.Runtime.VersionSpecific.Type;
+namespace Il2CppInterop.Runtime.Runtime.VersionSpecific.Type;
 
 [ApplicableToUnityVersionsSince("2021.1.0")]
 public unsafe class NativeTypeStructHandler_27_0 : INativeTypeStructHandler

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Il2CppGen.Runtime.Attributes;
+namespace Il2CppInterop.Runtime.Attributes;
 
 [AttributeUsage(AttributeTargets.Class)]
 public class Il2CppImplementsAttribute : Attribute

@@ -1,7 +1,7 @@
 ﻿using System;
-using Il2CppGen.Runtime.Runtime;
+using Il2CppInterop.Runtime.Runtime;
 
-namespace Il2CppGen.Runtime.InteropTypes.Fields;
+namespace Il2CppInterop.Runtime.InteropTypes.Fields;
 
 public unsafe class Il2CppReferenceField<TRefObj> where TRefObj : Il2CppObjectBase
 {

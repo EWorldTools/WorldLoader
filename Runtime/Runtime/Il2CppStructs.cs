@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 // ReSharper disable InconsistentNaming
 // ReSharper disable UnusedMember.Global
 
-namespace Il2CppGen.Runtime.Runtime;
+namespace Il2CppInterop.Runtime.Runtime;
 
 //Stub structs
 public struct Il2CppAssembly
@@ -256,27 +256,27 @@ public struct Il2CppImageGlobalMetadata
 }
 
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct Il2CppGenericInst
+public unsafe struct Il2CppInteropericInst
 {
     public uint type_argc;
     public Il2CppTypeStruct** type_argv;
 }
 
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct Il2CppGenericContext
+public unsafe struct Il2CppInteropericContext
 {
     /* The instantiation corresponding to the class generic parameters */
-    public Il2CppGenericInst* class_inst;
+    public Il2CppInteropericInst* class_inst;
 
     /* The instantiation corresponding to the method generic parameters */
-    public Il2CppGenericInst* method_inst;
+    public Il2CppInteropericInst* method_inst;
 }
 
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct Il2CppGenericMethod
+public unsafe struct Il2CppInteropericMethod
 {
     public Il2CppMethodInfo* methodDefinition;
-    public Il2CppGenericContext context;
+    public Il2CppInteropericContext context;
 }
 
 public unsafe struct Il2CppReflectionMethod

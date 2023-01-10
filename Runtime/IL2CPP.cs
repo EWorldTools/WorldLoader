@@ -8,15 +8,16 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
-using WorldLoader.Il2CppGen.Internal;
+using Il2CppInterop.Internal;
 using WorldLoader.Attributes;
-using Il2CppGen.Runtime.InteropTypes;
-using Il2CppGen.Runtime.InteropTypes.Arrays;
-using Il2CppGen.Runtime.Runtime;
+using Il2CppInterop.Runtime.InteropTypes;
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
+using Il2CppInterop.Runtime.Runtime;
 using InternalCore.Objects;
 using WorldLoader.HookUtils;
+using Attributes;
 
-namespace Il2CppGen.Runtime;
+namespace Il2CppInterop.Runtime;
 
 public static unsafe class IL2CPP
 {

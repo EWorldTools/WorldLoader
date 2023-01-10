@@ -1,4 +1,4 @@
-﻿using Il2CppGen.Runtime;
+﻿using Il2CppInterop.Runtime;
 using System;
 using UnityEngine;
 

@@ -1,6 +1,6 @@
 using System;
 
-namespace Il2CppGen.Runtime.Runtime.VersionSpecific.ParameterInfo;
+namespace Il2CppInterop.Runtime.Runtime.VersionSpecific.ParameterInfo;
 
 public interface INativeParameterInfoStructHandler : INativeStructHandler
 {

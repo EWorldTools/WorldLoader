@@ -12,8 +12,8 @@ using WorldLoader.Il2CppUnhollower.Packages;
 using WorldLoader.HookUtils;
 using System.Reflection;
 using System.Diagnostics;
-using WorldLoader.Il2CppGen.Generator;
-using WorldLoader.Il2CppGen.Generator.Runners;
+using Il2CppInterop.Generator;
+using Il2CppInterop.Generator.Runners;
 using WorldLoader.ModulesLibs.Managers;
 
 namespace WorldLoader
@@ -142,7 +142,7 @@ namespace WorldLoader
                 OutputDir = output,
             };
 
-            Il2CppGenGenerator.Create(opts)
+            Il2CppInteropGenerator.Create(opts)
                                   .AddDeobfuscationMapGenerator()
                                   .Run();
         }

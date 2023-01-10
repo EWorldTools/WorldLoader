@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Il2CppGen.Runtime.Runtime.VersionSpecific.EventInfo;
+namespace Il2CppInterop.Runtime.Runtime.VersionSpecific.EventInfo;
 
 public interface INativeEventInfoStructHandler : INativeStructHandler
 {

@@ -44,7 +44,7 @@ namespace WorldLoader.Mods
 			Version = ModInfo.Version;
 			Author = ModInfo.Author;
 			Mod = this;
-			harmonyInstance = new(Name + Version.Random("-"));
+			harmonyInstance = new(Name + new Guid()); // Yeah Unix, im pretty stupud ~w~
 		}
 
 		/// <summary>

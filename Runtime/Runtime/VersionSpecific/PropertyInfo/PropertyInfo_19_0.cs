@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Il2CppGen.Runtime.Runtime.VersionSpecific.PropertyInfo;
+namespace Il2CppInterop.Runtime.Runtime.VersionSpecific.PropertyInfo;
 
 [ApplicableToUnityVersionsSince("5.3.2")]
 public unsafe class NativePropertyInfoStructHandler_19_0 : INativePropertyInfoStructHandler

@@ -1,7 +1,7 @@
 using System;
-using Il2CppGen.Runtime.Runtime.VersionSpecific.Type;
+using Il2CppInterop.Runtime.Runtime.VersionSpecific.Type;
 
-namespace Il2CppGen.Runtime.Runtime.VersionSpecific.Class;
+namespace Il2CppInterop.Runtime.Runtime.VersionSpecific.Class;
 
 public interface INativeClassStructHandler : INativeStructHandler
 {

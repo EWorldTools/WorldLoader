@@ -44,9 +44,12 @@
     <Reference Include="Iced, Version=1.17.0.0, Culture=neutral, PublicKeyToken=5baba79f4264913b, processorArchitecture=MSIL">
       <HintPath>..\packages\Iced.1.17.0\lib\net45\Iced.dll</HintPath>
     </Reference>
-    <Reference Include="Il2CppGen.Runtime, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="IL2CppGen, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\Il2CppGen.Runtime.dll</HintPath>
+      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\IL2CppGen.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppInterop.Runtime">
+      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\Il2CppInterop.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Il2Cppmscorlib, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -185,91 +188,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Unhollower\Packages\AssemblyUnhollower.cs" />
     <Compile Include="Unhollower\Packages\Cpp2IL.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Attributes\CachedScanResultsAttribute.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Attributes\CallerCountAttribute.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Attributes\ObfuscatedNameAttribute.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Contexts\FieldRewriteContext.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Contexts\MethodRewriteContext.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Contexts\RewriteGlobalContext.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Contexts\TypeRewriteContext.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Contexts\UnhollowedAssemblyContext.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Extensions\AssemblyExtensions.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Extensions\CollectionEx.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Extensions\CustomAttributeEx.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Extensions\EnumEx.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Extensions\ILGeneratorEx.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Extensions\ParameterDefinitionEx.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Extensions\StringEx.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Extensions\TypeReferenceEx.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Extensions\WriterEx.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\GeneratorOptions.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Harmony\HarmonyBackendComponent.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Harmony\HarmonySupport.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Host\BaseHost.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Host\IHostComponent.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Il2CppInteropGenerator.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Il2CppInteropUtils.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Json\Deobb.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Logger.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Maps\MethodAddressToTokenMap.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Maps\MethodAddressToTokenMapBase.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Maps\MethodXrefScanCache.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\MetadataAccess\CecilMetadataAccess.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\MetadataAccess\IIl2CppMetadataAccess.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\MetadataAccess\IMetadataAccess.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\MetadataAccess\NullMetadataAccess.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\MiniILParser.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass05CreateRenameGroups.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass10CreateTypedefs.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass11ComputeTypeSpecifics.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass12FillTypedefs.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass13FillGenericConstraints.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass15GenerateMemberContexts.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass16ScanMethodRefs.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass18FinalizeMethodContexts.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass19CopyMethodParameters.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass20GenerateStaticConstructors.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass21GenerateValueTypeFields.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass22GenerateEnums.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass23GeneratePointerConstructors.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass25GenerateNonBlittableValueTypeDefaultCtors.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass30GenerateGenericMethodStoreConstructors.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass40GenerateFieldAccessors.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass50GenerateMethods.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass60AddImplicitConversions.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass70GenerateProperties.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass79UnstripTypes.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass80UnstripFields.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass80UnstripMethods.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass81FillUnstrippedMethodBodies.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass89GenerateForwarders.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass89GenerateMethodXrefCache.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass90WriteToDisk.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Passes\Pass91GenerateMethodPointerMap.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Runners\DeobfuscationAnalyzer.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Runners\DeobfuscationMapGenerator.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Runners\InteropAssemblyGenerator.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Runners\IRunner.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Utils\CorlibReferences.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Utils\FieldAccessorGenerator.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Utils\Memoize.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Utils\RuntimeAssemblyReferences.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Utils\TimingCookie.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Utils\UniquificationContext.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Utils\UnstripGenerator.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Utils\UnstripTranslator.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\Utils\XrefScanMetadataGenerationUtil.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\XrefScans\GeneratedDatabasesUtil.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\XrefScans\IXrefScannerImpl.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\XrefScans\XrefInstance.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\XrefScans\XrefScanImpl.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\XrefScans\XrefScanMethodDb.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\XrefScans\XrefScanner.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\XrefScans\XrefScannerLowLevel.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\XrefScans\XrefScannerManager.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\XrefScans\XrefScanUtil.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\XrefScans\XrefScanUtilFinder.cs" />
-    <Compile Include="Unhollower\Packages\Il2CppGen\XrefScans\XrefType.cs" />
     <Compile Include="Unhollower\Packages\Models\ExecutablePackage.cs" />
     <Compile Include="Unhollower\Packages\Models\PackageBase.cs" />
     <Compile Include="Unhollower\Packages\Semver.cs" />
@@ -294,17 +212,14 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Runtime.Il2cpp\Runtime.Il2cpp.csproj">
-      <Project>{83af5b5b-c062-4398-bb46-f984553a1c97}</Project>
-      <Name>Runtime.Il2cpp</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Libs\" />
+    <ProjectReference Include="..\Runtime.Il2cpp\Runtime.Il2cpp.csproj">
+      <Project>{83af5b5b-c062-4398-bb46-f984553a1c97}</Project>
+      <Name>Runtime.Il2cpp</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

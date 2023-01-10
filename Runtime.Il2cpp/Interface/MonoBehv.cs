@@ -1,4 +1,4 @@
-﻿using Il2CppGen.Runtime.Injection;
+﻿using Il2CppInterop.Runtime.Injection;
 using System;
 using System.Collections;
 using System.Collections.Generic;

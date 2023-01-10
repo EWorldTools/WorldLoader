@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FC1676BE-E536-45F9-ADD6-6BE42BB9AF8F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IL2CppGen</RootNamespace>
+    <AssemblyName>IL2CppGen</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <LangVersion>latest</LangVersion>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="Iced">
+      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\Iced.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2Cppmscorlib">
+      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\WorldLoader\UnhollowedAsm\Il2Cppmscorlib.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Mdb">
+      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\Mono.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Pdb">
+      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\Mono.Cecil.Pdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Rocks">
+      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\Mono.Cecil.Rocks.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoMod.RuntimeDetour">
+      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MonoMod.RuntimeDetour.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoMod.Utils">
+      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MonoMod.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attributes\CachedScanResultsAttribute.cs" />
+    <Compile Include="Attributes\CallerCountAttribute.cs" />
+    <Compile Include="Attributes\ObfuscatedNameAttribute.cs" />
+    <Compile Include="Contexts\FieldRewriteContext.cs" />
+    <Compile Include="Contexts\MethodRewriteContext.cs" />
+    <Compile Include="Contexts\RewriteGlobalContext.cs" />
+    <Compile Include="Contexts\TypeRewriteContext.cs" />
+    <Compile Include="Contexts\UnhollowedAssemblyContext.cs" />
+    <Compile Include="Extensions\AssemblyExtensions.cs" />
+    <Compile Include="Extensions\CollectionEx.cs" />
+    <Compile Include="Extensions\CustomAttributeEx.cs" />
+    <Compile Include="Extensions\EnumEx.cs" />
+    <Compile Include="Extensions\ILGeneratorEx.cs" />
+    <Compile Include="Extensions\ParameterDefinitionEx.cs" />
+    <Compile Include="Extensions\StringEx.cs" />
+    <Compile Include="Extensions\TypeReferenceEx.cs" />
+    <Compile Include="Extensions\WriterEx.cs" />
+    <Compile Include="GeneratorOptions.cs" />
+    <Compile Include="Host\BaseHost.cs" />
+    <Compile Include="Host\IHostComponent.cs" />
+    <Compile Include="Il2CppInteropGenerator.cs" />
+    <Compile Include="Il2CppInteropUtils.cs" />
+    <Compile Include="Json\Deobb.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="Maps\MethodAddressToTokenMap.cs" />
+    <Compile Include="Maps\MethodAddressToTokenMapBase.cs" />
+    <Compile Include="Maps\MethodXrefScanCache.cs" />
+    <Compile Include="MetadataAccess\CecilMetadataAccess.cs" />
+    <Compile Include="MetadataAccess\IIl2CppMetadataAccess.cs" />
+    <Compile Include="MetadataAccess\IMetadataAccess.cs" />
+    <Compile Include="MetadataAccess\NullMetadataAccess.cs" />
+    <Compile Include="MiniILParser.cs" />
+    <Compile Include="Passes\Pass05CreateRenameGroups.cs" />
+    <Compile Include="Passes\Pass10CreateTypedefs.cs" />
+    <Compile Include="Passes\Pass11ComputeTypeSpecifics.cs" />
+    <Compile Include="Passes\Pass12FillTypedefs.cs" />
+    <Compile Include="Passes\Pass13FillGenericConstraints.cs" />
+    <Compile Include="Passes\Pass15GenerateMemberContexts.cs" />
+    <Compile Include="Passes\Pass16ScanMethodRefs.cs" />
+    <Compile Include="Passes\Pass18FinalizeMethodContexts.cs" />
+    <Compile Include="Passes\Pass19CopyMethodParameters.cs" />
+    <Compile Include="Passes\Pass20GenerateStaticConstructors.cs" />
+    <Compile Include="Passes\Pass21GenerateValueTypeFields.cs" />
+    <Compile Include="Passes\Pass22GenerateEnums.cs" />
+    <Compile Include="Passes\Pass23GeneratePointerConstructors.cs" />
+    <Compile Include="Passes\Pass25GenerateNonBlittableValueTypeDefaultCtors.cs" />
+    <Compile Include="Passes\Pass30GenerateGenericMethodStoreConstructors.cs" />
+    <Compile Include="Passes\Pass40GenerateFieldAccessors.cs" />
+    <Compile Include="Passes\Pass50GenerateMethods.cs" />
+    <Compile Include="Passes\Pass60AddImplicitConversions.cs" />
+    <Compile Include="Passes\Pass70GenerateProperties.cs" />
+    <Compile Include="Passes\Pass79UnstripTypes.cs" />
+    <Compile Include="Passes\Pass80UnstripFields.cs" />
+    <Compile Include="Passes\Pass80UnstripMethods.cs" />
+    <Compile Include="Passes\Pass81FillUnstrippedMethodBodies.cs" />
+    <Compile Include="Passes\Pass89GenerateForwarders.cs" />
+    <Compile Include="Passes\Pass89GenerateMethodXrefCache.cs" />
+    <Compile Include="Passes\Pass90WriteToDisk.cs" />
+    <Compile Include="Passes\Pass91GenerateMethodPointerMap.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Runners\DeobfuscationAnalyzer.cs" />
+    <Compile Include="Runners\DeobfuscationMapGenerator.cs" />
+    <Compile Include="Runners\InteropAssemblyGenerator.cs" />
+    <Compile Include="Runners\IRunner.cs" />
+    <Compile Include="Utils\CorlibReferences.cs" />
+    <Compile Include="Utils\FieldAccessorGenerator.cs" />
+    <Compile Include="Utils\Memoize.cs" />
+    <Compile Include="Utils\RuntimeAssemblyReferences.cs" />
+    <Compile Include="Utils\TimingCookie.cs" />
+    <Compile Include="Utils\UniquificationContext.cs" />
+    <Compile Include="Utils\UnstripGenerator.cs" />
+    <Compile Include="Utils\UnstripTranslator.cs" />
+    <Compile Include="Utils\XrefScanMetadataGenerationUtil.cs" />
+    <Compile Include="XrefScans\GeneratedDatabasesUtil.cs" />
+    <Compile Include="XrefScans\IXrefScannerImpl.cs" />
+    <Compile Include="XrefScans\XrefInstance.cs" />
+    <Compile Include="XrefScans\XrefScanImpl.cs" />
+    <Compile Include="XrefScans\XrefScanMethodDb.cs" />
+    <Compile Include="XrefScans\XrefScanner.cs" />
+    <Compile Include="XrefScans\XrefScannerLowLevel.cs" />
+    <Compile Include="XrefScans\XrefScannerManager.cs" />
+    <Compile Include="XrefScans\XrefScanUtil.cs" />
+    <Compile Include="XrefScans\XrefScanUtilFinder.cs" />
+    <Compile Include="XrefScans\XrefType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Runtime\Runtime.csproj">
+      <Project>{675af739-a353-4060-bb74-8ac8e47c57c6}</Project>
+      <Name>Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WorldLoader\WorldLoader.csproj">
+      <Project>{600be558-4cd9-4e6f-ac6a-045b7f030c1b}</Project>
+      <Name>WorldLoader</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(TargetPath)" "C:\Program Files (x86)\Steam\steamapps\common\VRChat" /Y /I</PostBuildEvent>
+  </PropertyGroup>
+</Project>

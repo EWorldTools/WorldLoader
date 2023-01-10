@@ -3,9 +3,9 @@ using WorldLoader.Mods;
 using WorldLoader.HookUtils;
 using WorldLoader.Discord;
 using WorldLoader.Utils;
-using Il2CppGen;
+using Il2CppInterop;
 using WorldLoader.DataClasses;
-using WorldLoader.Il2CppGen.HarmonySupport;
+//using Il2CppInterop.HarmonySupport;
 using WorldLoader.ModulesLibs.Managers;
 using System.Threading.Tasks;
 using Runtime.Il2cpp;
@@ -19,10 +19,10 @@ namespace WorldLoader
 		internal static bool MonoBhvMade = false;
 		private static int count;
 
-		public static UnityAppInfo appInfo { get; private set; }
+		//public static UnityAppInfo appInfo { get; private set; }
 		internal static AssemblyResolveManager _AssemblyResolveManager { get; set; }
 		internal static LoaderMenu Menu { get; set; }
-		public static HarmonySupportComponent harmonySupportComponent { get; set; }
+		//public static HarmonySupportComponent harmonySupportComponent { get; set; }
 		internal static HarmonyLib.Harmony HarmonyInstance { get; set; }
 
 		protected internal static void Login() {
@@ -48,12 +48,12 @@ namespace WorldLoader
 				(sender, args) => Logs.Error(args.Exception.ToString());
 
 			HarmonyInstance = new HarmonyLib.Harmony("WorldLoader");
-			harmonySupportComponent = new();
-			harmonySupportComponent.Start();
+            //harmonySupportComponent = new();
+            //harmonySupportComponent.Start();
 
-			Watermark.Send();
-			appInfo = new();
-		}
+            Watermark.Send();
+            //appInfo = new();
+        }
 
 		internal static void Awake()
 		{
@@ -94,7 +94,8 @@ namespace WorldLoader
 			Logs.Log();
 
 			Update.UpdateRPC(null, $"Loading {count} Mods...");
-			Internal_Utils.SetUpMainMono();
+            Internal_Utils.SetUpMainMono();
+
 			foreach (UnityMod vrMod in ModManager.Mods.Keys) {
 				try {
 					"[OnInject] -".WriteToConsole(ConsoleColor.Green).WriteLineToConsole(vrMod.Name, ConsoleColor.Magenta);

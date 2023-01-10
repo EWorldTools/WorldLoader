@@ -7,18 +7,18 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.InteropServices;
 using System.Threading;
-using WorldLoader.Il2CppGen.Internal;
-using WorldLoader.Il2CppGen.Internal.XrefScans;
-using Il2CppGen.Runtime.Runtime;
-using Il2CppGen.Runtime.Runtime.VersionSpecific.Assembly;
-using Il2CppGen.Runtime.Runtime.VersionSpecific.Class;
-using Il2CppGen.Runtime.Runtime.VersionSpecific.FieldInfo;
-using Il2CppGen.Runtime.Runtime.VersionSpecific.Image;
-using Il2CppGen.Runtime.Runtime.VersionSpecific.MethodInfo;
+using Il2CppInterop.Internal;
+using Il2CppInterop.Internal.XrefScans;
+using Il2CppInterop.Runtime.Runtime;
+using Il2CppInterop.Runtime.Runtime.VersionSpecific.Assembly;
+using Il2CppInterop.Runtime.Runtime.VersionSpecific.Class;
+using Il2CppInterop.Runtime.Runtime.VersionSpecific.FieldInfo;
+using Il2CppInterop.Runtime.Runtime.VersionSpecific.Image;
+using Il2CppInterop.Runtime.Runtime.VersionSpecific.MethodInfo;
 using WorldLoader.HookUtils;
-using WorldLoader.Il2CppGen.Internal.Extensions;
+using Il2CppInterop.Internal.Extensions;
 
-namespace Il2CppGen.Runtime.Injection
+namespace Il2CppInterop.Runtime.Injection
 {
     internal static unsafe class InjectorHelpers
     {
@@ -91,7 +91,7 @@ namespace Il2CppGen.Runtime.Injection
             string klass = type.Name;
             if (klass == null) return;
             string namespaze = type.Namespace ?? string.Empty;
-            var attribute = Attribute.GetCustomAttribute(type, typeof(Il2CppGen.Runtime.Attributes.ClassInjectionAssemblyTargetAttribute)) as Il2CppGen.Runtime.Attributes.ClassInjectionAssemblyTargetAttribute;
+            var attribute = Attribute.GetCustomAttribute(type, typeof(Il2CppInterop.Runtime.Attributes.ClassInjectionAssemblyTargetAttribute)) as Il2CppInterop.Runtime.Attributes.ClassInjectionAssemblyTargetAttribute;
 
             foreach (IntPtr image in (attribute is null) ? IL2CPP.GetIl2CppImages() : attribute.GetImagePointers())
             {
@@ -119,7 +119,7 @@ namespace Il2CppGen.Runtime.Injection
         {
             if (proxyMethod == null) return IntPtr.Zero;
 
-            FieldInfo methodInfoPointerField = Il2CppGenUtils.GetIl2CppMethodInfoPointerFieldForGeneratedMethod(proxyMethod);
+            FieldInfo methodInfoPointerField = Il2CppInteropUtils.GetIl2CppMethodInfoPointerFieldForGeneratedMethod(proxyMethod);
             if (methodInfoPointerField == null)
                 throw new ArgumentException($"Couldn't find the generated method info pointer for {proxyMethod.Name}");
 
@@ -139,7 +139,7 @@ namespace Il2CppGen.Runtime.Injection
         private static readonly Dictionary<(string _namespace, string _class, IntPtr imagePtr), IntPtr> s_ClassNameLookup = new();
         #region GenericMethod::GetMethod
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        internal delegate Il2CppMethodInfo* d_GenericMethodGetMethod(Il2CppGenericMethod* gmethod, bool copyMethodPtr);
+        internal delegate Il2CppMethodInfo* d_GenericMethodGetMethod(Il2CppInteropericMethod* gmethod, bool copyMethodPtr);
         //private static readonly d_GenericMethodGetMethod GenericMethodGetMethodDetour = new(ClassInjector.hkGenericMethodGetMethod);
         internal static d_GenericMethodGetMethod GenericMethodGetMethod;
         //internal static d_GenericMethodGetMethod GenericMethodGetMethodOriginal;

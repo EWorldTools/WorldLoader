@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Il2CppGen.Runtime.Runtime.VersionSpecific.MethodInfo;
+namespace Il2CppInterop.Runtime.Runtime.VersionSpecific.MethodInfo;
 
 [ApplicableToUnityVersionsSince("2021.2.0")]
 public unsafe class NativeMethodInfoStructHandler_29_0 : INativeMethodInfoStructHandler

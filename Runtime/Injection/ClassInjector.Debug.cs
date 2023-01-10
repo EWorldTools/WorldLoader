@@ -1,10 +1,10 @@
 using System;
 using System.Runtime.InteropServices;
-using Il2CppGen.Runtime.Runtime;
+using Il2CppInterop.Runtime.Runtime;
 using WorldLoader.HookUtils;
-using WorldLoader.Il2CppGen.Internal;
+using Il2CppInterop.Internal;
 
-namespace Il2CppGen.Runtime.Injection;
+namespace Il2CppInterop.Runtime.Injection;
 
 public unsafe partial class ClassInjector
 {

@@ -1,11 +1,11 @@
 ﻿using System;
-using WorldLoader.Il2CppGen.Internal.Host;
-using WorldLoader.Il2CppGen.Internal.XrefScans;
-using Il2CppGen.Runtime.Injection;
-using Il2CppGen.Runtime.Runtime;
-using Il2CppGen.Runtime.XrefScans;
+using Il2CppInterop.Internal.Host;
+using Il2CppInterop.Internal.XrefScans;
+using Il2CppInterop.Runtime.Injection;
+using Il2CppInterop.Runtime.Runtime;
+using Il2CppInterop.Runtime.XrefScans;
 
-namespace Il2CppGen;
+namespace Il2CppInterop;
 
 public record Configuration
 {

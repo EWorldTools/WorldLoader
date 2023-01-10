@@ -1,6 +1,6 @@
 using System;
 
-namespace Il2CppGen.Runtime.Runtime.VersionSpecific.Image;
+namespace Il2CppInterop.Runtime.Runtime.VersionSpecific.Image;
 
 public interface INativeImageStructHandler : INativeStructHandler
 {

@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Il2CppGen.Runtime.Runtime.VersionSpecific.ParameterInfo;
+namespace Il2CppInterop.Runtime.Runtime.VersionSpecific.ParameterInfo;
 
 [ApplicableToUnityVersionsSince("5.3.0")]
 internal class NativeParameterInfoStructHandler_16_0 : INativeParameterInfoStructHandler

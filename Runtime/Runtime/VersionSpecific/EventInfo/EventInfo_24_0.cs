@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Il2CppGen.Runtime.Runtime.VersionSpecific.EventInfo;
+namespace Il2CppInterop.Runtime.Runtime.VersionSpecific.EventInfo;
 
 [ApplicableToUnityVersionsSince("2018.3.0")]
 public unsafe class NativeEventInfoStructHandler_24_0 : INativeEventInfoStructHandler

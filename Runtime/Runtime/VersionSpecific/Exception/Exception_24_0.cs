@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Il2CppGen.Runtime.Runtime.VersionSpecific.Exception;
+namespace Il2CppInterop.Runtime.Runtime.VersionSpecific.Exception;
 
 [ApplicableToUnityVersionsSince("2019.3.0")]
 public unsafe class NativeExceptionStructHandler_24_0 : INativeExceptionStructHandler
