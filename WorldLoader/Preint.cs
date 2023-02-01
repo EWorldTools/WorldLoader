@@ -18,6 +18,7 @@ public class C {
 public class Values
 {
     public bool Debug { get; set; } = false;
+    public bool ExternUI { get; set; } = true;
     public bool HollowerPassAllNames { get; set; } = false;
     public bool UnhollowerLogTrace { get; set; } = false;
     public string GameAssemblyPath { get; set; } = "";

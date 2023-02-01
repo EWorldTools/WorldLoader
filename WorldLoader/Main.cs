@@ -30,7 +30,8 @@ namespace WorldLoader
             Internal_Utils.RunInTry(Load, null, true);
 			Internal_Utils.RunInTry(Preint.Start);
 			Menu = new LoaderMenu();
-			Internal_Utils.RunInTry(Menu.Show);
+			if (C.L.Config.ExternUI)
+				Internal_Utils.RunInTry(Menu.Show);
 
 			Logs.Log(ConsoleColor.DarkCyan, "Logging In And Checking Tags...");
             Logs.Debug(" -=========================== Debug Mode On! ===========================- ", ConsoleColor.Gray);
