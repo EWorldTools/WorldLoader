@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("_1254")]
 [assembly: AssemblyProduct("WorldLoader")]
-[assembly: AssemblyCopyright("Furry Balls Inc")]
+[assembly: AssemblyCopyright("WorldVRC")]
 [assembly: AssemblyTrademark("")]
 [assembly: ComVisible(false)]
 [assembly: Guid("cfe72319-45e3-4e7f-9635-c533c5d66ddf")]
