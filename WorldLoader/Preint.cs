@@ -59,8 +59,8 @@ namespace WorldLoader
             foreach (var folder in Folders)
                 if (!Directory.Exists(folder))
                 {
-                    Directory.CreateDirectory(folder);
-                    Logs.Log("Made Missing Directory! ["+folder+"]", "Prinit");
+                    var dir = Directory.CreateDirectory(folder);
+                    Logs.Log("Made Missing Directory! ["+ dir.FullName+ "]", "Prinit");
                 }
             Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), InternalInfo.Name, "Dependencies"));
             if (!File.Exists($"{Directory.GetCurrentDirectory()}\\WorldLoader\\Dependencies\\discord-rpc.dll"))

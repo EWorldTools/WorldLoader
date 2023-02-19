@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using WorldLoader.Attributes;
 using WorldLoader.HookUtils;
 using WorldLoader.ModulesLibs.Managers;
@@ -24,6 +25,7 @@ namespace WorldLoader.Mods
 			this.type = type;
 		}
 		public UnityMod Mod { get; private set; }
+		public Assembly Assembly { get; private set; }
 		public bool AllowUnloading { get; set; } = true;
 
 
@@ -38,13 +40,14 @@ namespace WorldLoader.Mods
 		}
 
 
-		internal void Initialize(ModAttribute ModInfo)
+		internal void Initialize(ModAttribute ModInfo, Assembly assm)
 		{
 			Name = ModInfo.Name;
 			Version = ModInfo.Version;
 			Author = ModInfo.Author;
 			Mod = this;
 			harmonyInstance = new(Name + Guid.NewGuid()); // Yeah Unix, im pretty stupud ~w~
+			Assembly = assm;
 		}
 
 		/// <summary>

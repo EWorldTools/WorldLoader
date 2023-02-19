@@ -18,7 +18,7 @@ using WorldLoader.ModulesLibs.Managers;
 
 namespace WorldLoader
 {
-	internal partial class LoaderMenu : Form
+	public partial class LoaderMenu : Form
     {
         private static OpenFileDialog OpenFile;
         internal static bool IsDone { get; private set; }

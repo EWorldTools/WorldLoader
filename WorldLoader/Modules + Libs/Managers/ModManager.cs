@@ -53,7 +53,7 @@ public sealed class ModManager
 		{
 			_Mods.Add(vrMod);
 			Mods.Add(vrMod, (path.FullName, path));
-			vrMod.Initialize(ModAttributes);
+			vrMod.Initialize(ModAttributes, assembly);
 			WorldLoader.Menu.flatComboBox2.Items.Add(vrMod.Name);
 
 
@@ -79,7 +79,7 @@ public sealed class ModManager
 				var autor = type.Assembly.GetCustomAttributes(typeof(AssemblyCompanyAttribute), false).SingleOrDefault<object>() as AssemblyCompanyAttribute;
 				ModAttributes = new(title.Title, "Unknown", autor.Company);
 
-				vrMod.Initialize(ModAttributes);
+				vrMod.Initialize(ModAttributes, assembly);
 				WorldLoader.Menu.flatComboBox2.Items.Add(vrMod.Name);
 
 
@@ -159,7 +159,7 @@ public sealed class ModManager
 					if ((ModAttributes = type.GetCustomAttributes(typeof(ModAttribute), true).FirstOrDefault<object>() as ModAttribute) != null) {
 						_Mods.Add(vrMod);
 						Mods.Add(vrMod, (text, new FileInfo(text)));
-						vrMod.Initialize(ModAttributes);
+						vrMod.Initialize(ModAttributes, assembly);
 						WorldLoader.Menu.flatComboBox2.Items.Add(vrMod.Name);
 
 						Logs.Log(vrMod.ModColor, $"======= [{vrMod.Name}] - {vrMod.Version} =======");
@@ -176,7 +176,7 @@ public sealed class ModManager
 							var autor = type.Assembly.GetCustomAttributes(typeof(AssemblyCompanyAttribute), false).SingleOrDefault<object>() as AssemblyCompanyAttribute;
 							ModAttributes = new(title.Title, "Unknown", autor.Company);
 
-							vrMod.Initialize(ModAttributes);
+							vrMod.Initialize(ModAttributes, assembly);
 							WorldLoader.Menu.flatComboBox2.Items.Add(vrMod.Name);
 
 

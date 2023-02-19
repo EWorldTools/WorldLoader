@@ -22,7 +22,7 @@ namespace WorldLoader
 
         //public static UnityAppInfo appInfo { get; private set; }
         internal static AssemblyResolveManager _AssemblyResolveManager { get; set; }
-		internal static LoaderMenu Menu { get; set; }
+		public static LoaderMenu Menu { get; private set; }
         public static HarmonySupportComponent harmonySupportComponent { get; set; }
         internal static HarmonyLib.Harmony HarmonyInstance { get; set; }
 
